@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Home | Alawusa Heritage Fish & Farms</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link
+      rel="shortcut icon"
+      href="Alawusa heritage icon - Icon.png"
+      type="img"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="homepage.js"></script>
+    <style>
+      
+      /* Modern E-commerce Variables */
+      :root {
+        --primary-color: #1a4d2e;
+        --secondary-color: #28a745;
+        --accent-color: #ffc107;
+        --light-bg: #f9f9f9;
+        --dark-text: #333;
+        --light-text: #fff;
+        --border-radius: 8px;
+        --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        --transition: all 0.3s ease;
+      }
+      /* Reset and Base Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        max-width: 100%;
+        overflow-x: hidden;
+        font-family: "Poppins", sans-serif;
+        line-height: 1.6;
+        color: #333;
+        /* Animation */
+        animation: fade 100000s infinite alternate;
+      }
+
+      @keyframes fade {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+
+      /* Header Styles */
+      .main-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: white;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .top-bar {
+        background: #2e802e;
+        color: white;
+        padding: 8px 20px;
+        font-size: 14px;
+        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      .contact-info span {
+        margin: 0 10px;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 5%;
+        background-color: #fff;
+      }
+
+      .logo img {
+        width: 100px;
+        height: auto;
+      }
+
+      /* Navigation */
+      .desktop-nav ul {
+        display: flex;
+        list-style: none;
+        gap: 25px;
+      }
+
+      .desktop-nav ul li a {
+        text-decoration: none;
+        font-weight: 600;
+        color: #444;
+        transition: color 0.3s;
+        font-size: 16px;
+        position: relative;
+      }
+
+      .desktop-nav ul li a:hover,
+      .desktop-nav ul li a.active {
+        color: #15921b;
+      }
+
+      .desktop-nav ul li a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background-color: #15921b;
+        transition: width 0.3s ease;
+      }
+
+      .desktop-nav ul li a:hover::after {
+        width: 100%;
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .shopping-cart {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+
+      .cart-count {
+        background: #e74c3c;
+        color: white;
+        border-radius: 50%;
+        padding: 2px 6px;
+        font-size: 12px;
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        min-width: 18px;
+        text-align: center;
+      }
+
+      .menu-icon {
+        display: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #444;
+      }
+
+      /* Hero Section */
+      .hero {
+        position: relative;
+        height: 70vh;
+        background: url("background\ pic\ 1.webp") center/cover no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin-top: 0;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.45);
+      }
+
+      .hero-content {
+        position: relative;
+        color: white;
+        max-width: 800px;
+        padding: 0 20px;
+      }
+
+      .hero-content h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      }
+
+      .hero-content p {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+        color: #f0f0f0;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 12px 30px;
+        background-color: #4caf50;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        margin-bottom: 15px;
+        transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      }
+
+      .btn:hover{
+        background-color: #388e3c;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        
+      }
+
+      
+      .btn-sm {
+        display: inline-block;
+        padding: 12px 30px;
+        border: 1px solid green;
+        border-radius: 30px;
+        text-decoration: none;
+        color: rgb(68, 68, 68);
+        font-weight: bold;
+        transition: background-color 0.3s, color 0.3s, border 0.3s;
+      }
+
+      .btn-sm:hover{
+        background-color: #4caf50;
+        color: white;
+        border: none;
+      }
+
+      /* Categories Section */
+      .categories {
+        padding: 80px 0;
+        background: #f9f9f9;
+      }
+
+      .small-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .title {
+        font-family: "Poppins", sans-serif;
+        color: #2e802e;
+        text-align: center;
+        margin: 0 auto 60px;
+        position: relative;
+        font-size: 2.2rem;
+        font-weight: 600;
+      }
+
+      .title::after {
+        content: "";
+        background: #ff6b6b;
+        width: 80px;
+        height: 4px;
+        border-radius: 2px;
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+      }
+
+      .col-3 {
+        flex: 1;
+        min-width: 250px;
+        max-width: 300px;
+        text-align: center;
+        transition: transform 0.3s;
+      }
+
+      .col-3:hover {
+        transform: translateY(-10px);
+      }
+
+      .col-3 img {
+        width: 100%;
+        height: 200px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+
+      .col-3:hover img {
+        transform: scale(1.05);
+      }
+
+      .col-3 h4 {
+        margin-top: 15px;
+        font-size: 1.2rem;
+        color: #444;
+        font-weight: 600;
+      }
+
+      /* Products Section */
+      .products-section {
+        padding: 80px 0;
+      }
+
+      .col-4 {
+        flex: 1;
+        min-width: 250px;
+        max-width: 280px;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s;
+        margin-bottom: 30px;
+      }
+
+      .col-4:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .col-4 img {
+        width: 100%;
+        height: 200px;
+      }
+
+      .product-info {
+        padding: 20px;
+      }
+
+      .col-4 h4 {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+        color: #333;
+        font-weight: 600;
+      }
+
+      .rating {
+        color: #ffc107;
+        margin-bottom: 10px;
+      }
+
+      .price {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #2e802e;
+      }
+
+      /* Slideshow Section */
+      .slideshow-section {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 40px;
+        padding: 60px 5%;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        margin: 80px 0;
+      }
+
+      .slideshow-left {
+        flex: 1;
+        position: relative;
+        height: 350px;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .fade-slide {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+      }
+
+      .fade-slide.active {
+        opacity: 1;
+      }
+
+      .fade-slide img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .slideshow-right {
+        flex: 1;
+        padding: 0 20px;
+      }
+
+      .slideshow-right h2 {
+        font-size: 2.2rem;
+        margin-bottom: 20px;
+        color: #2e802e;
+        font-weight: 600;
+      }
+
+      .slideshow-right p {
+        font-size: 1.1rem;
+        margin-bottom: 25px;
+        color: #555;
+        line-height: 1.6;
+      }
+
+      /* Agencies Section */
+      .agencies {
+        padding: 80px 0;
+        background: #f9f9f9;
+      }
+
+      .agency-logos {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 40px;
+      }
+
+      .agency-logos img {
+        height: 80px;
+        width: auto;
+        filter: grayscale(0%);
+        opacity: 1;
+        transition: all 0.3s;
+      }
+
+      .agency-logos img:hover {
+        filter: grayscale(100%);
+        opacity: 1;
+      }
+
+      /* Footer */
+      .footer {
+        background: #0f2c0f;
+        color: #8a8a8a;
+        padding: 60px 0 20px;
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      .footer-col {
+        flex: 1;
+        min-width: 250px;
+        margin-bottom: 30px;
+      }
+
+      .footer-col h3 {
+        color: #fff;
+        margin-bottom: 20px;
+        font-size: 1.3rem;
+        font-weight: 600;
+      }
+
+      .footer-col ul {
+        list-style: none;
+      }
+
+      .footer-col ul li {
+        margin-bottom: 10px;
+      }
+
+      .footer-col ul li a {
+        color: #8a8a8a;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .footer-col ul li a:hover {
+        color: #4caf50;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .social-links a {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        background: #333;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 40px;
+        color: white;
+        transition: all 0.3s;
+      }
+
+      .social-links a:hover {
+        background: #4caf50;
+        transform: translateY(-3px);
+      }
+
+      .copyright {
+        text-align: center;
+        padding-top: 20px;
+        margin-top: 40px;
+        border-top: 1px solid #333;
+        color: #8a8a8a;
+        font-size: 14px;
+      }
+
+      /* Mobile Menu */
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100%;
+        background: #1a4720;
+        z-index: 2000;
+        transition: right 0.4s ease;
+        overflow-y: auto;
+        padding: 20px;
+      }
+
+      .mobile-menu.open {
+        right: 0;
+      }
+
+      .mobile-menu .close-btn {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 28px;
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        cursor: pointer;
+      }
+
+      .mobile-menu ul {
+        list-style: none;
+        margin-top: 60px;
+      }
+
+      .mobile-menu ul li {
+        margin-bottom: 15px;
+      }
+
+      .mobile-menu ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        display: block;
+        padding: 10px;
+        border-radius: 5px;
+        transition: background 0.3s;
+      }
+
+      .mobile-menu ul li a:hover {
+        background: #2e802e;
+      }
+
+      .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+        padding-left: 20px;
+      }
+
+      .accordion-content.open {
+        max-height: 200px;
+      }
+
+      /* Popup */
+      .popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
+      }
+
+      .popup.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .popup-content {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        max-width: 400px;
+        width: 90%;
+        text-align: center;
+        position: relative;
+        transform: scale(0.9);
+        transition: transform 0.3s;
+      }
+
+      .popup.active .popup-content {
+        transform: scale(1);
+      }
+
+      .popup .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 24px;
+        cursor: pointer;
+        color: #777;
+      }
+
+      .popup img {
+        width: 100px;
+        margin-bottom: 15px;
+      }
+
+      .popup h2 {
+        margin-bottom: 15px;
+        color: #2e802e;
+      }
+
+      .popup p {
+        margin-bottom: 20px;
+        color: #555;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 1024px) {
+        .hero-content h1 {
+          font-size: 2.8rem;
+        }
+
+        .slideshow-section {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .slideshow-left {
+          width: 100%;
+          margin-bottom: 30px;
+        }
+      }
+
+      @media (max-width: 1000px) {
+        .desktop-nav {
+          display: none;
+        }
+        .menu-icon {
+          display: block;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .top-bar {
+          flex-direction: column;
+          gap: 5px;
+          font-size: 12px;
+        }
+
+        .desktop-nav {
+          display: none;
+        }
+
+        .menu-icon {
+          display: block;
+        }
+
+        .hero {
+          height: 60vh;
+        }
+
+        .hero-content h1 {
+          font-size: 2.2rem;
+        }
+
+        .hero-content p {
+          font-size: 1.1rem;
+        }
+
+        .title {
+          font-size: 1.8rem;
+        }
+
+        .slideshow-right h2 {
+          font-size: 1.8rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero {
+          height: 50vh;
+        }
+
+        .hero-content h1 {
+          font-size: 1.8rem;
+        }
+
+        .btn {
+          padding: 10px 20px;
+          font-size: 14px;
+        }
+
+        .btn-sm {
+          padding: 10px 20px;
+          font-size: 14px;
+        }
+
+        .title {
+          font-size: 1.6rem;
+        }
+
+        .col-3,
+        .col-4 {
+          min-width: 100%;
+        }
+      }
+
+      /* Footer */
+      .footer {
+        background: var(--primary-color);
+        color: var(--light-text);
+        padding: 60px 0 20px;
+      }
+
+      .footer-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 40px;
+        margin-bottom: 40px;
+      }
+
+      .footer-col {
+        flex: 1;
+        min-width: 200px;
+      }
+
+      .footer-col h3 {
+        font-size: 20px;
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .footer-col h3::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 50px;
+        height: 2px;
+        background: var(--secondary-color);
+      }
+
+      .footer-col ul {
+        list-style: none;
+      }
+
+      .footer-col ul li {
+        margin-bottom: 10px;
+      }
+
+      .footer-col ul li a {
+        color: #ddd;
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .footer-col ul li a:hover {
+        color: var(--secondary-color);
+        padding-left: 5px;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .social-links a {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+      }
+
+      .social-links a:hover {
+        background: var(--secondary-color);
+        transform: translateY(-3px);
+      }
+
+      .social-links img {
+        width: 20px;
+        height: 20px;
+      }
+
+      .copyright {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 14px;
+        color: #aaa;
+      }
+
+      /* Newsletter Section */
+      .newsletter-section {
+        background: #041e42;
+        color: white;
+        padding: 50px 20px;
+        margin-bottom: 40px;
+        margin: 5px;
+        border-radius:2px;
+      }
+
+      .newsletter-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap; /* allows wrapping */
+        gap: 20px;
+        width: 100%;
+        margin: 10px;
+      }
+
+      .newsletter-text {
+        flex: 1 1 300px; /* allows shrinking on smaller screens */
+      }
+
+      .newsletter-form {
+        display: flex;
+        flex: 1 1 300px;
+        max-width: 500px;
+        width: 100%;
+      }
+
+      .newsletter-form input {
+        flex: 1;
+        padding: 12px 10px;
+        border: none;
+        border-radius: 4px 0 0 4px;
+        font-size: 1rem;
+        min-width: 0; /* prevents stretching */
+      }
+
+      .newsletter-form button {
+        background: #15921b;
+        color: white;
+        border: none;
+        padding: 0 20px;
+        border-radius: 0 4px 4px 0;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        white-space: nowrap; /* keeps text inside */
+      }
+
+      .newsletter-form button:hover {
+        background: #117a15;
+      }
+
+
+      ul li i {
+  margin-right: 6px;
+  color: var(--secondary-color);
+  font-size: 16px;
+}
+
+#userName2{
+  color: #fff;
+}
+    
+    </style>
+  </head>
+
+  <body>
+    
+
+    <!-- Header -->
+    <header class="main-header">
+      <div class="header">
+        <div class="logo">
+          <a href="index.html"
+            ><img src="Alawusa heritage logo.png" alt="Alawusa Heritage"
+          /></a>
+        </div>
+
+        <!-- Desktop Menu -->
+        <nav class="desktop-nav">
+          <ul>
+            <li>
+  <i class="fas fa-user-circle" ></i><span id="userName"></i> Customer</span>
+</li>
+            <li><a href="dashboard.html" class="active">Home</a></li>
+            <li><a href="homepage.html">Profile</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="aboutus.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="testimonial.html">Testimonial</a></li>
+            
+          </ul>
+        </nav>
+
+        <div class="header-right">
+          <a href="usercart.html" class="shopping-cart">
+            <img src="shopping-cart.png" width="30" height="30" alt="Cart" />
+            <span id="cart-count" class="cart-count">0</span>
+          </a>
+          <div class="menu-icon" onclick="openMenu()">☰</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu">
+      <button class="close-btn" onclick="closeMenu()">×</button>
+      <ul>
+        <li>
+  <i class="fas fa-user-circle"></i><span id="userName2"></i> Customer</span>
+</li>
+        <li><a href="dashboard.html">Home</a></li>
+        <li><a href="homepage.html">Profile</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="aboutus.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="testimonial.html">Testimonial</a></li>
+        
+      </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content" data-aos="fade-up">
+        <h1>Providing High-quality, Farm-fresh Protein Solutions</h1>
+        <p>
+          Building on over 40 years of family legacy in sustainable agriculture
+          and innovating Nigeria's food supply
+        </p>
+        <a href="#categories" class="btn">Explore Now <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories" id="categories">
+      <div class="small-container">
+        <h2 class="title">Featured Categories</h2>
+        <div class="row">
+          <div class="col-3" data-aos="fade-up">
+            <a href="productdetailsforlivechicken.html"
+              ><img src="Live chicken sticker.png" alt="Live Chicken"
+            /></a>
+            <h4>LIVE CHICKEN</h4>
+          </div>
+          <div class="col-3" data-aos="fade-up">
+            <a href="productdetailsforrayfish.html"
+              ><img src="Ray fish sticker.png" alt="Ray Fish"
+            /></a>
+            <h4>RAY-FISH</h4>
+          </div>
+          <div class="col-3" data-aos="fade-up">
+            <a href="productdetailsforlivepigs.html"
+              ><img src="pig sticker.png" alt="Live Pigs"
+            /></a>
+            <h4>LIVE PIGS</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="products-section">
+      <div class="small-container">
+        <h2 class="title" id="fproducts">Featured Products</h2>
+        <div class="row">
+          <div class="col-4" data-aos="fade-up">
+            <a href="productdetailsforpork.html"
+              ><img src="Pork sticker.png" alt="Pork"
+            /></a>
+            <div class="product-info">
+              <h4>ALAWUSA FARM-FRESH PORK (PROCESSED)</h4>
+              <div class="rating">
+                <span>★★★★★</span>
+              </div>
+              <p class="price">₦3,500 - ₦10,000</p>
+            </div>
+          </div>
+          <div class="col-4" data-aos="fade-up">
+            <a href="productdetailsforprocessedchicken.html"
+              ><img src="processed chicken sticker.png" alt="Processed Chicken"
+            /></a>
+            <div class="product-info">
+              <h4>ALAWUSA FARM-FRESH FULL CHICKEN (PROCESSED)</h4>
+              <div class="rating">
+                <span>★★★★★</span>
+              </div>
+              <p class="price">₦15,000 - ₦35,000</p>
+            </div>
+          </div>
+          <div class="col-4" data-aos="fade-up">
+            <a href="productdetailsforprocessedrayfish.html"
+              ><img src="Processed Rayfish sticker.png" alt="Processed Rayfish"
+            /></a>
+            <div class="product-info">
+              <h4>ALAWUSA SOURCED FRESH RAYFISH</h4>
+              <div class="rating">
+                <span>★★★★★</span>
+              </div>
+              <p class="price">₦2,000</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Latest Products -->
+    <section class="products-section" style="background: #f9f9f9">
+      <div class="small-container">
+        <h2 class="title" id="lproducts">Latest Products</h2>
+        <div class="row">
+          <div class="col-4" data-aos="fade-up">
+            <a href="productdetailsforcatfish.html"
+              ><img src="catfish pic.jpeg" alt="Catfish"
+            /></a>
+            <div class="product-info">
+              <h4>ALAWUSA FARM-FRESH CATFISH</h4>
+              <div class="rating">
+                <span>★★★★★</span>
+              </div>
+              <p class="price">₦2,000 - ₦4,000</p>
+            </div>
+          </div>
+          <div class="col-4" data-aos="fade-up">
+            <a href="productdetailsfordriedcatfish.html"
+              ><img src="Dried catfish sticker.png" alt="Dried Catfish"
+            /></a>
+            <div class="product-info">
+              <h4>ALAWUSA DRIED CAT-FISH (CARTON)</h4>
+              <div class="rating">
+                <span>★★★★★</span>
+              </div>
+              <p class="price">₦20,000 - ₦50,000</p>
+            </div>
+          </div>
+          <div class="col-4" data-aos="fade-up">
+            <a href="productdetailsfordrysmokedsolefish.html"
+              ><img src="sole fish sticker.png" alt="Sole Fish"
+            /></a>
+            <div class="product-info">
+              <h4>ALAWUSA SOURCED DRIED SOLE FISH</h4>
+              <div class="rating">
+                <span>★★★★★</span>
+              </div>
+              <p class="price">₦5,500 - ₦10,000</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slideshow Section -->
+    <section class="slideshow-section">
+      <div class="slideshow-left">
+        <div class="fade-slide active">
+          <img src="Live chicken sticker.png" alt="Live Chicken" />
+        </div>
+        <div class="fade-slide">
+          <img src="Ray fish sticker.png" alt="Ray Fish" />
+        </div>
+        <div class="fade-slide">
+          <img src="catfish pic.jpeg" alt="Catfish" />
+        </div>
+        <div class="fade-slide">
+          <img src="pig sticker.png" alt="Pig" />
+        </div>
+        <div class="fade-slide">
+          <img src="Chicken Eggs 30 holes sticker.png" alt="Slide 5" />
+        </div>
+        <div class="fade-slide">
+          <img src="Chicken Eggs 15 holes sticker.png" alt="Slide 6" />
+        </div>
+        <div class="fade-slide">
+          <img src="processed chicken sticker.png" alt="Slide 7" />
+        </div>
+        <div class="fade-slide">
+          <img src="Dried catfish sticker.png" alt="Slide 8" />
+        </div>
+        <div class="fade-slide">
+          <img src="Pork sticker.png" alt="Slide 9" />
+        </div>
+        <div class="fade-slide">
+          <img src="sourced seafood sticker.png" alt="Slide 10" />
+        </div>
+        <div class="fade-slide">
+          <img src="sole fish sticker.png" alt="Slide 11" />
+        </div>
+        <div class="fade-slide">
+          <img src="Dry smoked rayfish sticker.png" alt="Slide 12" />
+        </div>
+        <div class="fade-slide">
+          <img src="Processed Rayfish sticker.png" alt="Slide 13" />
+        </div>
+      </div>
+      <div class="slideshow-right">
+        <h2>Become our Regular Customer</h2>
+        <p>
+          Enjoy exclusive discounts and premium services when you shop with us
+          regularly.
+        </p>
+        <a href="products.html" class="btn">Shop Now <i class="fas fa-arrow-right"></i></a>
+        
+      </div>
+    </section>
+
+    <!-- Agencies Section -->
+    <section class="agencies">
+      <div class="small-container">
+        <h2 class="title">Trusted By</h2>
+        <div class="agency-logos">
+          <img
+            src="federal agency for agriculture 1.png"
+            alt="Federal Agency For Agriculture"
+          />
+          <img src="ogun state logo 1.png" alt="Ogun State" />
+          <img src="lagos agency for agriculture 1.png" alt="Lagos State" />
+          <img src="panog logo 1.png" alt="PANOG" style="width: 250px" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+      <div class="container">
+        <div class="newsletter-content">
+          <div class="newsletter-text">
+            <h3>Sign Up For Our Newsletter</h3>
+            <p>
+              Get email updates about our latest products and special offers
+            </p>
+          </div>
+          <form
+            action="https://sheetdb.io/api/v1/7pjxxvpo241l5"
+            method="POST"
+            id="newsletterForm"
+            class="newsletter-form"
+          >
+            <input
+              type="email"
+              name="data[email]"
+              placeholder="Your email address"
+              required
+            />
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-container">
+          <div class="footer-col">
+            <a href="index.html"
+              ><img
+                src="Alawusa heritage logo.png"
+                alt="Alawusa Heritage"
+                style="width: 200px; filter: brightness(2) invert(0)"
+            /></a>
+            <p>Bringing the Best of Our Farm to Your Table</p>
+
+            <div class="social-links">
+              <a
+                href="https://www.facebook.com/profile.php?id=61577588632364&mibextid=ZbWKwL"
+                ><img src="facebook.png" alt="Facebook"
+              /></a>
+              <a
+                href="https://www.instagram.com/alawusaheritage?igsh=MXJnbHJ5dGtlOGs0eQ=="
+                ><img src="instagram.png" alt="Instagram"
+              /></a>
+              <a href="https://wa.link/zp8ngg"
+                ><img src="whatsapp.png" alt="WhatsApp"
+              /></a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h3>Customer Service</h3>
+            <ul>
+              <li><a href="faq.html">FAQs</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3>Useful Links</h3>
+            <ul>
+              <li><a href="blogpost.html">Farm Tips/Blog Post</a></li>
+              <li><a href="ourfarm.html">Our Farm/Sustainability</a></li>
+              <li><a href="recipes.html">Recipes</a></li>
+              <li><a href="aboutus.html">About Us</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3>Contact Info</h3>
+            <ul>
+              <li><i class="fas fa-phone"></i> +234-802-227-6254</li>
+              <li><i class="fas fa-envelope"></i> alawusaheritage@gmail.com</li>
+              <li>
+                <i class="fas fa-map-marker-alt"></i> Alawusa-House, Hungotho,
+                Tube, Ipokia LG, Ogun State
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="copyright">
+          <p>&copy; 2025 Alawusa Heritage Fish & Farms. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      // Initialize AOS
+      AOS.init({
+        duration: 1000,
+        once: true,
+      });
+
+      // Mobile Menu Functions
+      function openMenu() {
+        document.getElementById("mobileMenu").classList.add("open");
+      }
+
+      function closeMenu() {
+        document.getElementById("mobileMenu").classList.remove("open");
+      }
+
+      // Slideshow Functionality
+      const slides = document.querySelectorAll(".fade-slide");
+      let currentSlide = 0;
+
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.remove("active");
+        });
+        slides[index].classList.add("active");
+      }
+
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+      }
+
+      // Start slideshow
+      setInterval(nextSlide, 4000);
+
+      // Popup Functionality
+      const popup = document.getElementById("popup");
+      const closePopupBtn = document.getElementById("closePopup");
+      const registerBtn = document.getElementById("registerBtn");
+
+      // Show popup after 3 seconds
+      setTimeout(() => {
+        popup.classList.add("active");
+      }, 3000);
+
+      // Close popup
+      closePopupBtn.addEventListener("click", () => {
+        popup.classList.remove("active");
+      });
+
+      // Redirect to account page
+      registerBtn.addEventListener("click", () => {
+        window.location.href = "account.html";
+      });
+
+      // Cart functionality
+      function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const cartCount = document.getElementById("cart-count");
+        if (cartCount) {
+          cartCount.textContent = totalItems;
+        }
+      }
+
+      
+
+      // Initialize cart count
+      updateCartCount();
+
+      // Initialize on page load
+      document.addEventListener("DOMContentLoaded", () => {
+        updateCartCount();
+      });
+
+      // Close mobile menu when clicking on links
+      document.querySelectorAll("#mobileMenu a").forEach((link) => {
+        link.addEventListener("click", closeMenu);
+      });
+
+      // Newsletter signup
+      document
+        .getElementById("newsletterForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          fetch(this.action, {
+            method: "POST",
+            body: new FormData(this),
+          }).then(() => {
+            alert("🎉 Thank you for subscribing!");
+            this.reset();
+          })
+
+          .catch((err) => {
+        console.error("Subscription Error:", err);
+        alert("❌ Failed to subscribe email.");
+      });
+        });
+    </script>
+
+    <script>
+      (function () {
+        if (!window.chatbase || window.chatbase("getState") !== "initialized") {
+          window.chatbase = (...arguments) => {
+            if (!window.chatbase.q) {
+              window.chatbase.q = [];
+            }
+            window.chatbase.q.push(arguments);
+          };
+          window.chatbase = new Proxy(window.chatbase, {
+            get(target, prop) {
+              if (prop === "q") {
+                return target.q;
+              }
+              return (...args) => target(prop, ...args);
+            },
+          });
+        }
+        const onLoad = function () {
+          const script = document.createElement("script");
+          script.src = "https://www.chatbase.co/embed.min.js";
+          script.id = "TcwUb0cLFLQZZlxVHISps";
+          script.domain = "www.chatbase.co";
+          document.body.appendChild(script);
+        };
+        if (document.readyState === "complete") {
+          onLoad();
+        } else {
+          window.addEventListener("load", onLoad);
+        }
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battery Charging Animation</title>
+    <style>
+        body {
+            background-color: black;
+            padding: 200px 100px 100px 700px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .hover {
+            color: white;
+            font-family: cursive;
+            margin-left: 0;
+            margin-bottom: 20px;
+        }
+
+        .click-for-mobile {
+            color: white;
+            font-family: cursive;
+            margin-left: 0;
+            display: none;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 1024px) {
+            body {
+                padding: 90px 100px 100px 100px;
+                align-items: center;
+            }
+
+            .hover {
+                display: none;
+            }
+
+            .click-for-mobile {
+                display: block;
+            }
+        }
+
+        .battery-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .battery-top {
+            width: 20px;
+            height: 8px;
+            background: white;
+            border-radius: 4px 4px 0 0;
+            margin-bottom: -1px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .battery {
+            width: 70px;
+            height: 140px;
+            border: 3px solid white;
+            border-radius: 8px;
+            position: relative;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-weight: bold;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .battery-level {
+            width: 100%;
+            background-color: red;
+            transition: height 0.5s ease, background-color 1s ease;
+            z-index: 1;
+        }
+
+        .battery-percentage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 16px;
+            z-index: 2;
+            text-shadow: 1px 1px 2px black;
+        }
+
+        .charger-container {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .charger-wire {
+            width: 4px;
+            height: 80px;
+            background-color: rgb(235, 233, 233);
+            border-radius: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .charger-mouth {
+            width: 20px;
+            height: 12px;
+            background-color: rgb(235, 233, 233);
+            border-radius: 4px 4px 0 0;
+            transition: transform 0.3s ease;
+        }
+
+        .charger-port {
+            width: 16px;
+            height: 8px;
+            background-color: rgb(83, 83, 83);
+            border-radius: 2px;
+            margin-top: -25px;
+            transition: transform 0.3s ease;
+        }
+
+        .charger-container:hover .charger-port {
+            transform: translateY(-5px);
+        }
+
+        .charger-container:hover .charger-mouth {
+            transform: translateY(-5px);
+        }
+
+        .charger-container:hover .charger-wire {
+            transform: translateY(-5px);
+        }
+
+        .charging {
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { opacity: 0.7; }
+            to { opacity: 1; }
+        }
+        
+        .info-message {
+            color: white;
+            font-family: cursive;
+            margin-top: 20px;
+            font-size: 14px;
+            text-align: center;
+            max-width: 300px;
+        }
+        
+        .battery-input {
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid white;
+            background: black;
+            color: white;
+            width: 150px;
+        }
+        
+        .set-battery-btn {
+            margin-top: 10px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: 1px solid white;
+            background: #333;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .set-battery-btn:hover {
+            background: #555;
+        }
+        
+        .controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <p class="hover">Hover over Charger to Charge battery</p>
+    <p class="click-for-mobile">Click Charger to Charge battery</p>
+
+    <div class="battery-container">
+        <div class="battery-top"></div>
+        <div class="battery" id="battery">
+            <div class="battery-level" id="batteryLevel"></div>
+            <div class="battery-percentage" id="batteryPercentage">--%</div>
+        </div>
+        
+        <div class="charger-container" id="charger">
+            <div class="charger-port"></div>
+            <div class="charger-mouth"></div>
+            <div class="charger-wire"></div>
+            
+        </div>
+    </div>
+    
+    <div class="controls">
+        <p class="info-message" id="statusMessage">
+            Battery API is not available in most browsers. Please enter your current battery percentage.
+        </p>
+        <input type="number" class="battery-input" id="batteryInput" min="1" max="100" placeholder="Enter % (1-100)">
+        <button class="set-battery-btn" id="setBatteryBtn">Set Battery Level</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const batteryLevel = document.getElementById('batteryLevel');
+            const batteryPercentage = document.getElementById('batteryPercentage');
+            const batteryContainer = document.getElementById('battery');
+            const charger = document.getElementById('charger');
+            const batteryInput = document.getElementById('batteryInput');
+            const setBatteryBtn = document.getElementById('setBatteryBtn');
+            const statusMessage = document.getElementById('statusMessage');
+            
+            let currentBatteryLevel = 0;
+            let isCharging = false;
+            let chargeInterval;
+            
+            // Try to get battery info (this will likely fail in most browsers)
+            function tryGetBattery() {
+                if ('getBattery' in navigator) {
+                    navigator.getBattery().then(function(battery) {
+                        currentBatteryLevel = Math.round(battery.level * 100);
+                        updateBatteryDisplay(currentBatteryLevel);
+                        batteryInput.value = currentBatteryLevel;
+                        statusMessage.textContent = "Detected your battery level: " + currentBatteryLevel + "%";
+                    }).catch(function() {
+                        setDefaultBattery();
+                    });
+                } else {
+                    setDefaultBattery();
+                }
+            }
+            
+            function setDefaultBattery() {
+                // Set a realistic default battery level
+                currentBatteryLevel = 42;
+                updateBatteryDisplay(currentBatteryLevel);
+                batteryInput.value = currentBatteryLevel;
+                statusMessage.textContent = "Using default battery level. Please enter your actual battery percentage above.";
+            }
+            
+            // Initialize
+            tryGetBattery();
+            
+            // Set battery button handler
+            setBatteryBtn.addEventListener('click', function() {
+                const newLevel = parseInt(batteryInput.value);
+                if (newLevel >= 1 && newLevel <= 100) {
+                    currentBatteryLevel = newLevel;
+                    updateBatteryDisplay(currentBatteryLevel);
+                    statusMessage.textContent = "Battery level set to " + newLevel + "%";
+                } else {
+                    statusMessage.textContent = "Please enter a valid battery percentage between 1 and 100";
+                }
+            });
+            
+            // Function to update battery display
+            function updateBatteryDisplay(level) {
+                // Calculate height based on percentage
+                const height = (level / 100) * 100;
+                batteryLevel.style.height = `${height}%`;
+                
+                // Change color based on battery level
+                if (level <= 20) {
+                    batteryLevel.style.backgroundColor = 'red';
+                } else if (level <= 50) {
+                    batteryLevel.style.backgroundColor = 'orange';
+                } else {
+                    batteryLevel.style.backgroundColor = 'rgb(42, 196, 42)';
+                }
+                
+                // Update percentage text
+                batteryPercentage.textContent = `${level}%`;
+            }
+            
+            // Function to simulate charging
+            function startCharging() {
+                if (isCharging) return;
+                
+                isCharging = true;
+                batteryContainer.classList.add('charging');
+                
+                chargeInterval = setInterval(function() {
+                    if (currentBatteryLevel < 100) {
+                        currentBatteryLevel += 1;
+                        if (currentBatteryLevel > 100) currentBatteryLevel = 100;
+                        updateBatteryDisplay(currentBatteryLevel);
+                        batteryInput.value = currentBatteryLevel;
+                    } else {
+                        stopCharging();
+                    }
+                }, 50000);
+            }
+            
+            // Function to stop charging
+            function stopCharging() {
+                isCharging = false;
+                clearInterval(chargeInterval);
+                batteryContainer.classList.remove('charging');
+            }
+            
+            // Event listeners for hover
+            charger.addEventListener('mouseenter', startCharging);
+            charger.addEventListener('mouseleave', stopCharging);
+            
+            // For mobile devices
+            charger.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                if (isCharging) {
+                    stopCharging();
+                } else {
+                    startCharging();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

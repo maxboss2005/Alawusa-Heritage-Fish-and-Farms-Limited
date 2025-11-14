@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Dashboard | Alawusa Heritage Fish & Farms</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="homepage.js"></script>
+</head>
+<body>
+  <header class="main-header">
+    <div class="top-bar">
+      <div class="contact-info">
+        <span>📞 +234-802-227-6254</span>
+        <span>📧 alawusaheritage@gmail.com</span>
+      </div>
+    </div>
+
+    <div class="header">
+      <div class="logo">
+        <a href="dashboard.html"><img src="Alawusa heritage logo.png" width="150px"></a>
+      </div>
+      <nav class="navbar desktop-nav">
+        <ul>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="orders.html">My Orders</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a id="logoutButton">Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Dashboard Body -->
+  <section class="dashboard">
+    <h1>Welcome, <span id="userName">Customer</span> </h1>
+    <p>Here’s your personalized dashboard.</p>
+
+    <div class="dashboard-cards">
+      <div class="card">
+        <h3>My Orders</h3>
+        <p>Track your recent orders and deliveries.</p>
+      </div>
+      <div class="card">
+        <h3>Recommended for You</h3>
+        <p>Products based on your interests.</p>
+      </div>
+      <div class="card">
+        <h3>Coupons & Discounts</h3>
+        <p>Exclusive offers available for you.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Fetch name from localStorage (after login)
+    const username = localStorage.getItem("username");
+    if (username) {
+      document.getElementById("username").innerText = username;
+    }
+
+    // Logout clears data
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      localStorage.clear();
+      window.location.href = "account.html"; // back to login page
+    });
+  </script>
+</body>
+</html>

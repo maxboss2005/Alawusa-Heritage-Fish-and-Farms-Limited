@@ -1,0 +1,157 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battery Charging</title>
+    <style>
+
+        body{
+            background-color: white;
+        }
+
+        .percent{
+            display: inline-block;
+            
+            
+        }
+
+        .battery-top{
+            padding: 3px;
+            width: 15px;
+            border: 2px solid black;
+            border-radius: 30px 30px 5px 0px;
+            margin-left: 25px;
+           margin-bottom: 1px;
+        }
+
+        .battery{
+            padding: 20px;
+            width: 30px;
+            height: 100px;
+            border: 2px solid black;
+            border-radius: 5px;
+            position: absolute;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-weight: bold;
+            
+        }
+
+        .low{
+            position: relative;
+            top: 95px;
+            left: 5px;
+            transition: all 0.3s;
+        }
+
+        .battery::before{
+            content: "";
+        position: absolute;
+        top: 130px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: red;
+        transition: all 0.3s;
+        }
+
+        .battery:hover::before{
+            background-color: rgb(42, 196, 42);
+            top: 0;  
+        }
+
+        .battery:hover .low{
+            opacity: 0;
+        }
+
+        .full {
+             position: relative;
+            top: 30px;
+            left: 5px;
+            margin-top: -40px;
+            margin-left: -10px;
+            color: black;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+         .battery:hover .full{
+            opacity: 1;
+        }
+
+        .charger-port {
+            padding: 5px;
+            width: 10px;
+            height: 10px;
+            border: 2px solid black;
+            border-radius: 2px;
+            position: relative;
+            top: 95px;
+            left: 5px;
+        }
+
+        .charger-mouth {
+            padding: 10px;
+            width: 10px;
+            height: 15px;
+            border: 2px solid black;
+            border-radius: 2px;
+            position: relative;
+            top: 15px;
+            left: -12px;
+        }
+
+        .charger-wire {
+            padding: 1px;
+            width: 2px;
+            height: 100px;
+            border: 2px solid black;
+            border-radius: 2px;
+            position: relative;
+            top: 25px;
+            left: 0px;
+        }
+
+        .battery:hover .charger-port {
+            margin-top: -5px;
+        }
+
+        .charger-port{
+            background-color: rgb(83, 83, 83);
+        }
+
+        .charger-wire, .charger-mouth{
+            background-color: rgb(235, 233, 233);
+        }
+
+
+        
+
+        
+    </style>
+</head>
+<body>
+
+    <p style="font-family: cursive;">Hover over Charger to Charge battery</p>
+
+    <div class="percent">
+        <div class="battery-top">
+
+    </div>
+    <div class="battery">
+        <p class="full">100%</p>
+        <p class="low">5%</p>
+
+        <div class="charger">
+            <div class="charger-port">
+            <div class="charger-mouth">
+                <div class="charger-wire">
+
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+</body>
+</html>

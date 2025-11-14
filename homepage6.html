@@ -1,0 +1,2408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>My Account | Alawusa Heritage</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="homepage.css">
+  <link rel="shortcut icon" href="Alawusa heritage icon - Icon.png" type="img">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script type="module" src="homepage.js"></script>
+  
+  <style>
+    /* Spin the Wheel Styles */
+    .wheel-section {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border-radius: 12px;
+      padding: 30px;
+      margin: 30px 0;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e0e0e0;
+    }
+    
+    .wheel-section h4 {
+      color: #2e802e;
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 24px;
+      font-weight: 600;
+    }
+    
+    .wheel-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 25px;
+    }
+    
+    .wheel-wrapper {
+      position: relative;
+      width: 300px;
+      height: 300px;
+    }
+    
+    .wheel {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 0 8px #2e802e, 0 0 15px rgba(0, 0, 0, 0.2);
+      transition: transform 5s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+      transform: rotate(0deg);
+    }
+    
+    .wheel-item {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      transform-origin: bottom right;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-weight: 600;
+      color: white;
+      font-size: 14px;
+      padding-left: 40px;
+      box-sizing: border-box;
+    }
+    
+    .wheel-item:nth-child(1) {
+      background-color: #4caf50;
+      transform: rotate(0deg) skewY(-30deg);
+    }
+    
+    .wheel-item:nth-child(2) {
+      background-color: #2196f3;
+      transform: rotate(60deg) skewY(-30deg);
+    }
+    
+    .wheel-item:nth-child(3) {
+      background-color: #ff9800;
+      transform: rotate(120deg) skewY(-30deg);
+    }
+    
+    .wheel-item:nth-child(4) {
+      background-color: #f44336;
+      transform: rotate(180deg) skewY(-30deg);
+    }
+    
+    .wheel-item:nth-child(5) {
+      background-color: #9c27b0;
+      transform: rotate(240deg) skewY(-30deg);
+    }
+    
+    .wheel-item:nth-child(6) {
+      background-color: #3f51b5;
+      transform: rotate(300deg) skewY(-30deg);
+    }
+    
+    .wheel-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50px;
+      height: 50px;
+      background-color: #2e802e;
+      border-radius: 50%;
+      z-index: 10;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+    
+    .wheel-center i {
+      font-size: 20px;
+    }
+    
+    .wheel-pointer {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 40px;
+      background-color: #e74c3c;
+      clip-path: polygon(50% 100%, 0 0, 100% 0);
+      z-index: 20;
+    }
+    
+    .spin-button {
+      background: linear-gradient(135deg, #2e802e 0%, #3a9e3a 100%);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(46, 128, 46, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .spin-button:hover {
+      background: linear-gradient(135deg, #267026 0%, #2e802e 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(46, 128, 46, 0.4);
+    }
+    
+    .spin-button:active {
+      transform: translateY(0);
+    }
+    
+    .spin-button:disabled {
+      background: #cccccc;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    
+    .wheel-result {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      min-height: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .wheel-result.hidden {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    
+    .result-title {
+      font-weight: 600;
+      color: #2e802e;
+      margin-bottom: 5px;
+    }
+    
+    .result-description {
+      font-size: 14px;
+      color: #666;
+    }
+    
+    .wheel-stats {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 300px;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #666;
+    }
+    
+    .wheel-info {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 13px;
+      color: #888;
+    }
+    
+    @keyframes confetti {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+    
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background-color: #f00;
+      opacity: 0;
+      z-index: 1000;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .wheel-wrapper {
+        width: 250px;
+        height: 250px;
+      }
+      
+      .wheel-item {
+        font-size: 12px;
+        padding-left: 30px;
+      }
+    }
+
+    /* Rewards Section Styles */
+.rewards-section {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 12px;
+  padding: 30px;
+  margin: 30px 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e0e0e0;
+}
+
+.rewards-section h4 {
+  color: #2e802e;
+  margin-bottom: 25px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.rewards-container {
+  min-height: 100px;
+}
+
+.rewards-loading {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+.reward-card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #4caf50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reward-card.used {
+  border-left-color: #ccc;
+  opacity: 0.7;
+}
+
+.reward-card.expired {
+  border-left-color: #f44336;
+}
+
+.reward-info {
+  flex: 1;
+}
+
+.reward-code {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2e802e;
+  margin-bottom: 5px;
+}
+
+.reward-description {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.reward-expiry {
+  font-size: 12px;
+  color: #888;
+}
+
+.reward-status {
+  text-align: right;
+}
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-active {
+  background: #4caf50;
+  color: white;
+}
+
+.status-used {
+  background: #ccc;
+  color: #666;
+}
+
+.status-expired {
+  background: #f44336;
+  color: white;
+}
+
+.no-rewards {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  padding: 40px 20px;
+}
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+<header>
+  <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+
+  <div class="logo">
+    <a href="homepage.html">
+      <img src="Alawusa heritage logo.png" alt="Alawusa Heritage logo">
+    </a>
+  </div>
+
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search for products...">
+    <button id="searchBtn">Search</button>
+  </div>
+
+  <div class="search-icon" id="mobileSearchIcon">
+    <i class="fa fa-search"></i>
+  </div>
+
+  <div class="header-actions">
+    <!-- User Profile Section -->
+    <div class="user-profile">
+      <div class="profile-dropdown">
+        <div class="profile-trigger">
+          <img id="headerProfileImg" src="avatar.png"  class="profile-pic">
+          <span class="user-name" id="userName">User</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="dropdown-menu">
+          <a href="dashboard.html" class="dropdown-item">
+            <i class="fas fa-home"></i>Home
+          <a href="homepage.html" class="dropdown-item">
+            <i class="fas fa-user"></i>My Profile
+          </a>
+          <a href="userorders.html" class="dropdown-item">
+            <i class="fas fa-box-open"></i>My Orders
+          </a>
+          <a href="wishlist.html" class="dropdown-item">
+            <i class="fas fa-bookmark"></i>Wishlist
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item" id="logoutButtonOne">
+            <i class="fas fa-sign-out-alt"></i>Logout
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="cart-wrapper">
+      <a href="usercart.html"><i class="fas fa-shopping-cart"></i></a>
+      <span class="cart-count" id="cartCount">0</span>
+    </div>
+  </div>
+</header>
+  <!-- Mobile search overlay -->
+  <div class="mobile-search-overlay" id="mobileSearchOverlay">
+    <div class="mobile-search-box">
+      <input id="mobileSearchInput" type="search" placeholder="Search for products...">
+      <button id="mobileSearchBtn">Search</button>
+      <span id="closeMobileSearch">&times;</span>
+    </div>
+  </div>
+
+  <!-- overlay for mobile sidebar -->
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+  <!-- Dashboard -->
+  <div class="dashboard-container">
+    <aside class="sidebar" id="sidebar" aria-hidden="false">
+      <h2>My Account</h2>
+      <ul style="color: black;">
+        <a href="dashboard.html"><li><i class="fa-solid fa-home" style="margin-right: 15px;"></i> Home</li></a>
+        <a href="homepage.html"><li class="active"><i class="fa-solid fa-user" style="margin-right: 15px;"></i> Profile  </li></a>
+        <a href="userproducts.html"><li><i class="fa-solid fa-store" style="margin-right: 15px;"></i> Products </li></a>
+        <a href="userorders.html"><li><i class="fa-solid fa-box-open" style="margin-right: 20px;"></i> Orders</li></a>
+        <a href="wishlist.html"><li><i class="fa-solid fa-bookmark" style="margin-right: 20px;"></i> Wishlist</li></a>
+        <li id="logoutButton"><i class="fa-solid fa-sign-out" style="margin-right: 15px;"></i> Logout</li>
+      
+      </ul>
+    </aside>
+
+
+<div class="desktop-content"> 
+    <main class="main-content" id="mainContent">
+      <!-- Account Details -->
+<section id="account-details" class="profile-section">
+  <h4>Account Details</h4>
+  <p><strong>Full Name:</strong> <span id="displayName"></span></p>
+  <p><strong>Email:</strong> <span id="displayEmail"></span></p>
+  <p><strong>Phone:</strong> <span id="displayPhone"></span></p>
+  <p><strong>Home Address:</strong> <span id="displayAddress"></span></p>
+</section>
+
+<!-- Spin the Wheel Section -->
+<section class="wheel-section profile-section">
+  <h4>Spin the Wheel & Win Discounts!</h4>
+  <div class="wheel-container">
+    <div class="wheel-wrapper">
+      <div class="wheel" id="discountWheel">
+        <div class="wheel-item">10% OFF</div>
+        <div class="wheel-item">Free Shipping</div>
+        <div class="wheel-item">5% OFF</div>
+        <div class="wheel-item">Try Again</div>
+        <div class="wheel-item">15% OFF</div>
+        <div class="wheel-item">$5 OFF</div>
+      </div>
+      <div class="wheel-center">
+        <i class="fas fa-gift"></i>
+      </div>
+      <div class="wheel-pointer"></div>
+    </div>
+    
+    <button class="spin-button" id="spinButton">
+      <i class="fas fa-redo-alt"></i> Spin for Discount!
+    </button>
+    
+    <div class="wheel-result hidden" id="wheelResult">
+      <div class="result-title" id="resultTitle">Congratulations!</div>
+      <div class="result-description" id="resultDescription">You won: 10% OFF</div>
+    </div>
+    
+    <div class="wheel-stats">
+      <div>Spins Today: <span id="spinsToday">0</span>/<span id="maxSpins">3</span></div>
+      <div>Next Spin: <span id="nextSpinTimer">00:00</span></div>
+    </div>
+    
+    <div class="wheel-info">
+      <i class="fas fa-info-circle"></i> Spin the wheel daily to win exclusive discounts!
+    </div>
+  </div>
+</section>
+
+<!-- Add this section after the Spin the Wheel section -->
+<section class="rewards-section profile-section">
+  <h4>My Rewards & Discounts</h4>
+  <div class="rewards-container" id="rewardsContainer">
+    <div class="rewards-loading">Loading your rewards...</div>
+  </div>
+</section>
+
+<!-- Edit Account -->
+<section id="edit-account" class="profile-section">
+  <h4>Edit Account</h4>
+  <input type="text" id="editName" placeholder="Full Name">
+  <input type="text" id="editPhone" placeholder="Phone Number">
+  <input type="text" id="editAddress" placeholder="Home Address">
+  <button id="saveAccountBtn">Save Changes</button>
+</section>
+
+<!-- Change Password -->
+<section id="change-password" class="profile-section">
+  <h4>Change Password</h4>
+  <input type="password" id="oldPassword" placeholder="Old Password">
+  <input type="password" id="newPassword" placeholder="New Password">
+  <input type="password" id="confirmPassword" placeholder="Confirm Password">
+  <button id="changePasswordBtn">Update Password</button>
+</section>
+
+<!-- Profile Picture Section -->
+<section id="profile-picture" class="profile-section">
+  <h4>Profile Picture</h4>
+  <div class="profile-picture-container">
+    <img id="profileImg" src="avatar.png" width="100" height="100" 
+         style="border-radius:50%; margin-bottom:10px; object-fit: cover;">
+    <div class="upload-controls">
+      <input type="file" id="uploadProfilePic" accept="image/*" style="display: none;">
+      <button id="uploadBtn" class="btn-primary">Upload Picture</button>
+      <button id="removeBtn" class="btn-secondary" style="display: none;">Remove Picture</button>
+    </div>
+    <div class="upload-progress" id="uploadProgress" style="display: none;">
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+      <span class="progress-text">Uploading...</span>
+    </div>
+  </div>
+  <p style="font-size: 12px; color: #666; margin-top: 10px;">
+    <i class="fas fa-info-circle"></i> 
+    <span id="storageInfo">File size must not be more than 5mb.
+      Only PNG, JPEG files are accepted.</span>
+  </p>
+</section>
+    </main>
+</div>
+
+
+  </div>
+
+
+  <!------ featured categories ------>
+    <div class="home-page">
+        <div class="categories" id="body">
+            <div class="small-container">
+<h2 class="title" id="categories" align="center" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: rgb(46, 128, 46); line-height: 60px;">
+                    Featured Categories
+                </h2>
+                <div class="row">
+                <div class="col-3" data-aos="fade-up">
+                    <a href="userproducts.html"><img src="Live chicken sticker.png" style="height: 180px;"></a>
+                    <h4 align="center">LIVE CHICKEN</h4>
+                </div>
+                <div class="col-3" data-aos="fade-up">
+                    <a href="userproducts.html"><img src="Ray fish sticker.png" style="height: 180px;"></a>
+                    <h4 align="center">RAY-FISH</h4>
+                </div>
+                <div class="col-3" data-aos="fade-up">
+                    <a href="userproducts.html"><img src="pig sticker.png"></a>
+                    <h4 align="center">LIVE PIGS</h4>
+                </div>
+            </div>
+            </div>
+            
+        </div>
+
+        <!-----featured products-->
+        <div class="small-container" id="categories">
+            <h2 class="title" id="fproducts">
+                Featured Products
+            </h2><br>
+            <div class="row">
+                <div class="col-4" data-aos="fade-up">
+                    <a href="userproducts.html"><img src="Pork sticker.png" style="margin-top: 40px;"></a>
+                    <h4 style="margin-left: 20px;">ALAWUSA FARM-FRESH PORK (PROCESSED)</h4>
+                    <div class="rating" style="margin-left: 20px;">
+                        <span style="color: #4caf50;">&starf;</span>
+                        <span style="color: #4caf50;">&starf;</span>
+                        <span style="color: #4caf50;">&starf;</span>
+                        <span style="color: #4caf50;">&starf;</span>
+                        <span style="color: #4caf50;">&starf;</span>
+                    </div>
+                    <p style="font-size: larger; margin-left: 20px;"><strike>N</strike>3,500.00 | <strike>N</strike>5,500.00 <br><strike>N</strike>10,000.00</p>
+                </div>
+                <div class="col-4" data-aos="fade-up">
+                    <a href="userproducts.html"><img src="processed chicken sticker.png"></a>
+                    <h4 style="margin-left: 20px;">ALAWUSA FARM-FRESH FULL CHICKEN (PROCESSED)</h4>
+                    <div class="rating" style="margin-left: 20px;">
+                        <span style="color: #4caf50;">&starf;</span>
+                        <span style="color: #4caf50;">&starf;</span>
+                        <span style="color: #4caf50;">&starf;</span>
+                        <span style="color: #4caf50;">&starf;</span>
+                        <span style="color: #4caf50;">&starf;</span>
+                    </div>
+                    <p style="font-size: larger; margin-left: 20px;"><strike>N</strike>15,000 - <strike> N</strike>35,000</p>
+                </div>
+                <div class="col-4" data-aos="fade-up">
+                    <a href="userproducts.html"><img src="Processed Rayfish sticker.png" style="height: 150px;"></a>
+                    <h4 style="margin-left: 20px;">ALAWUSA SOURCED FRESH RAYFISH</h4>
+                    <div class="rating" style="margin-left: 20px;">
+                        <span style="color: #4caf50;">&starf;</span>
+                        <span style="color: #4caf50;">&starf;</span>
+                        <span style="color: #4caf50;">&starf;</span>
+                        <span style="color: #4caf50;">&starf;</span>
+                        <span style="color: #4caf50;">&starf;</span>
+                    </div>
+                    <p style="font-size: larger; margin-left: 20px;"><strike>N</strike>2,000</p>
+                </div>
+            </div>
+
+            <!---latest products-->
+            <h2 class="title" id="lproducts">
+                Latest Products
+            </h2>
+            <div class="row">
+                <div class="col-4" data-aos="fade-up">
+                    <a href="userproducts.html"><img src="catfish pic.jpeg" style="margin-top: 30px;"></a>
+                    <h4 style="margin-left: 20px;">ALAWUSA FARM-FRESH CATFISH</h4>
+                    <div class="rating" style="margin-left: 20px;">
+                        <span style="color: #4caf50;">&starf;</span>
+                        <span style="color: #4caf50;">&starf;</span>
+                        <span style="color: #4caf50;">&starf;</span>
+                        <span style="color: #4caf50;">&starf;</span>
+                        <span style="color: #4caf50;">&starf;</span>
+                    </div>
+                    <p style="font-size: larger; margin-left: 20px;"><strike>N</strike>2,000.00 - <strike>N</strike>4,000.00 per 1</p>
+                </div>
+                <div class="col-4" data-aos="fade-up">
+                    <a href="userproducts.html"><img src="Dried catfish sticker.png" style="height: 180px;"></a>
+                    <h4 style="margin-left: 20px;">ALAWUSA DRIED CAT-FISH (CARTON)</h4>
+                    <div class="rating" style="margin-left: 20px;">
+                        <span style="color: #4caf50;">&starf;</span>
+                        <span style="color: #4caf50;">&starf;</span>
+                        <span style="color: #4caf50;">&starf;</span>
+                        <span style="color: #4caf50;">&starf;</span>
+                        <span style="color: #4caf50;">&starf;</span>
+                    </div>
+                    <p style="font-size: larger; margin-left: 20px;"><strike>N</strike>20,000 - <strike> N</strike>50,000</p>
+                </div>
+                <div class="col-4" data-aos="fade-up">
+                    <a href="userproducts.html"><img src="sole fish sticker.png" style="height: 180px;"></a>
+                    <h4 style="margin-left: 20px;">ALAWUSA SOURCED DRIED SOLE FISH</h4>
+                    <div class="rating" style="margin-left: 20px;">
+                        <span style="color: #4caf50;">&starf;</span>
+                        <span style="color: #4caf50;">&starf;</span>
+                        <span style="color: #4caf50;">&starf;</span>
+                        <span style="color: #4caf50;">&starf;</span>
+                        <span style="color: #4caf50;">&starf;</span>
+                    </div>
+                    <p style="font-size: larger; margin-left: 20px;"><strike>N</strike>5,500 - <strike> N</strike>10,000</p>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Newsletter Section -->
+  <section class="newsletter-section">
+    <div class="container">
+      <div class="newsletter-content">
+        <div class="newsletter-text">
+          <h3>Sign Up For Our Newsletter</h3>
+          <p>Get email updates about our latest products and special offers</p>
+        </div>
+       <form  action="https://sheetdb.io/api/v1/7pjxxvpo241l5" method="POST" id="newsletterForm" class="newsletter-form">
+  <input type="email" name="data[email]" placeholder="Your email address" required>
+  <button type="submit">Subscribe</button>
+</form>
+      </div>
+    </div>
+  </section>
+  
+
+
+  <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <a href="homepage.html"><img src="Alawusa heritage logo.png" alt="Alawusa Heritage" style="width: 200px; filter: brightness(2) invert(0);"></a>
+                    <p>Bringing the Best of Our Farm to Your Table</p>
+                    
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=61577588632364&mibextid=ZbWKwL"><img src="facebook.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/alawusaheritage?igsh=MXJnbHJ5dGtlOGs0eQ=="><img src="instagram.png" alt="Instagram"></a>
+                        <a href="https://wa.link/zp8ngg"><img src="whatsapp.png" alt="WhatsApp"></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="userfaq.html">FAQs</a></li>
+                        <li><a href="usercontact.html">Contact Us</a></li>
+                        
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li><a href="userblogpost.html">Farm Tips/Blog Post</a></li>
+                        <li><a href="userourfarm.html">Our Farm/Sustainability</a></li>
+                        <li><a href="userrecipes.html">Recipes</a></li>
+                        <li><a href="useraboutus.html">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +234-802-227-6254</li>
+                        <li><i class="fas fa-envelope" ></i> alawusaheritage@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt" ></i> Alawusa-House, Hungotho, Tube, Ipokia LG, Ogun State</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Alawusa Heritage Fish & Farms. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+  <script>
+    /* -------------------------
+       Sidebar toggle + overlay
+       ------------------------- */
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const menuToggle = document.getElementById('menuToggle');
+
+    function openSidebar() {
+      sidebar.classList.add('open');
+      overlay.classList.add('show');
+      menuToggle.setAttribute('aria-expanded', 'true');
+      sidebar.setAttribute('aria-hidden', 'false');
+      overlay.setAttribute('aria-hidden', 'false');
+      // trap focus could be added here for a11y
+    }
+    function closeSidebar() {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('show');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      sidebar.setAttribute('aria-hidden', 'true');
+      overlay.setAttribute('aria-hidden', 'true');
+    }
+    function toggleSidebar() {
+      if (sidebar.classList.contains('open')) closeSidebar(); else openSidebar();
+    }
+
+    menuToggle.addEventListener('click', toggleSidebar);
+    overlay.addEventListener('click', closeSidebar);
+    // close with Escape key
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSidebar(); });
+
+    /* -------------------------
+       Cart count (localStorage persistence)
+       ------------------------- */
+    const CART_KEY = 'alawusa_cart_count';
+    const cartCountEl = document.getElementById('cart-count');
+
+    function getCartCount() {
+      const raw = localStorage.getItem(CART_KEY);
+      return raw ? parseInt(raw, 10) || 0 : 0;
+    }
+    function setCartCount(n) {
+      localStorage.setItem(CART_KEY, String(n));
+      cartCountEl.textContent = n;
+      // optionally hide when zero:
+      cartCountEl.style.display = n > 0 ? 'inline-block' : 'none';
+    }
+
+    // wire the demo add-to-cart button (for testing)
+    document.getElementById('addCartBtn').addEventListener('click', () => {
+      const current = getCartCount();
+      setCartCount(current + 1);
+    });
+
+    // initialize
+    (function init() {
+      const initial = getCartCount();
+      setCartCount(initial);
+      // demo names — set both greeting and main area
+      const name = localStorage.getItem('alawusa_user_name') || 'Customer';
+      document.getElementById('userGreeting').textContent = name;
+      document.getElementById('userNameMain').textContent = name;
+    })();
+
+    /* -------------------------
+       Simple search behaviour (optional)
+       ------------------------- */
+    document.getElementById('searchBtn').addEventListener('click', () => {
+      const q = document.getElementById('searchInput').value.trim();
+      if (!q) { document.getElementById('searchInput').focus(); return; }
+      // for demo we just alert — replace with your search route
+      window.location.href = `search.html?q=${encodeURIComponent(q)}`;
+    });
+
+
+    
+  </script>
+
+  <script>
+// Desktop search functionality
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize search functionality after DOM is loaded
+  initializeSearch();
+});
+
+function initializeSearch() {
+  // Desktop search
+  const searchBtn = document.getElementById('searchBtn');
+  const searchInput = document.getElementById('searchInput');
+  
+  if (searchBtn && searchInput) {
+    searchBtn.addEventListener('click', performSearch);
+    
+    searchInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        performSearch();
+      }
+    });
+  }
+
+  // Mobile search overlay functionality
+  const mobileOverlay = document.getElementById('mobileSearchOverlay');
+  const mobileIcon = document.getElementById('mobileSearchIcon');
+  const closeBtn = document.getElementById('closeMobileSearch');
+  const mobileSearchBtn = document.getElementById('mobileSearchBtn');
+  const mobileSearchInput = document.getElementById('mobileSearchInput');
+
+  if (mobileIcon) {
+    mobileIcon.addEventListener('click', () => {
+      if (mobileOverlay) {
+        mobileOverlay.style.display = 'flex';
+        if (mobileSearchInput) {
+          mobileSearchInput.focus();
+        }
+      }
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      if (mobileOverlay) {
+        mobileOverlay.style.display = 'none';
+      }
+    });
+  }
+
+  if (mobileSearchBtn && mobileSearchInput) {
+    mobileSearchBtn.addEventListener('click', performMobileSearch);
+    
+    mobileSearchInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        performMobileSearch();
+      }
+    });
+  }
+
+  // Close mobile overlay when clicking outside
+  if (mobileOverlay) {
+    mobileOverlay.addEventListener('click', (e) => {
+      if (e.target === mobileOverlay) {
+        mobileOverlay.style.display = 'none';
+      }
+    });
+  }
+}
+
+function performSearch() {
+  const searchInput = document.getElementById('searchInput');
+  if (!searchInput) return;
+  
+  const q = searchInput.value.trim();
+  if (!q) {
+    alert('Please enter a product name to search');
+    searchInput.focus();
+    return;
+  }
+  
+  // Redirect to products page with search query
+  window.location.href = `userproducts.html?search=${encodeURIComponent(q)}`;
+}
+
+function performMobileSearch() {
+  const mobileSearchInput = document.getElementById('mobileSearchInput');
+  const mobileOverlay = document.getElementById('mobileSearchOverlay');
+  
+  if (!mobileSearchInput) return;
+  
+  const q = mobileSearchInput.value.trim();
+  if (!q) {
+    alert('Please enter a product name to search');
+    mobileSearchInput.focus();
+    return;
+  }
+  
+  // Redirect to products page with search query
+  window.location.href = `userproducts.html?search=${encodeURIComponent(q)}`;
+  
+  // Close overlay
+  if (mobileOverlay) {
+    mobileOverlay.style.display = 'none';
+  }
+}
+</script>
+
+  
+
+  
+
+  <script type="module">
+    
+    // Newsletter signup
+    document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  fetch(this.action, {
+    method: "POST",
+    body: new FormData(this),
+  }).then(() => {
+    alert("🎉 Thank you for subscribing!");
+    this.reset();
+  });
+});
+</script>
+
+<script>
+
+
+function updateCartCount() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+    document.getElementById("cartCount").textContent = totalItems;
+  }
+window.onload = updateCartCount;
+</script>
+
+<script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="TcwUb0cLFLQZZlxVHISps";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const userMenu = document.querySelector(".user-menu");
+  const dropdown = userMenu.querySelector(".dropdown");
+  const toggleIcon = userMenu.querySelector("i.fa-angle-down");
+
+  // Initially hide dropdown
+  dropdown.style.display = "none";
+
+  // Toggle dropdown when clicking the icon
+  toggleIcon.addEventListener("click", (e) => {
+    e.stopPropagation(); // prevent click from bubbling up
+    const isVisible = dropdown.style.display === "block";
+    dropdown.style.display = isVisible ? "none" : "block";
+    toggleIcon.classList.toggle("rotated", !isVisible); // optional rotation effect
+  });
+
+  // Close dropdown if user clicks anywhere else
+  document.addEventListener("click", (e) => {
+    if (!userMenu.contains(e.target)) {
+      dropdown.style.display = "none";
+      toggleIcon.classList.remove("rotated");
+    }
+  });
+});
+</script>
+
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { 
+    getAuth, 
+    onAuthStateChanged, 
+    updatePassword, 
+    reauthenticateWithCredential, 
+    EmailAuthProvider 
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import { 
+    getFirestore, 
+    doc, 
+    getDoc, 
+    setDoc, 
+    updateDoc 
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  // Your Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyDuxTHLfwiETTMO6Dx7YMehngZqWLgUlH0",
+    authDomain: "alawusa-heritage-website.firebaseapp.com",
+    projectId: "alawusa-heritage-website",
+    storageBucket: "alawusa-heritage-website.firebasestorage.app",
+    messagingSenderId: "857988164081",
+    appId: "1:857988164081:web:ccac1200d344a8bd82bc50",
+    measurementId: "G-TJQJMVVMZG"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // Make auth and db available globally for header functions
+  window.auth = auth;
+  window.db = db;
+
+  // SheetDB Configuration
+  const SHEETDB_API_URL = 'https://sheetdb.io/api/v1/xzfj3c87hy1er';
+
+  // Function to upload image to SheetDB
+  async function uploadToSheetDB(userEmail, imageData) {
+    try {
+      const id = 'img_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+      const data = {
+        data: {
+          id: id,
+          email: userEmail,
+          profile_picture: imageData,
+          timestamp: new Date().toISOString(),
+          device_info: navigator.userAgent
+        }
+      };
+
+      const response = await fetch(SHEETDB_API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to upload to SheetDB');
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('SheetDB upload error:', error);
+      throw error;
+    }
+  }
+
+  // Function to get profile picture from SheetDB
+  async function getProfilePictureFromSheetDB(userEmail) {
+    try {
+      const response = await fetch(`${SHEETDB_API_URL}/search?email=${encodeURIComponent(userEmail)}`);
+      
+      if (!response.ok) {
+        throw new Error('Failed to fetch from SheetDB');
+      }
+
+      const data = await response.json();
+      
+      if (data && data.length > 0) {
+        const sorted = data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+        return sorted[0].profile_picture;
+      }
+      
+      return null;
+    } catch (error) {
+      console.error('SheetDB fetch error:', error);
+      return null;
+    }
+  }
+
+  // Function to update upload progress
+  function updateUploadProgress(percent) {
+    const progressFill = document.querySelector('.progress-fill');
+    const progressText = document.querySelector('.progress-text');
+    
+    if (progressFill) {
+      progressFill.style.width = percent + '%';
+    }
+    if (progressText) {
+      progressText.textContent = `Uploading... ${percent}%`;
+    }
+  }
+
+  // Function to show/hide upload progress
+  function toggleUploadProgress(show) {
+    const progress = document.getElementById('uploadProgress');
+    if (progress) {
+      progress.style.display = show ? 'block' : 'none';
+    }
+  }
+
+  // Function to compress image
+  function compressImage(file, maxWidth = 300, maxHeight = 300, quality = 0.8) {
+    return new Promise((resolve) => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      
+      img.onload = function() {
+        let width = img.width;
+        let height = img.height;
+        
+        if (width > height) {
+          if (width > maxWidth) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          }
+        } else {
+          if (height > maxHeight) {
+            width = Math.round((width * maxHeight) / height);
+            height = maxHeight;
+          }
+        }
+        
+        canvas.width = width;
+        canvas.height = height;
+        
+        ctx.drawImage(img, 0, 0, width, height);
+        
+        const base64 = canvas.toDataURL('image/jpeg', quality);
+        resolve(base64);
+      };
+      
+      img.src = URL.createObjectURL(file);
+    });
+  }
+
+  // Function to sync profile pictures
+  function syncProfilePicture(imageSrc) {
+    // Update header profile picture
+    const headerImg = document.getElementById('headerProfileImg');
+    if (headerImg) {
+      headerImg.src = imageSrc;
+    }
+    
+    // Update profile section picture
+    const profileImg = document.getElementById('profileImg');
+    if (profileImg) {
+      profileImg.src = imageSrc;
+    }
+  }
+
+  // Improved function to update header profile
+  window.updateHeaderProfile = function() {
+    const user = auth.currentUser;
+    const headerProfileImg = document.getElementById('headerProfileImg');
+    const headerUserName = document.getElementById('userName');
+    
+    console.log('updateHeaderProfile called');
+    console.log('Header profile img element:', headerProfileImg);
+    console.log('Current user:', user);
+    
+    if (!headerProfileImg) {
+      console.error('Header profile image element not found');
+      return;
+    }
+
+    if (user) {
+      // For logged-in users
+      const localImage = localStorage.getItem(`alawusa_profile_${user.email}`);
+      console.log('Local image found:', !!localImage);
+      if (localImage) {
+        headerProfileImg.src = localImage;
+        console.log('Header image updated to local image');
+      }
+      
+      // Update user name in header
+      const userRef = doc(db, "users", user.uid);
+      getDoc(userRef).then((userSnap) => {
+        if (userSnap.exists()) {
+          const data = userSnap.data();
+          if (headerUserName) {
+            headerUserName.textContent = data.name || 'User';
+          }
+        }
+      });
+    } else {
+      // For guest users
+      const guestImage = localStorage.getItem('alawusa_guest_profile');
+      console.log('Guest image found:', !!guestImage);
+      if (guestImage) {
+        headerProfileImg.src = guestImage;
+        console.log('Header image updated to guest image');
+      }
+      if (headerUserName) {
+        headerUserName.textContent = 'Guest';
+      }
+    }
+  };
+
+  // Setup profile picture functionality
+  function setupProfilePictureHandlers(user) {
+    const uploadBtn = document.getElementById('uploadBtn');
+    const removeBtn = document.getElementById('removeBtn');
+    const fileInput = document.getElementById('uploadProfilePic');
+    
+    uploadBtn.addEventListener('click', () => {
+      fileInput.click();
+    });
+    
+    fileInput.addEventListener('change', async (event) => {
+      const file = event.target.files[0];
+      if (!file) return;
+        
+      if (!file.type.startsWith('image/')) {
+        alert('Please select a valid image file');
+        return;
+      }
+      
+      if (file.size > 5 * 1024 * 1024) {
+        alert('File size must be less than 5MB');
+        return;
+      }
+      
+      try {
+        uploadBtn.classList.add('loading');
+        toggleUploadProgress(true);
+        updateUploadProgress(30);
+        
+        const compressedImage = await compressImage(file);
+        updateUploadProgress(100);
+        
+        if (user) {
+          await uploadToSheetDB(user.email, compressedImage);
+          localStorage.setItem(`alawusa_profile_${user.email}`, compressedImage);
+        } else {
+          localStorage.setItem('alawusa_guest_profile', compressedImage);
+        }
+        
+        updateUploadProgress(100);
+        
+        // Sync the picture everywhere
+        syncProfilePicture(compressedImage);
+        
+        removeBtn.style.display = 'inline-block';
+        
+        alert('Profile picture updated successfully!');
+        
+      } catch (error) {
+        console.error('Upload error:', error);
+        alert('Error uploading profile picture: ' + error.message);
+      } finally {
+        uploadBtn.classList.remove('loading');
+        toggleUploadProgress(false);
+        fileInput.value = '';
+      }
+    });
+    
+    removeBtn.addEventListener('click', async () => {
+      if (confirm('Are you sure you want to remove your profile picture?')) {
+        try {
+          const defaultAvatar = 'avatar.png';
+          
+          if (user) {
+            localStorage.removeItem(`alawusa_profile_${user.email}`);
+          } else {
+            localStorage.removeItem('alawusa_guest_profile');
+          }
+          
+          // Sync removal everywhere
+          syncProfilePicture(defaultAvatar);
+          
+          removeBtn.style.display = 'none';
+          
+          alert('Profile picture removed successfully!');
+        } catch (error) {
+          console.error('Remove error:', error);
+          alert('Error removing profile picture');
+        }
+      }
+    });
+  }
+
+  // Load and display profile picture
+  async function loadProfilePicture(user) {
+    const profileImg = document.getElementById('profileImg');
+    const removeBtn = document.getElementById('removeBtn');
+    
+    // Try to get from localStorage first (fastest)
+    const localImage = localStorage.getItem(`alawusa_profile_${user.email}`);
+    if (localImage) {
+      profileImg.src = localImage;
+      removeBtn.style.display = 'inline-block';
+      return;
+    }
+    
+    // If not in localStorage, try SheetDB
+    try {
+      const sheetDBImage = await getProfilePictureFromSheetDB(user.email);
+      if (sheetDBImage) {
+        profileImg.src = sheetDBImage;
+        localStorage.setItem(`alawusa_profile_${user.email}`, sheetDBImage);
+        removeBtn.style.display = 'inline-block';
+      }
+    } catch (error) {
+      console.error('Error loading profile picture:', error);
+    }
+  }
+
+  // Update displayed account details
+  function updateDisplayedUserData(userData) {
+    document.getElementById("displayName").textContent = userData.name || "Not set";
+    document.getElementById("displayEmail").textContent = userData.email || "Not set";
+    document.getElementById("displayPhone").textContent = userData.phone || "Not set";
+    document.getElementById("displayAddress").textContent = userData.address || "Not set";
+    
+    document.getElementById("editName").value = userData.name || "";
+    document.getElementById("editPhone").value = userData.phone || "";
+    document.getElementById("editAddress").value = userData.address || "";
+  }
+
+  // Load user data
+  async function loadUserData(user) {
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
+
+    if (userSnap.exists()) {
+      const data = userSnap.data();
+      const userData = {
+        name: data.name || "",
+        email: user.email || "",
+        phone: data.phone || "",
+        address: data.address || ""
+      };
+      
+      updateDisplayedUserData(userData);
+      
+      // Load profile picture
+      await loadProfilePicture(user);
+      
+    } else {
+      // Create user document if it doesn't exist
+      await setDoc(userRef, { 
+        name: user.displayName || "", 
+        email: user.email || "",
+        phone: "", 
+        address: ""
+      });
+    }
+  }
+
+  // Handle guest user
+  function handleGuestUser() {
+    document.getElementById("edit-account").style.display = "none";
+    document.getElementById("change-password").style.display = "none";
+    
+    // Simple local storage for guest users
+    const uploadBtn = document.getElementById("uploadBtn");
+    const fileInput = document.getElementById("uploadProfilePic");
+    const profileImg = document.getElementById("profileImg");
+    const removeBtn = document.getElementById("removeBtn");
+    
+    // Check for existing guest image
+    const guestImage = localStorage.getItem('alawusa_guest_profile');
+    if (guestImage) {
+      profileImg.src = guestImage;
+      removeBtn.style.display = 'inline-block';
+    }
+    
+    uploadBtn.addEventListener("click", () => {
+      fileInput.click();
+    });
+    
+    fileInput.addEventListener("change", async (event) => {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      if (!file.type.startsWith('image/')) {
+        alert("Please select an image file");
+        return;
+      }
+
+      if (file.size > 5 * 1024 * 1024) {
+        alert("File size must be less than 5MB");
+        return;
+      }
+
+      try {
+        const compressedImage = await compressImage(file);
+        localStorage.setItem('alawusa_guest_profile', compressedImage);
+        profileImg.src = compressedImage;
+        removeBtn.style.display = 'inline-block';
+        alert("Profile picture saved locally!");
+      } catch (error) {
+        alert("Error processing image");
+      }
+    });
+    
+    removeBtn.addEventListener("click", () => {
+      localStorage.removeItem('alawusa_guest_profile');
+      profileImg.src = 'avatar.png';
+      removeBtn.style.display = 'none';
+    });
+  }
+
+  // Auth state listener
+  onAuthStateChanged(auth, async (user) => {
+    console.log('Auth state changed:', user);
+    if (user) {
+      await loadUserData(user);
+      setupProfilePictureHandlers(user);
+      updateHeaderProfile(); 
+
+      // Setup account editing
+      document.getElementById("saveAccountBtn").addEventListener("click", async () => {
+        const name = document.getElementById("editName").value.trim();
+        const phone = document.getElementById("editPhone").value.trim();
+        const address = document.getElementById("editAddress").value.trim();
+
+        if (!name) {
+          alert("Please enter your full name");
+          return;
+        }
+
+        try {
+          await updateDoc(doc(db, "users", user.uid), { 
+            name, 
+            phone, 
+            address 
+          });
+          
+          updateDisplayedUserData({ name, email: user.email, phone, address });
+          alert("Profile updated successfully!");
+        } catch (error) {
+          alert("Error updating profile: " + error.message);
+        }
+      });
+
+      // Password change functionality
+      document.getElementById("changePasswordBtn").addEventListener("click", async () => {
+        const oldPassword = document.getElementById("oldPassword").value;
+        const newPassword = document.getElementById("newPassword").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+
+        if (!oldPassword || !newPassword || !confirmPassword) {
+          alert("Please fill in all password fields");
+          return;
+        }
+
+        if (newPassword !== confirmPassword) {
+          alert("New passwords do not match!");
+          return;
+        }
+
+        if (newPassword.length < 6) {
+          alert("New password must be at least 6 characters long");
+          return;
+        }
+
+        try {
+          const credential = EmailAuthProvider.credential(user.email, oldPassword);
+          await reauthenticateWithCredential(user, credential);
+          await updatePassword(user, newPassword);
+          
+          document.getElementById("oldPassword").value = "";
+          document.getElementById("newPassword").value = "";
+          document.getElementById("confirmPassword").value = "";
+          
+          alert("Password updated successfully!");
+        } catch (err) {
+          if (err.code === 'auth/wrong-password') {
+            alert("Current password is incorrect");
+          } else if (err.code === 'auth/weak-password') {
+            alert("New password is too weak");
+          } else {
+            alert("Error updating password: " + err.message);
+          }
+        }
+      });
+
+    } else {
+      handleGuestUser();
+      updateHeaderProfile();
+      document.getElementById("displayName").textContent = "Guest User";
+      document.getElementById("displayEmail").textContent = "Not logged in";
+      document.getElementById("displayPhone").textContent = "Not set";
+      document.getElementById("displayAddress").textContent = "Not set";
+    }
+  });
+
+  // Logout functionality
+  document.getElementById("logoutButton").addEventListener("click", async () => {
+    try {
+      await auth.signOut();
+      window.location.href = "account.html";
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  });
+
+  // Header logout functionality
+  document.getElementById('logoutButtonOne').addEventListener('click', async (e) => {
+    e.preventDefault();
+    try {
+      await auth.signOut();
+      window.location.href = 'account.html';
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  });
+
+  // Initialize header profile on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM Content Loaded - initializing header profile');
+    // Small delay to ensure all elements are loaded
+    setTimeout(() => {
+      updateHeaderProfile();
+    }, 500);
+  });
+</script>
+<script>
+// Search functionality for homepage
+document.addEventListener('DOMContentLoaded', function() {
+  // Desktop search
+  const searchBtn = document.getElementById('searchBtn');
+  const searchInput = document.getElementById('searchInput');
+  
+  if (searchBtn && searchInput) {
+    searchBtn.addEventListener('click', performSearch);
+    
+    searchInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        performSearch();
+      }
+    });
+  }
+
+  // Mobile search
+  const mobileSearchBtn = document.getElementById('mobileSearchBtn');
+  const mobileSearchInput = document.getElementById('mobileSearchInput');
+  const mobileSearchOverlay = document.getElementById('mobileSearchOverlay');
+
+  if (mobileSearchBtn && mobileSearchInput) {
+    mobileSearchBtn.addEventListener('click', performMobileSearch);
+    
+    mobileSearchInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        performMobileSearch();
+      }
+    });
+  }
+
+  // Mobile search overlay functionality
+  const mobileSearchIcon = document.getElementById('mobileSearchIcon');
+  const closeMobileSearch = document.getElementById('closeMobileSearch');
+
+  if (mobileSearchIcon) {
+    mobileSearchIcon.addEventListener('click', () => {
+      if (mobileSearchOverlay) {
+        mobileSearchOverlay.style.display = 'flex';
+        if (mobileSearchInput) {
+          mobileSearchInput.focus();
+        }
+      }
+    });
+  }
+
+  if (closeMobileSearch) {
+    closeMobileSearch.addEventListener('click', () => {
+      if (mobileSearchOverlay) {
+        mobileSearchOverlay.style.display = 'none';
+      }
+    });
+  }
+
+  // Close mobile overlay when clicking outside
+  if (mobileSearchOverlay) {
+    mobileSearchOverlay.addEventListener('click', (e) => {
+      if (e.target === mobileSearchOverlay) {
+        mobileSearchOverlay.style.display = 'none';
+      }
+    });
+  }
+});
+
+function performSearch() {
+  const searchInput = document.getElementById('searchInput');
+  if (!searchInput) return;
+  
+  const q = searchInput.value.trim();
+  if (!q) {
+    alert('Please enter a product name to search');
+    searchInput.focus();
+    return;
+  }
+  
+  // Redirect to products page with search query
+  window.location.href = `userproducts.html?search=${encodeURIComponent(q)}`;
+}
+
+function performMobileSearch() {
+  const mobileSearchInput = document.getElementById('mobileSearchInput');
+  const mobileSearchOverlay = document.getElementById('mobileSearchOverlay');
+  
+  if (!mobileSearchInput) return;
+  
+  const q = mobileSearchInput.value.trim();
+  if (!q) {
+    alert('Please enter a product name to search');
+    mobileSearchInput.focus();
+    return;
+  }
+  
+  // Redirect to products page with search query
+  window.location.href = `userproducts.html?search=${encodeURIComponent(q)}`;
+  
+  // Close overlay
+  if (mobileSearchOverlay) {
+    mobileSearchOverlay.style.display = 'none';
+  }
+}
+
+// Improved function to update header profile
+function updateHeaderProfile() {
+  const user = auth.currentUser;
+  const headerProfileImg = document.getElementById('headerProfileImg');
+  const headerUserName = document.getElementById('userName');
+  
+  if (!headerProfileImg) {
+    console.error('Header profile image element not found');
+    return;
+  }
+
+  if (user) {
+    // For logged-in users
+    const localImage = localStorage.getItem(`alawusa_profile_${user.email}`);
+    if (localImage) {
+      headerProfileImg.src = localImage;
+    }
+    
+    // Update user name in header
+    const userRef = doc(db, "users", user.uid);
+    getDoc(userRef).then((userSnap) => {
+      if (userSnap.exists()) {
+        const data = userSnap.data();
+        if (headerUserName) {
+          headerUserName.textContent = data.name || 'User';
+        }
+      }
+    });
+  } else {
+    // For guest users
+    const guestImage = localStorage.getItem('alawusa_guest_profile');
+    if (guestImage) {
+      headerProfileImg.src = guestImage;
+    }
+    if (headerUserName) {
+      headerUserName.textContent = 'Guest';
+    }
+  }
+}
+
+// Function to sync profile pictures
+function syncProfilePicture(imageSrc) {
+  // Update header profile picture
+  document.getElementById('headerProfileImg').src = imageSrc;
+  
+  // Update profile section picture
+  document.getElementById('profileImg').src = imageSrc;
+}
+
+
+// Function to sync profile pictures everywhere
+function syncProfilePicture(imageSrc) {
+  // Update header profile picture
+  const headerImg = document.getElementById('headerProfileImg');
+  if (headerImg) {
+    headerImg.src = imageSrc;
+  }
+  
+  // Update profile section picture
+  const profileImg = document.getElementById('profileImg');
+  if (profileImg) {
+    profileImg.src = imageSrc;
+  }
+}
+// Update your existing profile picture handlers
+function setupProfilePictureHandlers(user) {
+  const uploadBtn = document.getElementById('uploadBtn');
+  const removeBtn = document.getElementById('removeBtn');
+  const fileInput = document.getElementById('uploadProfilePic');
+  const profileImg = document.getElementById('profileImg');
+  
+  uploadBtn.addEventListener('click', () => {
+    fileInput.click();
+  });
+  
+  fileInput.addEventListener('change', async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    if (!file.type.startsWith('image/')) {
+      alert('Please select a valid image file');
+      return;
+    }
+    
+    if (file.size > 5 * 1024 * 1024) {
+      alert('File size must be less than 5MB');
+      return;
+    }
+    
+    try {
+      uploadBtn.classList.add('loading');
+      toggleUploadProgress(true);
+      updateUploadProgress(30);
+      
+      const compressedImage = await compressImage(file);
+      updateUploadProgress(60);
+      
+      if (user) {
+        await uploadToSheetDB(user.email, compressedImage);
+        localStorage.setItem(`alawusa_profile_${user.email}`, compressedImage);
+      } else {
+        localStorage.setItem('alawusa_guest_profile', compressedImage);
+      }
+      
+      updateUploadProgress(100);
+      
+      // Sync the picture everywhere
+      syncProfilePicture(compressedImage);
+      
+      removeBtn.style.display = 'inline-block';
+      
+      alert('Profile picture updated successfully!');
+      
+    } catch (error) {
+      console.error('Upload error:', error);
+      alert('Error uploading profile picture: ' + error.message);
+    } finally {
+      uploadBtn.classList.remove('loading');
+      toggleUploadProgress(false);
+      fileInput.value = '';
+    }
+  });
+  
+  removeBtn.addEventListener('click', async () => {
+    if (confirm('Are you sure you want to remove your profile picture?')) {
+      try {
+        const defaultAvatar = 'avatar.png';
+        
+        if (user) {
+          localStorage.removeItem(`alawusa_profile_${user.email}`);
+        } else {
+          localStorage.removeItem('alawusa_guest_profile');
+        }
+        
+        // Sync removal everywhere
+        syncProfilePicture(defaultAvatar);
+        
+        removeBtn.style.display = 'none';
+        
+        alert('Profile picture removed successfully!');
+      } catch (error) {
+        console.error('Remove error:', error);
+        alert('Error removing profile picture');
+      }
+    }
+  });
+}
+
+// Header logout functionality
+document.getElementById('headerLogout').addEventListener('click', async (e) => {
+  e.preventDefault();
+  try {
+    await auth.signOut();
+    window.location.href = 'account.html';
+  } catch (error) {
+    console.error('Logout error:', error);
+  }
+});
+
+// Initialize header profile on page load
+document.addEventListener('DOMContentLoaded', function() {
+  updateHeaderProfile();
+});
+
+// Initialize header profile on page load
+document.addEventListener('DOMContentLoaded', function() {
+  // Small delay to ensure all elements are loaded
+  setTimeout(() => {
+    updateHeaderProfile();
+  }, 100);
+});
+
+// Also call updateHeaderProfile when auth state changes
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    await loadUserData(user);
+    setupProfilePictureHandlers(user);
+    updateHeaderProfile(); // Ensure this is called here
+  } else {
+    handleGuestUser();
+    updateHeaderProfile(); // And here for guest users
+    // ... rest of your guest user code
+  }
+});
+
+
+</script>
+
+<!-- Spin the Wheel JavaScript -->
+<!-- Fixed Spin the Wheel JavaScript -->
+<script>
+// Make Firebase functions available globally
+
+
+// Import Firebase functions and make them available globally
+async function initializeFirebaseForWheel() {
+  if (typeof window.auth !== 'undefined') {
+    auth = window.auth;
+    db = window.db;
+    
+    // Import Firestore functions
+    const { doc: docFn, getDoc: getDocFn, updateDoc: updateDocFn } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js");
+    const { onAuthStateChanged: onAuthStateChangedFn } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js");
+    
+    doc = docFn;
+    getDoc = getDocFn;
+    updateDoc = updateDocFn;
+    onAuthStateChanged = onAuthStateChangedFn;
+    
+    initializeWheel();
+  } else {
+    // Retry after a short delay if Firebase isn't loaded yet
+    setTimeout(initializeFirebaseForWheel, 500);
+  }
+}
+
+function initializeWheel() {
+  // Wheel elements
+  const wheel = document.getElementById('discountWheel');
+  const spinButton = document.getElementById('spinButton');
+  const wheelResult = document.getElementById('wheelResult');
+  const resultTitle = document.getElementById('resultTitle');
+  const resultDescription = document.getElementById('resultDescription');
+  const spinsTodayEl = document.getElementById('spinsToday');
+  const maxSpinsEl = document.getElementById('maxSpins');
+  const nextSpinTimerEl = document.getElementById('nextSpinTimer');
+  
+  // Wheel configuration
+  const wheelItems = [
+    { 
+      text: "10% OFF", 
+      value: "10%", 
+      description: "Get 10% off your next purchase",
+      type: "percentage",
+      amount: 10
+    },
+    { 
+      text: "Free Shipping", 
+      value: "free_shipping", 
+      description: "Free shipping on your next order",
+      type: "shipping",
+      amount: 0
+    },
+    { 
+      text: "5% OFF", 
+      value: "5%", 
+      description: "Get 5% off your next purchase",
+      type: "percentage",
+      amount: 5
+    },
+    { 
+      text: "Try Again", 
+      value: "try_again", 
+      description: "No luck this time, try again tomorrow",
+      type: "none",
+      amount: 0
+    },
+    { 
+      text: "15% OFF", 
+      value: "15%", 
+      description: "Get 15% off your next purchase",
+      type: "percentage",
+      amount: 15
+    },
+    { 
+      text: "$5 OFF", 
+      value: "$5", 
+      description: "Get $5 off your next purchase",
+      type: "fixed",
+      amount: 5
+    }
+  ];
+  
+  // Spin limits
+  const MAX_SPINS_PER_DAY = 3;
+  let isSpinning = false;
+
+  // Initialize spin tracking
+  async function initializeSpinTracking(user) {
+    if (!user) return;
+    
+    try {
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+      
+      if (userSnap.exists()) {
+        const userData = userSnap.data();
+        const spinData = userData.spinData || { 
+          lastSpinDate: null, 
+          spinsToday: 0
+        };
+        
+        const today = new Date().toDateString();
+        
+        // Reset spins if it's a new day
+        if (spinData.lastSpinDate !== today) {
+          spinData.spinsToday = 0;
+          spinData.lastSpinDate = today;
+          await updateDoc(userRef, { spinData });
+        }
+        
+        // Update UI
+        spinsTodayEl.textContent = spinData.spinsToday;
+        maxSpinsEl.textContent = MAX_SPINS_PER_DAY;
+        
+        // Update button state
+        if (spinData.spinsToday >= MAX_SPINS_PER_DAY) {
+          spinButton.disabled = true;
+          spinButton.innerHTML = '<i class="fas fa-clock"></i> Come Back Tomorrow';
+          startTimer();
+        } else {
+          spinButton.disabled = false;
+          spinButton.innerHTML = '<i class="fas fa-redo-alt"></i> Spin for Discount!';
+        }
+      }
+    } catch (error) {
+      console.error("Error initializing spin tracking:", error);
+      // Fallback to localStorage if Firebase fails
+      initializeLocalStorageFallback();
+    }
+  }
+  
+  // Fallback to localStorage if Firebase is not available
+  function initializeLocalStorageFallback() {
+    const today = new Date().toDateString();
+    const spinData = JSON.parse(localStorage.getItem('alawusa_spin_data')) || { 
+      lastSpinDate: null, 
+      spinsToday: 0
+    };
+    
+    // Reset spins if it's a new day
+    if (spinData.lastSpinDate !== today) {
+      spinData.spinsToday = 0;
+      spinData.lastSpinDate = today;
+      localStorage.setItem('alawusa_spin_data', JSON.stringify(spinData));
+    }
+    
+    // Update UI
+    spinsTodayEl.textContent = spinData.spinsToday;
+    maxSpinsEl.textContent = MAX_SPINS_PER_DAY;
+    
+    // Update button state
+    if (spinData.spinsToday >= MAX_SPINS_PER_DAY) {
+      spinButton.disabled = true;
+      spinButton.innerHTML = '<i class="fas fa-clock"></i> Come Back Tomorrow';
+      startTimer();
+    } else {
+      spinButton.disabled = false;
+      spinButton.innerHTML = '<i class="fas fa-redo-alt"></i> Spin for Discount!';
+    }
+  }
+  
+  // Start countdown timer for next spin
+  function startTimer() {
+    const now = new Date();
+    const tomorrow = new Date(now);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(0, 0, 0, 0);
+    
+    const updateTimer = () => {
+      const now = new Date();
+      const diff = tomorrow - now;
+      
+      if (diff <= 0) {
+        nextSpinTimerEl.textContent = '00:00';
+        location.reload();
+        return;
+      }
+      
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      
+      nextSpinTimerEl.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+    };
+    
+    updateTimer();
+    setInterval(updateTimer, 60000);
+  }
+  
+  // Create confetti effect
+  function createConfetti() {
+    const colors = ['#4caf50', '#2196f3', '#ff9800', '#f44336', '#9c27b0', '#3f51b5'];
+    
+    for (let i = 0; i < 50; i++) {
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.animation = `confetti ${Math.random() * 3 + 2}s linear forwards`;
+      document.body.appendChild(confetti);
+      
+      setTimeout(() => {
+        if (confetti.parentNode) {
+          confetti.remove();
+        }
+      }, 5000);
+    }
+  }
+  
+  // Generate a unique discount code
+  function generateDiscountCode() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let code = '';
+    for (let i = 0; i < 8; i++) {
+      code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return 'AH' + code;
+  }
+  
+  // Save reward to user's account
+  async function saveRewardToAccount(user, prize) {
+    if (!user || prize.value === "try_again") return null;
+    
+    try {
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+      
+      if (userSnap.exists()) {
+        const userData = userSnap.data();
+        const rewards = userData.rewards || [];
+        
+        const rewardCode = generateDiscountCode();
+        const newReward = {
+          id: 'reward_' + Date.now(),
+          code: rewardCode,
+          type: prize.type,
+          value: prize.value,
+          amount: prize.amount,
+          description: prize.description,
+          wonAt: new Date().toISOString(),
+          expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+          used: false,
+          usedAt: null
+        };
+        
+        rewards.push(newReward);
+        
+        await updateDoc(userRef, { 
+          rewards: rewards,
+          lastRewardWon: newReward
+        });
+        
+        return newReward;
+      }
+    } catch (error) {
+      console.error("Error saving reward:", error);
+      // Fallback to localStorage
+      return saveRewardToLocalStorage(prize);
+    }
+    return null;
+  }
+  
+  // Fallback: Save reward to localStorage
+  function saveRewardToLocalStorage(prize) {
+    const rewardCode = generateDiscountCode();
+    const newReward = {
+      id: 'reward_' + Date.now(),
+      code: rewardCode,
+      type: prize.type,
+      value: prize.value,
+      amount: prize.amount,
+      description: prize.description,
+      wonAt: new Date().toISOString(),
+      expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+      used: false,
+      usedAt: null
+    };
+    
+    const rewards = JSON.parse(localStorage.getItem('alawusa_rewards')) || [];
+    rewards.push(newReward);
+    localStorage.setItem('alawusa_rewards', JSON.stringify(rewards));
+    
+    return newReward;
+  }
+  
+  // Update spin data
+  async function updateSpinData(user) {
+    if (!user) {
+      // Use localStorage for guest users
+      return updateSpinDataLocalStorage();
+    }
+    
+    try {
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+      
+      if (userSnap.exists()) {
+        const userData = userSnap.data();
+        const spinData = userData.spinData || { 
+          lastSpinDate: null, 
+          spinsToday: 0,
+          totalSpins: 0
+        };
+        
+        const today = new Date().toDateString();
+        
+        if (spinData.lastSpinDate !== today) {
+          spinData.spinsToday = 1;
+          spinData.lastSpinDate = today;
+        } else {
+          spinData.spinsToday = (spinData.spinsToday || 0) + 1;
+        }
+        
+        spinData.totalSpins = (spinData.totalSpins || 0) + 1;
+        spinData.lastSpinAt = new Date().toISOString();
+        
+        await updateDoc(userRef, { spinData });
+        
+        return spinData;
+      }
+    } catch (error) {
+      console.error("Error updating spin data:", error);
+      // Fallback to localStorage
+      return updateSpinDataLocalStorage();
+    }
+    return { spinsToday: 0 };
+  }
+  
+  // Fallback: Update spin data in localStorage
+  function updateSpinDataLocalStorage() {
+    const today = new Date().toDateString();
+    const spinData = JSON.parse(localStorage.getItem('alawusa_spin_data')) || { 
+      lastSpinDate: null, 
+      spinsToday: 0,
+      totalSpins: 0
+    };
+    
+    if (spinData.lastSpinDate !== today) {
+      spinData.spinsToday = 1;
+      spinData.lastSpinDate = today;
+    } else {
+      spinData.spinsToday = (spinData.spinsToday || 0) + 1;
+    }
+    
+    spinData.totalSpins = (spinData.totalSpins || 0) + 1;
+    spinData.lastSpinAt = new Date().toISOString();
+    
+    localStorage.setItem('alawusa_spin_data', JSON.stringify(spinData));
+    return spinData;
+  }
+  
+  // Check if user can spin
+  async function canUserSpin(user) {
+    if (!user) {
+      // Check localStorage for guest users
+      const spinData = JSON.parse(localStorage.getItem('alawusa_spin_data')) || { spinsToday: 0 };
+      const today = new Date().toDateString();
+      
+      if (spinData.lastSpinDate !== today) {
+        return true; // New day, can spin
+      }
+      
+      return spinData.spinsToday < MAX_SPINS_PER_DAY;
+    }
+    
+    try {
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+      
+      if (userSnap.exists()) {
+        const userData = userSnap.data();
+        const spinData = userData.spinData || { spinsToday: 0 };
+        const today = new Date().toDateString();
+        
+        if (spinData.lastSpinDate !== today) {
+          return true; // New day, can spin
+        }
+        
+        return spinData.spinsToday < MAX_SPINS_PER_DAY;
+      }
+    } catch (error) {
+      console.error("Error checking spin eligibility:", error);
+      // Fallback to localStorage
+      const spinData = JSON.parse(localStorage.getItem('alawusa_spin_data')) || { spinsToday: 0 };
+      const today = new Date().toDateString();
+      
+      if (spinData.lastSpinDate !== today) {
+        return true;
+      }
+      
+      return spinData.spinsToday < MAX_SPINS_PER_DAY;
+    }
+    
+    return true;
+  }
+  
+  // Spin the wheel
+  async function spinWheel() {
+    if (isSpinning) return;
+    
+    const user = auth ? auth.currentUser : null;
+    
+    if (!user) {
+      alert("Please log in to spin the wheel!");
+      return;
+    }
+    
+    const canSpin = await canUserSpin(user);
+    if (!canSpin) {
+      alert("You've used all your spins for today. Come back tomorrow!");
+      return;
+    }
+    
+    isSpinning = true;
+    
+    // Disable button during spin
+    spinButton.disabled = true;
+    spinButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Spinning...';
+    
+    // Hide previous result
+    wheelResult.classList.add('hidden');
+    
+    // Calculate random rotation
+    const fullRotations = 5;
+    const prizeIndex = Math.floor(Math.random() * wheelItems.length);
+    const prize = wheelItems[prizeIndex];
+    
+    // Each segment is 60 degrees (360/6)
+    const segmentAngle = 60;
+    // Offset to center the pointer on a segment
+    const pointerOffset = segmentAngle / 2;
+    // Calculate final rotation
+    const finalRotation = fullRotations * 360 + (prizeIndex * segmentAngle) + pointerOffset;
+    
+    // Apply rotation with CSS transition
+    wheel.style.transition = 'transform 5s cubic-bezier(0.17, 0.67, 0.83, 0.67)';
+    wheel.style.transform = `rotate(${finalRotation}deg)`;
+    
+    // After spin completes
+    setTimeout(async () => {
+      try {
+        // Update spin data
+        const updatedSpinData = await updateSpinData(user);
+        
+        // Update UI
+        spinsTodayEl.textContent = updatedSpinData.spinsToday;
+        
+        // Show result
+        resultTitle.textContent = prize.value === "try_again" ? "Better Luck Next Time!" : "Congratulations!";
+        
+        let resultText = prize.description;
+        
+        // Save reward if user won something
+        if (prize.value !== "try_again") {
+          const savedReward = await saveRewardToAccount(user, prize);
+          if (savedReward) {
+            resultText += `\nYour code: ${savedReward.code}`;
+            createConfetti();
+            
+            // Reload rewards display
+            if (typeof loadUserRewards === 'function') {
+              loadUserRewards(user);
+            }
+          }
+        }
+        
+        resultDescription.innerHTML = resultText.replace(/\n/g, '<br>');
+        wheelResult.classList.remove('hidden');
+        
+        // Update button state
+        if (updatedSpinData.spinsToday >= MAX_SPINS_PER_DAY) {
+          spinButton.disabled = true;
+          spinButton.innerHTML = '<i class="fas fa-clock"></i> Come Back Tomorrow';
+          startTimer();
+        } else {
+          spinButton.disabled = false;
+          spinButton.innerHTML = '<i class="fas fa-redo-alt"></i> Spin Again';
+        }
+        
+      } catch (error) {
+        console.error("Error processing spin result:", error);
+        alert("Error processing your spin. Please try again.");
+        spinButton.disabled = false;
+        spinButton.innerHTML = '<i class="fas fa-redo-alt"></i> Spin for Discount!';
+      } finally {
+        isSpinning = false;
+      }
+    }, 5000);
+  }
+  
+  // Initialize the wheel when user is authenticated
+  if (auth && onAuthStateChanged) {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        await initializeSpinTracking(user);
+        spinButton.addEventListener('click', spinWheel);
+      } else {
+        spinButton.disabled = true;
+        spinButton.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Spin';
+        spinsTodayEl.textContent = '0';
+      }
+    });
+  } else {
+    // Fallback for when Firebase is not available
+    spinButton.addEventListener('click', spinWheel);
+    initializeLocalStorageFallback();
+  }
+}
+
+// Start initialization
+document.addEventListener('DOMContentLoaded', function() {
+  initializeFirebaseForWheel();
+});
+</script>
+
+<script>
+// Rewards & Discounts Section
+// Function to load and display user rewards
+async function loadUserRewards(user) {
+  if (!user) return;
+  
+  try {
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
+    const rewardsContainer = document.getElementById('rewardsContainer');
+    
+    if (!rewardsContainer) return;
+    
+    if (userSnap.exists()) {
+      const userData = userSnap.data();
+      const rewards = userData.rewards || [];
+      
+      if (rewards.length === 0) {
+        rewardsContainer.innerHTML = `
+          <div class="no-rewards">
+            <i class="fas fa-gift" style="font-size: 48px; color: #ccc; margin-bottom: 15px;"></i>
+            <p>No rewards yet. Spin the wheel to win discounts!</p>
+          </div>
+        `;
+        return;
+      }
+      
+      // Sort rewards by expiry date (newest first)
+      rewards.sort((a, b) => new Date(b.wonAt) - new Date(a.wonAt));
+      
+      let rewardsHTML = '';
+      
+      rewards.forEach(reward => {
+        const expiryDate = new Date(reward.expiresAt);
+        const now = new Date();
+        const isExpired = expiryDate < now;
+        const isUsed = reward.used;
+        
+        let statusClass = 'status-active';
+        let statusText = 'Active';
+        
+        if (isUsed) {
+          statusClass = 'status-used';
+          statusText = 'Used';
+        } else if (isExpired) {
+          statusClass = 'status-expired';
+          statusText = 'Expired';
+        }
+        
+        rewardsHTML += `
+          <div class="reward-card ${isUsed ? 'used' : ''} ${isExpired ? 'expired' : ''}">
+            <div class="reward-info">
+              <div class="reward-code">${reward.code}</div>
+              <div class="reward-description">${reward.description}</div>
+              <div class="reward-expiry">
+                Expires: ${expiryDate.toLocaleDateString()}
+                ${isUsed ? ` • Used on: ${new Date(reward.usedAt).toLocaleDateString()}` : ''}
+              </div>
+            </div>
+            <div class="reward-status">
+              <span class="status-badge ${statusClass}">${statusText}</span>
+            </div>
+          </div>
+        `;
+      });
+      
+      rewardsContainer.innerHTML = rewardsHTML;
+    }
+  } catch (error) {
+    console.error("Error loading rewards:", error);
+    const rewardsContainer = document.getElementById('rewardsContainer');
+    if (rewardsContainer) {
+      rewardsContainer.innerHTML = '<div class="no-rewards">Error loading rewards</div>';
+    }
+  }
+}
+
+// Update your auth state listener to load rewards
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    await loadUserData(user);
+    setupProfilePictureHandlers(user);
+    updateHeaderProfile();
+    await loadUserRewards(user); // Add this line
+    
+    // ... rest of your existing code
+  } else {
+    handleGuestUser();
+    updateHeaderProfile();
+    // ... rest of your guest user code
+  }
+});
+</script>
+
+</body>
+</html>
