@@ -189,7 +189,6 @@
         display: inline-block;
         margin-top: 20px;
         padding: 12px 18px;
-
         color: white;
         font-size: 14px;
         font-weight: 600;
@@ -206,11 +205,65 @@
       .home-btn i {
         margin-right: 6px;
       }
+
+      /* Dashboard Styles */
+      .dashboard {
+        display: none;
+        background: #fff;
+        padding: 40px 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+        text-align: center;
+      }
+      
+      .dashboard h2 {
+        color: #15921b;
+        margin-bottom: 20px;
+      }
+      
+      .user-info {
+        background: #f9f9f9;
+        padding: 20px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        text-align: left;
+      }
+      
+      .user-info h3 {
+        margin-top: 0;
+        color: #333;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+      }
+      
+      .user-info p {
+        margin: 8px 0;
+      }
+      
+      .logout-btn {
+        background: #e74c3c;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 6px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      
+      .logout-btn:hover {
+        background: #c0392b;
+      }
     </style>
   </head>
   <body>
     <div id="signUpMessage" class="messageDiv" style="display: none"></div>
-    <div class="account-container">
+    
+    <!-- Login/Register Container -->
+    <div class="account-container" id="loginContainer">
       <div class="account-header">
         <div class="logo">
           <a href="index.html"
@@ -381,7 +434,33 @@
       </div>
     </div>
 
-    
+    <!-- Dashboard Container -->
+    <div class="dashboard" id="dashboard">
+      <div class="account-header">
+        <div class="logo">
+          <a href="index.html"
+            ><img
+              src="Alawusa heritage logo.png"
+              alt="Alawusa Heritage Logo"
+              style="width: 150px"
+          /></a>
+        </div>
+        <h2>Welcome to Alawusa Heritage Fish and Farms</h2>
+        <p>You are successfully logged in</p>
+      </div>
+      
+      <div class="user-info">
+        <h3>Your Account Information</h3>
+        <p><strong>Name:</strong> <span id="userName"></span></p>
+        <p><strong>Email:</strong> <span id="userEmail"></span></p>
+        <p><strong>Login Time:</strong> <span id="loginTime"></span></p>
+        <p><strong>Session Duration:</strong> <span id="sessionDuration">0 seconds</span></p>
+      </div>
+      
+      <button class="logout-btn" id="logoutBtn">
+        Logout <i class="fas fa-sign-out-alt"></i>
+      </button>
+    </div>
 
     <script>
       const loginTab = document.getElementById("loginTab");
@@ -391,19 +470,36 @@
       const rememberMeCheckbox = document.getElementById("rememberMe");
       const loginEmail = document.getElementById("loginEmail");
       const loginPassword = document.getElementById("loginPassword");
+      const loginContainer = document.getElementById("loginContainer");
+      const dashboard = document.getElementById("dashboard");
+      const userName = document.getElementById("userName");
+      const userEmail = document.getElementById("userEmail");
+      const loginTime = document.getElementById("loginTime");
+      const sessionDuration = document.getElementById("sessionDuration");
+      const logoutBtn = document.getElementById("logoutBtn");
+      
+      let sessionTimer;
+      let loginStartTime;
 
-      // Check if user credentials are saved
+      // Check if user is already logged in
       document.addEventListener('DOMContentLoaded', function() {
         const savedEmail = localStorage.getItem('savedEmail');
         const savedPassword = localStorage.getItem('savedPassword');
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+        const savedUserData = localStorage.getItem('userData');
         
         if (savedEmail && savedPassword) {
           loginEmail.value = savedEmail;
           loginPassword.value = savedPassword;
           rememberMeCheckbox.checked = true;
           
-          // Show a message that credentials were auto-filled
           showMessage('Your login information has been auto-filled from saved data.', 'info');
+        }
+        
+        // If user is already logged in, show dashboard
+        if (isLoggedIn === 'true' && savedUserData) {
+          const userData = JSON.parse(savedUserData);
+          showDashboard(userData);
         }
       });
 
@@ -460,11 +556,21 @@
             localStorage.removeItem('savedPassword');
           }
           
-          // Simulate successful login
-          showMessage('Login successful!', 'success');
+          // Create user data object
+          const userData = {
+            name: email.split('@')[0], // Simple name extraction from email
+            email: email,
+            loginTime: new Date().toLocaleString()
+          };
           
-          // In a real application, you would redirect to the dashboard here
-          // window.location.href = 'dashboard.html';
+          // Save user data and login status
+          localStorage.setItem('userData', JSON.stringify(userData));
+          localStorage.setItem('isLoggedIn', 'true');
+          
+          // Show dashboard
+          showDashboard(userData);
+          
+          showMessage('Login successful!', 'success');
         } else {
           showMessage('Please enter both email and password.', 'error');
         }
@@ -480,22 +586,81 @@
         
         // Simulate registration process
         if (name && email && password) {
-          showMessage('Registration successful! You can now log in.', 'success');
+          // Create user data object
+          const userData = {
+            name: name,
+            email: email,
+            loginTime: new Date().toLocaleString()
+          };
           
-          // Switch to login tab
-          loginForm.classList.add("active");
-          registerForm.classList.remove("active");
-          loginTab.classList.add("active");
-          registerTab.classList.remove("active");
+          // Save user data and login status
+          localStorage.setItem('userData', JSON.stringify(userData));
+          localStorage.setItem('isLoggedIn', 'true');
           
-          // Clear registration form
-          document.getElementById('registerName').value = '';
-          document.getElementById('registerEmail').value = '';
-          document.getElementById('registerPassword').value = '';
+          // Show dashboard
+          showDashboard(userData);
+          
+          showMessage('Registration successful! You are now logged in.', 'success');
         } else {
           showMessage('Please fill in all fields.', 'error');
         }
       });
+
+      // Logout functionality
+      logoutBtn.addEventListener('click', function() {
+        // Clear login status
+        localStorage.setItem('isLoggedIn', 'false');
+        
+        // Stop session timer
+        clearInterval(sessionTimer);
+        
+        // Show login form
+        loginContainer.style.display = 'block';
+        dashboard.style.display = 'none';
+        
+        // Display saved login details
+        const savedEmail = localStorage.getItem('savedEmail');
+        const savedPassword = localStorage.getItem('savedPassword');
+        
+        if (savedEmail && savedPassword) {
+          showMessage(`Your saved login details: Email - ${savedEmail}, Password - ${savedPassword}`, 'info');
+        } else {
+          showMessage('You have been logged out successfully.', 'success');
+        }
+      });
+
+      // Function to show dashboard
+      function showDashboard(userData) {
+        loginContainer.style.display = 'none';
+        dashboard.style.display = 'block';
+        
+        // Display user information
+        userName.textContent = userData.name;
+        userEmail.textContent = userData.email;
+        loginTime.textContent = userData.loginTime;
+        
+        // Start session timer
+        loginStartTime = new Date();
+        updateSessionDuration();
+        sessionTimer = setInterval(updateSessionDuration, 1000);
+      }
+      
+      // Function to update session duration
+      function updateSessionDuration() {
+        const now = new Date();
+        const diffInSeconds = Math.floor((now - loginStartTime) / 1000);
+        
+        const hours = Math.floor(diffInSeconds / 3600);
+        const minutes = Math.floor((diffInSeconds % 3600) / 60);
+        const seconds = diffInSeconds % 60;
+        
+        let durationText = '';
+        if (hours > 0) durationText += `${hours}h `;
+        if (minutes > 0 || hours > 0) durationText += `${minutes}m `;
+        durationText += `${seconds}s`;
+        
+        sessionDuration.textContent = durationText;
+      }
 
       // Function to show messages
       function showMessage(message, type) {
