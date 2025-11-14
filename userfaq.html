@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>FAQ | Alawusa Heritage Fish & Farms</title>
+  <link rel="shortcut icon" href="Alawusa heritage icon - Icon.png" type="img">
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="module" src="homepage.js"></script>
+  
+  <style>
+
+    /* Modern E-commerce Variables */
+        :root {
+            --primary-color: #1a4d2e;
+            --secondary-color: #28a745;
+            --accent-color: #ffc107;
+            --light-bg: #f9f9f9;
+            --dark-text: #333;
+            --light-text: #fff;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+    /* Reset and Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f9f9f9;
+    }
+    
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    ul {
+      list-style: none;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Header Styles */
+    .main-header {
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .top-bar {
+      background: #2e802e;
+      color: white;
+      padding: 8px 0;
+      font-size: 14px;
+    }
+    
+    .top-bar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .header-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+    }
+    
+    .logo img {
+      width: 100px;
+    }
+    
+    .desktop-nav ul {
+      display: flex;
+      gap: 25px;
+    }
+    
+    .desktop-nav a {
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    
+    .desktop-nav ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+
+    .desktop-nav ul li a {
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+      font-size: 16px;
+      position: relative;
+    }
+
+    .desktop-nav ul li a:hover,
+      .desktop-nav ul li a.active {
+        color: #15921b;
+      }
+
+      .desktop-nav ul li a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background-color: #15921b;
+        transition: width 0.3s ease;
+      }
+
+      .desktop-nav ul li a:hover::after {
+        width: 100%;
+      }
+    
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .cart-icon {
+      position: relative;
+    }
+    
+    .cart-count {
+      background: #e74c3c;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      position: absolute;
+      top: -8px;
+      right: -8px;
+    }
+    
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .menu-close{
+      background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            cursor: pointer;
+    }
+    
+    /* Hero Section */
+    .faq-hero {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('faq.jpg') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+      margin-bottom: 40px;
+    }
+    
+    .faq-hero h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+    
+    .faq-hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    /* FAQ Section */
+    .faq-section {
+      padding: 40px 0;
+      margin-bottom: 40px;
+    }
+    
+    .faq-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    .faq-item {
+      background: white;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .faq-item:hover {
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .faq-question {
+      padding: 20px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      font-size: 18px;
+      background: #f8f9fa;
+      transition: background 0.3s;
+    }
+    
+    .faq-question:hover {
+      background: #e9ecef;
+    }
+    
+    .faq-question i {
+      transition: transform 0.3s;
+    }
+    
+    .faq-item.active .faq-question i {
+      transform: rotate(180deg);
+    }
+    
+    .faq-answer {
+      padding: 0 20px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+    
+    .faq-item.active .faq-answer {
+      padding: 20px;
+      max-height: 500px;
+    }
+    
+    /* Search and Categories */
+    .faq-tools {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    
+    .faq-search {
+      flex: 1;
+      min-width: 300px;
+      position: relative;
+    }
+    
+    .faq-search input {
+      width: 100%;
+      padding: 12px 20px;
+      border: 1px solid #ddd;
+      border-radius: 30px;
+      font-size: 16px;
+      outline: none;
+      transition: border 0.3s;
+    }
+    
+    .faq-search input:focus {
+      border-color: #2e802e;
+    }
+    
+    .faq-search button {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      background: #2e802e;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    .faq-search button:hover {
+      background: #246b24;
+    }
+    
+    .faq-categories {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .category-btn {
+      padding: 10px 20px;
+      background: #f1f1f1;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+    
+    .category-btn.active, .category-btn:hover {
+      background: #2e802e;
+      color: white;
+    }
+    
+    /* Contact CTA */
+    .contact-cta {
+      background: #2e802e;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+      border-radius: 10px;
+      margin: 50px 0;
+    }
+    
+    .contact-cta h2 {
+      margin-bottom: 15px;
+    }
+    
+    .contact-cta p {
+      margin-bottom: 25px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      border-radius: 5px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    
+    .btn-primary {
+      background: white;
+      color: #2e802e;
+      
+    }
+    
+    .btn-primary:hover {
+      background: #2e802e;
+      color: white;
+      border: 2px solid white;
+    }
+    
+    .btn-outline {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+    
+    .btn-outline:hover {
+      background: white;
+      color: #2e802e;
+    }
+    
+    /* Footer */
+    .footer {
+      background: #1a1a1a;
+      color: #ccc;
+      padding: 50px 0 20px;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .footer-column h3 {
+      color: white;
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+    
+    .footer-column ul li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-column a:hover {
+      color: white;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: #333;
+      border-radius: 50%;
+      transition: background 0.3s;
+    }
+    
+    .social-links a:hover {
+      background: #2e802e;
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid #333;
+      font-size: 14px;
+    }
+    
+    /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100%;
+            background: #1a4720;
+            z-index: 2000;
+            transition: right 0.4s ease;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .mobile-menu.open {
+            right: 0;
+        }
+        
+        .mobile-menu .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            cursor: pointer;
+        }
+        
+        .mobile-menu ul {
+            list-style: none;
+            margin-top: 60px;
+        }
+        
+        .mobile-menu ul li {
+            margin-bottom: 15px;
+        }
+        
+        .mobile-menu ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        .mobile-menu ul li a:hover {
+            background: #2e802e;
+        }
+
+        .overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  z-index: 1500;
+}
+
+    
+    /* Responsive Styles */
+    @media (max-width: 992px) {
+      .faq-hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .faq-tools {
+        flex-direction: column;
+      }
+      
+      .faq-search {
+        min-width: 100%;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .desktop-nav {
+        display: none;
+      }
+      
+      .menu-toggle {
+        display: block;
+      }
+      
+      .faq-hero {
+        padding: 60px 20px;
+      }
+      
+      .faq-hero h1 {
+        font-size: 2rem;
+      }
+      
+      .faq-hero p {
+        font-size: 1rem;
+      }
+      
+      .faq-question {
+        font-size: 16px;
+        padding: 15px;
+      }
+      
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .btn {
+        width: 100%;
+        max-width: 250px;
+        text-align: center;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .top-bar .container {
+        flex-direction: column;
+        gap: 5px;
+        text-align: center;
+      }
+      
+      .faq-hero {
+        padding: 40px 15px;
+      }
+      
+      .faq-hero h1 {
+        font-size: 1.8rem;
+      }
+      
+      .mobile-menu {
+        width: 100%;
+      }
+    }
+
+    /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: var(--light-text);
+            padding: 60px 0 20px;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .social-links img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: #aaa;
+        }
+
+  ul li i {
+  margin-right: 6px;
+  color: var(--secondary-color);
+  font-size: 16px;
+}
+
+#userName2{
+  color: #fff;
+}
+
+
+.user-actions {
+  position: relative;
+  cursor: pointer;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: 100%;
+  right: -150px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+  min-width: 200px;
+  padding: 15px 0;
+  z-index: 1001;
+  display: none;
+  margin-top: 10px;
+}
+
+.user-dropdown.active {
+  display: block;
+  animation: dropdownFade 0.3s ease;
+}
+
+@keyframes dropdownFade {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.user-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid white;
+}
+
+.user-dropdown a {
+  display: block;
+  padding: 10px 20px;
+  color: #333;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.user-dropdown a:hover {
+  background: #f5f5f5;
+  color: #2e7d32;
+}
+
+.user-dropdown a i {
+  margin-right: 8px;
+  width: 16px;
+  text-align: center;
+}
+
+ @media (max-width: 768px) {
+    .user-dropdown {
+      left: -10px;
+      right: -10px;
+      background-color: #444;
+    }
+
+    .user-dropdown a{
+      color: black;
+    }
+ }
+
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="main-header">
+    
+    
+    <div class="container">
+      <div class="header-main">
+        <div class="logo">
+          <a href="dashboard.html"><img src="Alawusa heritage logo.png" alt="Alawusa Heritage"></a>
+        </div>
+        
+        <nav class="desktop-nav">
+          <ul>
+            <li>
+  <!-- User Dropdown -->
+        <div class="user-actions">
+          <p id="userDropdownToggle">
+            <i class="fas fa-user-circle"></i>
+            <span id="userName">Customer</span>
+            <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 5px;"></i>
+          </p>
+          <div class="user-dropdown" id="userDropdown">
+            <a href="dashboard.html"><i class="fas fa-home"></i> Home</a>
+            <a href="homepage.html"><i class="fas fa-user"></i> My Profile</a>
+            <a href="userorders.html"><i class="fas fa-shopping-bag"></i> My Orders</a>
+            <a href="wishlist.html"><i class="fas fa-heart"></i> Wishlist</a>
+            <a href="userfaq.html"><i class="fas fa-question-circle"></i> Help Center</a>
+            <a href="#" id="logoutButtonOne"><i class="fas fa-sign-out-alt"></i> Logout</a>
+          </div>
+        </div>
+</li>
+
+            <li><a href="dashboard.html">Home</a></li>
+            <li><a href="homepage.html">Profile</a></li>
+            <li><a href="userproducts.html">Products</a></li>
+            <li><a href="useraboutus.html">About Us</a></li>
+            <li><a href="usercontact.html">Contact</a></li>
+            <li><a href="usertestimonial.html">Reviews</a></li>
+            
+          </ul>
+        </nav>
+        
+        <div class="header-actions">
+          <a href="usercart.html" class="cart-icon">
+            <img src="shopping-cart.png" width="30" height="30" alt="Cart">
+            <span class="cart-count">0</span>
+          </a>
+          <button class="menu-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Mobile Menu -->
+  <div class="overlay"></div>
+  <div class="mobile-menu">
+    <div class="mobile-menu-header">
+      <button class="menu-close">×</i></button>
+    </div>
+    <ul>
+        <li>
+  <!-- User Dropdown -->
+        <div class="user-actions">
+          <p id="userDropdownToggleMobile">
+            <i class="fas fa-user-circle"></i>
+            <span id="userName2">Customer</span>
+            <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 5px;"></i>
+          </p>
+          <div class="user-dropdown" id="userDropdownMobile">
+            <a href="dashboard.html"><i class="fas fa-home"></i> Home</a>
+            <a href="homepage.html"><i class="fas fa-user"></i> My Profile</a>
+            <a href="userorders.html"><i class="fas fa-shopping-bag"></i> My Orders</a>
+            <a href="wishlist.html"><i class="fas fa-heart"></i> Wishlist</a>
+            <a href="userfaq.html"><i class="fas fa-question-circle"></i> Help Center</a>
+            <a href="#" id="logoutButton"><i class="fas fa-sign-out-alt"></i> Logout</a>
+          </div>
+        </div>
+</li>
+        <li><a href="dashboard.html">Home</a></li>
+        <li><a href="homepage.html">Profile</a></li>
+        <li><a href="userproducts.html">Products</a></li>
+        <li><a href="useraboutus.html">About Us</a></li>
+        <li><a href="usercontact.html">Contact</a></li>
+        <li><a href="usertestimonial.html">Reviews</a></li>
+        
+    </ul>
+  </div>
+  
+  <!-- Hero Section -->
+  <section class="faq-hero">
+    <div class="container">
+      <h1>Frequently Asked Questions</h1>
+      <p>Find answers to common questions about our products, ordering process, and delivery options.</p>
+    </div>
+  </section>
+  
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="faq-tools">
+        <div class="faq-search">
+          <input type="text" placeholder="Search for questions...">
+          <button><i class="fas fa-search"></i></button>
+        </div>
+        <div class="faq-categories">
+          <button class="category-btn active" data-category="all">All Questions</button>
+          <button class="category-btn" data-category="products">Products</button>
+          <button class="category-btn" data-category="ordering">Ordering</button>
+          <button class="category-btn" data-category="delivery">Delivery</button>
+          <button class="category-btn" data-category="quality">Quality & Safety</button>
+        </div>
+      </div>
+      
+      <div class="faq-container">
+        <div class="faq-item active" data-categories="products">
+          <div class="faq-question">
+            <span>What products do you offer?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>We offer farm-fresh catfish (live and smoked), poultry (chicken and fresh eggs), pigs, and a wide selection of sourced seafood such as Croaker, Mackerel, Herring, and Hake.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item" data-categories="products quality">
+          <div class="faq-question">
+            <span>Is your smoked fish truly preservative-free?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Yes! Our smoked fish is 100% natural — smoked using traditional methods and firewood. No chemicals or artificial preservatives are added.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item" data-categories="ordering">
+          <div class="faq-question">
+            <span>Can I buy in bulk for resale or restaurant use?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Absolutely. We supply to local food vendors, supermarkets, and restaurants. Bulk orders come with discounts and consistent quality assurance.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item" data-categories="ordering">
+          <div class="faq-question">
+            <span>How do I place an order?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>You can order by visiting our farm or retail outlets, calling or WhatsApping our sales line, or using our website.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item" data-categories="delivery">
+          <div class="faq-question">
+            <span>Do you offer delivery?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Yes. We offer 24 to 48 hours delivery within Lagos and Ogun State, 3-7 days for other areas in Nigeria outside Lagos and Ogun State, and 7-14 days for international deliveries. Delivery fees depend on location and order size.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item" data-categories="quality">
+          <div class="faq-question">
+            <span>Are your products safe and healthy?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Yes! All products are raised with clean water, quality feed, and strict hygiene protocols. No harmful chemicals or antibiotics. Just clean, natural protein.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item" data-categories="ordering">
+          <div class="faq-question">
+            <span>Do you accept custom orders?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Yes. We can handle custom processing and packaging.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item" data-categories="products quality">
+          <div class="faq-question">
+            <span>How fresh are your eggs?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Our eggs are collected daily from healthy layers and delivered quickly to ensure you enjoy them at peak freshness.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item" data-categories="quality">
+          <div class="faq-question">
+            <span>Do you practice sustainable farming?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Absolutely. Our practices include water recycling for fish ponds, composting animal waste into fertilizer, a zero-waste goal, and natural feeding routines. We believe in feeding homes today without harming tomorrow.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item" data-categories="products">
+          <div class="faq-question">
+            <span>What is the shelf life of your smoked fish?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Our smoked fish has a shelf life of three months when stored properly in a cool, dry place.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item" data-categories="ordering">
+          <div class="faq-question">
+            <span>How can I contact you?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>You can reach us through multiple channels:<br>
+            - Phone: +2348022276254<br>
+            - Email: alawusaheritage@gmail.com<br>
+            - Visit our office or farm location<br>
+            - Social media: Facebook, Instagram, WhatsApp</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Contact CTA -->
+      <div class="contact-cta">
+        <h2>Still have questions?</h2>
+        <p>If you didn't find the answer you were looking for, our customer service team is ready to help you.</p>
+        <div class="cta-buttons">
+          <a href="usercontact.html" class="btn btn-primary">Contact Us <i class="fas fa-address-book"></i></a>
+          <a href="tel:+2348022276254" class="btn btn-outline">Call Now <i class="fas fa-phone-volume"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <a href="dashboard.html"><img src="Alawusa heritage logo.png" alt="Alawusa Heritage" style="width: 200px; filter: brightness(2) invert(0);"></a>
+                    <p>Bringing the Best of Our Farm to Your Table</p>
+                    
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=61577588632364&mibextid=ZbWKwL"><img src="facebook.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/alawusaheritage?igsh=MXJnbHJ5dGtlOGs0eQ=="><img src="instagram.png" alt="Instagram"></a>
+                        <a href="https://wa.link/zp8ngg"><img src="whatsapp.png" alt="WhatsApp"></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="userfaq.html">FAQs</a></li>
+                        <li><a href="usercontact.html">Contact Us</a></li>
+                        
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li><a href="userblogpost.html">Farm Tips/Blog Post</a></li>
+                        <li><a href="userourfarm.html">Our Farm/Sustainability</a></li>
+                        <li><a href="userrecipes.html">Recipes</a></li>
+                        <li><a href="useraboutus.html">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +234-802-227-6254</li>
+                        <li><i class="fas fa-envelope" ></i> alawusaheritage@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt" ></i> Alawusa-House, Hungotho, Tube, Ipokia LG, Ogun State</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Alawusa Heritage Fish & Farms. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+  
+  <script>
+    
+  const menuToggle = document.querySelector(".menu-toggle");
+  const mobileMenu = document.querySelector(".mobile-menu");
+  const closeBtn = document.querySelector(".menu-close");
+  const overlay = document.querySelector(".overlay");
+
+  // Open menu
+  menuToggle.addEventListener("click", () => {
+    mobileMenu.classList.add("open");
+    overlay.style.display = "block";
+  });
+
+  // Close menu
+  closeBtn.addEventListener("click", () => {
+    mobileMenu.classList.remove("open");
+    overlay.style.display = "none";
+  });
+
+  // Close when clicking overlay
+  overlay.addEventListener("click", () => {
+    mobileMenu.classList.remove("open");
+    overlay.style.display = "none";
+  });
+
+
+    
+    // FAQ Accordion
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      
+      question.addEventListener('click', () => {
+        // Close all other items
+        faqItems.forEach(otherItem => {
+          if (otherItem !== item) {
+            otherItem.classList.remove('active');
+          }
+        });
+        
+        // Toggle current item
+        item.classList.toggle('active');
+      });
+    });
+    
+    // FAQ Search Functionality
+    const searchInput = document.querySelector('.faq-search input');
+    const searchButton = document.querySelector('.faq-search button');
+    
+    function searchFAQs() {
+      const searchTerm = searchInput.value.toLowerCase();
+      
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question span').textContent.toLowerCase();
+        const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+        
+        if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+    
+    searchInput.addEventListener('input', searchFAQs);
+    searchButton.addEventListener('click', searchFAQs);
+    
+    // FAQ Category Filter
+    const categoryButtons = document.querySelectorAll('.category-btn');
+    
+    categoryButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Update active button
+        categoryButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        
+        const category = button.getAttribute('data-category');
+        
+        // Filter FAQs
+        faqItems.forEach(item => {
+          const categories = item.getAttribute('data-categories').split(' ');
+          
+          if (category === 'all' || categories.includes(category)) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+    
+    // Update Cart Count
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const cartCount = document.querySelector('.cart-count');
+      
+      if (cartCount) {
+        cartCount.textContent = totalItems;
+      }
+    }
+    
+    // Initialize cart count on page load
+    updateCartCount();
+
+    // User Dropdown Functionality
+const userDropdownToggle = document.getElementById('userDropdownToggle');
+const userDropdown = document.getElementById('userDropdown');
+
+function toggleUserDropdown() {
+  userDropdown.classList.toggle('active');
+}
+
+userDropdownToggle.addEventListener('click', function(e) {
+  e.stopPropagation();
+  toggleUserDropdown();
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+  if (!userDropdown.contains(e.target) && !userDropdownToggle.contains(e.target)) {
+    userDropdown.classList.remove('active');
+  }
+});
+
+
+// User Dropdown Functionality
+const userDropdownToggleMobile = document.getElementById('userDropdownToggleMobile');
+const userDropdownMobile = document.getElementById('userDropdownMobile');
+
+function toggleUserDropdownMobile() {
+  userDropdownMobile.classList.toggle('active');
+}
+
+userDropdownToggleMobile.addEventListener('click', function(e) {
+  e.stopPropagation();
+  toggleUserDropdownMobile();
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+  if (!userDropdownMobile.contains(e.target) && !userDropdownToggle.contains(e.target)) {
+    userDropdownMobile.classList.remove('active');
+  }
+});
+  </script>
+
+  
+</body>
+</html>

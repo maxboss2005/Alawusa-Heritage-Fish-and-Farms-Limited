@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Recipes | Alawusa Heritage Fish & Farms</title>
+  <link rel="shortcut icon" href="Alawusa heritage icon - Icon.png" type="img">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script type="module" src="homepage.js"></script>
+  <style>
+    /* Modern E-commerce Variables */
+        :root {
+            --primary-color: #1a4d2e;
+            --secondary-color: #28a745;
+            --accent-color: #ffc107;
+            --light-bg: #f9f9f9;
+            --dark-text: #333;
+            --light-text: #fff;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      max-width: 100%;
+      overflow-x: hidden;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f9fa;
+    }
+
+    /* Header Styles */
+    .main-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .top-bar {
+      background: #2e802e;
+      color: white;
+      padding: 8px 20px;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .contact-info span {
+      margin: 0 10px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+
+    .logo img {
+      width: 100px;
+      height: auto;
+    }
+
+    /* Navigation */
+    .desktop-nav ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+
+    .desktop-nav ul li a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #333;
+      transition: color 0.3s;
+      font-size: 16px;
+    }
+
+    .desktop-nav ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+
+    .desktop-nav ul li a {
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+      font-size: 16px;
+      position: relative;
+    }
+
+    .desktop-nav ul li a:hover,
+      .desktop-nav ul li a.active {
+        color: #15921b;
+      }
+
+      .desktop-nav ul li a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background-color: #15921b;
+        transition: width 0.3s ease;
+      }
+
+      .desktop-nav ul li a:hover::after {
+        width: 100%;
+      }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .shopping-cart {
+      position: relative;
+    }
+
+    .cart-count {
+      background: #e74c3c;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      position: absolute;
+      top: -8px;
+      right: -8px;
+    }
+
+    .menu-icon {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 60vh;
+      background: url("recipes.jpg") center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-content {
+      position: relative;
+      color: white;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    .hero-content h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .hero-content p {
+      font-size: 1.3rem;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    /* Recipe Section */
+    .recipes-section {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #2e802e;
+      font-size: 2.5rem;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: #2e802e;
+      margin: 10px auto;
+      border-radius: 2px;
+    }
+
+    .search-container {
+      max-width: 600px;
+      margin: 0 auto 40px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 15px 20px;
+      border: 2px solid #e0e0e0;
+      border-radius: 30px;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+
+    .search-input:focus {
+      border-color: #2e802e;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(46, 128, 46, 0.1);
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #777;
+    }
+
+    .recipes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+    }
+
+    .recipe-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .recipe-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .recipe-image {
+      height: 200px;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .recipe-content {
+      padding: 20px;
+    }
+
+    .recipe-title {
+      color: #2e802e;
+      margin-bottom: 10px;
+      font-size: 1.4rem;
+    }
+
+    .recipe-ingredients {
+      color: #555;
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+
+    .recipe-instructions {
+      color: #666;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .recipe-tip {
+      background: #f0f7f0;
+      padding: 10px 15px;
+      border-radius: 5px;
+      font-style: italic;
+      color: #2e802e;
+      border-left: 4px solid #2e802e;
+    }
+
+    .recipe-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #888;
+    }
+
+    .recipe-time, .recipe-difficulty {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Newsletter */
+    .newsletter {
+      background: linear-gradient(to right, #2e802e, #4caf50);
+      padding: 50px 20px;
+      color: white;
+      text-align: center;
+    }
+
+    .newsletter-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .newsletter h2 {
+      margin-bottom: 15px;
+      font-size: 2rem;
+    }
+
+    .newsletter p {
+      margin-bottom: 25px;
+      font-size: 1.1rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      padding: 12px 15px;
+      border: none;
+      border-radius: 4px 0 0 4px;
+      font-size: 16px;
+    }
+
+    .newsletter-btn {
+      background: #ff9800;
+      color: white;
+      border: none;
+      padding: 0 25px;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .newsletter-btn:hover {
+      background: #f57c00;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a1a1a;
+      color: #aaa;
+      padding: 50px 0 20px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .footer-logo img {
+      width: 200px;
+      margin-bottom: 15px;
+      filter: brightness(0) invert(1);
+    }
+
+    .footer-links h3 {
+      color: white;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links ul li a {
+      color: #aaa;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links ul li a:hover {
+      color: #2e802e;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: #333;
+      border-radius: 50%;
+      color: white;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .social-links a:hover {
+      background: #2e802e;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      margin-top: 30px;
+      border-top: 1px solid #333;
+      font-size: 14px;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 280px;
+      height: 100%;
+      background: #1a4720;
+      box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+      z-index: 1100;
+      transition: right 0.3s ease;
+      overflow-y: auto;
+      padding: 20px;
+    }
+    
+    .mobile-menu.open {
+      right: 0;
+    }
+    
+    .mobile-menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      
+    }
+    
+    .mobile-menu-logo img {
+      height: 40px;
+    }
+    
+    .close-menu {
+      background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            cursor: pointer;
+    }
+    
+    .mobile-nav ul {
+      list-style: none;
+    }
+    
+    .mobile-nav li {
+      margin-bottom: 15px;
+    }
+    
+    .mobile-nav a {
+      display: block;
+      padding: 10px 0;
+      font-weight: 500;
+      color: #fff;
+      text-decoration: none;
+    }
+    
+    .mobile-nav a:hover {
+      color: #15921b;
+    }
+    
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1099;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 992px) {
+      .hero-content h1 {
+        font-size: 2.8rem;
+      }
+      
+      .recipes-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .top-bar {
+        flex-direction: column;
+        gap: 5px;
+        font-size: 12px;
+        text-align: center;
+      }
+      
+      .contact-info span {
+        margin: 0 5px;
+      }
+      
+      .desktop-nav {
+        display: none;
+      }
+      
+      .menu-icon {
+        display: block;
+      }
+      
+      .hero {
+        height: 50vh;
+      }
+      
+      .hero-content h1 {
+        font-size: 2.2rem;
+      }
+      
+      .hero-content p {
+        font-size: 1.1rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .recipes-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .newsletter-form {
+        flex-direction: column;
+      }
+      
+      .newsletter-input {
+        border-radius: 4px;
+        margin-bottom: 10px;
+      }
+      
+      .newsletter-btn {
+        border-radius: 4px;
+        padding: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header {
+        padding: 10px 15px;
+      }
+      
+      .logo img {
+        width: 100px;
+      }
+      
+      .hero-content h1 {
+        font-size: 1.8rem;
+      }
+      
+      .recipes-section {
+        padding: 40px 15px;
+      }
+      
+      .recipe-card {
+        margin-bottom: 20px;
+      }
+    }
+
+    /* Animation for recipe cards */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .recipe-card {
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    .recipe-card:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+
+    .recipe-card:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+
+    .recipe-card:nth-child(4) {
+      animation-delay: 0.3s;
+    }
+
+    /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: var(--light-text);
+            padding: 60px 0 20px;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+            margin-left: 20px;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .social-links img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: #aaa;
+        }
+        /* Newsletter Section */
+    .newsletter-section {
+      background: #041e42;
+      color: white;
+      padding: 50px 0;
+      margin-bottom: 40px;
+    }
+    
+    .newsletter-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    
+    .newsletter-text h3 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+    
+    .newsletter-text p {
+      color: #9da4ad;
+    }
+    
+    .newsletter-form {
+      display: flex;
+      max-width: 500px;
+      width: 100%;
+    }
+    
+    .newsletter-form input {
+      flex: 1;
+      padding: 12px 15px;
+      border: none;
+      border-radius: 4px 0 0 4px;
+      font-size: 1rem;
+    }
+    
+    .newsletter-form button {
+      background: #15921b;
+      color: white;
+      border: none;
+      padding: 0 20px;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    
+    .newsletter-form button:hover {
+      background: #117a15;
+    }
+
+    /* Newsletter Responsive Fix */
+@media (max-width: 992px) {
+  .newsletter-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 25px;
+  }
+
+  .newsletter-text h3 {
+    font-size: 1.5rem;
+  }
+
+  .newsletter-text p {
+    font-size: 1rem;
+  }
+
+  .newsletter-form {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .newsletter-form {
+    flex-direction: column;
+  }
+
+  .newsletter-form input {
+    border-radius: 4px;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+
+  .newsletter-form button {
+    border-radius: 4px;
+    padding: 12px;
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .newsletter-text h3 {
+    font-size: 1.3rem;
+  }
+
+  .newsletter-text p {
+    font-size: 0.9rem;
+  }
+}
+
+ul li i {
+  margin-right: 6px;
+  color: var(--secondary-color);
+  font-size: 16px;
+}
+
+#userName2{
+  color: #fff;
+}
+
+.user-actions {
+  position: relative;
+  cursor: pointer;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: 100%;
+  right: -150px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+  min-width: 200px;
+  padding: 15px 0;
+  z-index: 1001;
+  display: none;
+  margin-top: 10px;
+}
+
+.user-dropdown.active {
+  display: block;
+  animation: dropdownFade 0.3s ease;
+}
+
+@keyframes dropdownFade {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.user-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid white;
+}
+
+.user-dropdown a {
+  display: block;
+  padding: 10px 20px;
+  color: #333;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.user-dropdown a:hover {
+  background: #f5f5f5;
+  color: #2e7d32;
+}
+
+.user-dropdown a i {
+  margin-right: 8px;
+  width: 16px;
+  text-align: center;
+}
+
+ @media (max-width: 768px) {
+    .user-dropdown {
+      left: -10px;
+      right: -10px;
+      background-color: #444;
+    }
+
+    .user-dropdown a{
+      color: white;
+    }
+ }
+
+  </style>
+</head>
+<body>
+  <header class="main-header">
+    
+
+    <div class="header">
+      <div class="logo">
+        <a href="dashboard.html"><img src="Alawusa heritage logo.png" alt="Alawusa Heritage"></a>
+      </div>
+
+      <nav class="desktop-nav">
+        <ul>
+          <li>
+  <!-- User Dropdown -->
+        <div class="user-actions">
+          <p id="userDropdownToggle">
+            <i class="fas fa-user-circle"></i>
+            <span id="userName">Customer</span>
+            <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 5px;"></i>
+          </p>
+          <div class="user-dropdown" id="userDropdown">
+            <a href="dashboard.html"><i class="fas fa-home"></i> Home</a>
+            <a href="homepage.html"><i class="fas fa-user"></i> My Profile</a>
+            <a href="userorders.html"><i class="fas fa-shopping-bag"></i> My Orders</a>
+            <a href="wishlist.html"><i class="fas fa-heart"></i> Wishlist</a>
+            <a href="userfaq.html"><i class="fas fa-question-circle"></i> Help Center</a>
+            <a href="#" id="logoutButtonOne"><i class="fas fa-sign-out-alt"></i> Logout</a>
+          </div>
+        </div>
+</li>
+            <li><a href="dashboard.html">Home</a></li>
+            <li><a href="homepage.html">Profile</a></li>
+            <li><a href="userproducts.html">Products</a></li>
+            <li><a href="useraboutus.html">About Us</a></li>
+            <li><a href="usercontact.html">Contact</a></li>
+            <li><a href="usertestimonial.html">Reviews</a></li>
+            
+        </ul>
+      </nav>
+
+      <div class="header-right">
+        <a href="usercart.html" class="shopping-cart">
+          <img src="shopping-cart.png" width="30" height="30" alt="Cart">
+          <span id="cart-count" class="cart-count">0</span>
+        </a>
+        <div class="menu-icon" id="menu-toggle">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="overlay" id="overlay"></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+      
+      <button class="close-menu" id="closeMenu">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <nav class="mobile-nav">
+      <ul>
+         <li>
+  <!-- User Dropdown -->
+        <div class="user-actions">
+          <p id="userDropdownToggleMobile">
+            <i class="fas fa-user-circle"></i>
+            <span id="userName2">Customer</span>
+            <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 5px;"></i>
+          </p>
+          <div class="user-dropdown" id="userDropdownMobile">
+            <a href="dashboard.html"><i class="fas fa-home"></i> Home</a>
+            <a href="homepage.html"><i class="fas fa-user"></i> My Profile</a>
+            <a href="userorders.html"><i class="fas fa-shopping-bag"></i> My Orders</a>
+            <a href="wishlist.html"><i class="fas fa-heart"></i> Wishlist</a>
+            <a href="userfaq.html"><i class="fas fa-question-circle"></i> Help Center</a>
+            <a href="#" id="logoutButton"><i class="fas fa-sign-out-alt"></i> Logout</a>
+          </div>
+        </div>
+</li>
+        <li><a href="dashboard.html">Home</a></li>
+        <li><a href="homepage.html">Profile</a></li>
+        <li><a href="userproducts.html">Products</a></li>
+        <li><a href="useraboutus.html">About Us</a></li>
+        <li><a href="usercontact.html">Contact</a></li>
+        <li><a href="usertestimonial.html">Reviews</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Delicious Recipes</h1>
+      <p>From Our Farm to Your Table - Discover Fresh Ideas</p>
+    </div>
+  </section>
+
+  <section class="recipes-section">
+    <h2 class="section-title">Explore Our Recipes</h2>
+    
+    <div class="search-container">
+      <input type="text" class="search-input" id="searchInput" placeholder="Search by ingredient (e.g., catfish, eggs, chicken)">
+      <i class="fas fa-search search-icon"></i>
+    </div>
+
+    <div class="recipes-grid" id="recipeList">
+      <article class="recipe-card" data-tags="smoked catfish afang soup">
+        <img src="recipe1.jpg" alt="Smoked Catfish & Vegetable Soup" class="recipe-image">
+        <div class="recipe-content">
+          <h3 class="recipe-title">Smoked Catfish & Vegetable Soup (Afang Style)</h3>
+          <p class="recipe-ingredients"><strong>Ingredients:</strong> Smoked catfish, afang leaves, waterleaf, palm oil, crayfish, onions, seasoning cubes, pepper, salt</p>
+          <p class="recipe-instructions"><strong>Instructions:</strong> Heat palm oil, add onions and crayfish. Add waterleaf and cook until soft. Add smoked catfish and afang, season, and simmer.</p>
+          <p class="recipe-tip">Farm Smart: Use leftover veggie peels as compost for your home garden!</p>
+          <div class="recipe-meta">
+            <span class="recipe-time"><i class="far fa-clock"></i> 45 mins</span>
+            <span class="recipe-difficulty"><i class="fas fa-chef-hat"></i> Intermediate</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="recipe-card" data-tags="egg plantain breakfast">
+        <img src="recipe2.jpg" alt="Egg and Plantain Breakfast Muffins" class="recipe-image">
+        <div class="recipe-content">
+          <h3 class="recipe-title">Egg and Plantain Breakfast Muffins</h3>
+          <p class="recipe-ingredients"><strong>Ingredients:</strong> Eggs, ripe plantain, onion, green pepper, salt, curry, thyme</p>
+          <p class="recipe-instructions"><strong>Instructions:</strong> Beat eggs and mix in diced plantain and vegetables. Pour into muffin tins and bake for 20 minutes at 180°C.</p>
+          <p class="recipe-tip">Save your egg shells — dry and crush them to enrich garden soil.</p>
+          <div class="recipe-meta">
+            <span class="recipe-time"><i class="far fa-clock"></i> 30 mins</span>
+            <span class="recipe-difficulty"><i class="fas fa-chef-hat"></i> Easy</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="recipe-card" data-tags="chicken suya wrap">
+        <img src="recipe3.jpg" alt="Spicy Chicken Suya Wrap" class="recipe-image">
+        <div class="recipe-content">
+          <h3 class="recipe-title">Spicy Chicken Suya Wrap</h3>
+          <p class="recipe-ingredients"><strong>Ingredients:</strong> Chicken strips, suya spice, lettuce, tomatoes, onions, flatbread, mayo/ketchup</p>
+          <p class="recipe-instructions"><strong>Instructions:</strong> Season chicken with suya spice, sauté, then wrap in flatbread with veggies and sauce. Grill lightly before serving.</p>
+          <p class="recipe-tip">Reuse leftover chicken for sandwiches or fried rice — no waste!</p>
+          <div class="recipe-meta">
+            <span class="recipe-time"><i class="far fa-clock"></i> 25 mins</span>
+            <span class="recipe-difficulty"><i class="fas fa-chef-hat"></i> Easy</span>
+          </div>
+        </div>
+      </article>
+      
+      <!-- Additional recipe cards can be added here -->
+    </div>
+  </section>
+
+  
+
+  <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <a href="dashboard.html"><img src="Alawusa heritage logo.png" alt="Alawusa Heritage" style="width: 200px; filter: brightness(2) invert(0);"></a>
+                    <p>Bringing the Best of Our Farm to Your Table</p>
+                    
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=61577588632364&mibextid=ZbWKwL"><img src="facebook.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/alawusaheritage?igsh=MXJnbHJ5dGtlOGs0eQ=="><img src="instagram.png" alt="Instagram"></a>
+                        <a href="https://wa.link/zp8ngg"><img src="whatsapp.png" alt="WhatsApp"></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="userfaq.html">FAQs</a></li>
+                        <li><a href="usercontact.html">Contact Us</a></li>
+                        
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li><a href="userblogpost.html">Farm Tips/Blog Post</a></li>
+                        <li><a href="userourfarm.html">Our Farm/Sustainability</a></li>
+                        <li><a href="userrecipes.html">Recipes</a></li>
+                        <li><a href="useraboutus.html">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +234-802-227-6254</li>
+                        <li><i class="fas fa-envelope" ></i> alawusaheritage@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt" ></i> Alawusa-House, Hungotho, Tube, Ipokia LG, Ogun State</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Alawusa Heritage Fish & Farms. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+  <script>
+    
+  // Mobile menu toggle
+  const menuToggle = document.getElementById("menu-toggle");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const overlay = document.getElementById("overlay");
+  const closeMenu = document.getElementById("closeMenu");
+
+  menuToggle.addEventListener("click", () => {
+    mobileMenu.classList.add("open");
+    overlay.classList.add("active");
+  });
+
+  closeMenu.addEventListener("click", () => {
+    mobileMenu.classList.remove("open");
+    overlay.classList.remove("active");
+  });
+
+  overlay.addEventListener("click", () => {
+    mobileMenu.classList.remove("open");
+    overlay.classList.remove("active");
+  });
+
+
+    
+    // Recipe search functionality
+    document.getElementById('searchInput').addEventListener('keyup', function() {
+      const value = this.value.toLowerCase();
+      const recipes = document.querySelectorAll('.recipe-card');
+      
+      recipes.forEach(recipe => {
+        const tags = recipe.getAttribute('data-tags');
+        if (tags.includes(value)) {
+          recipe.style.display = 'block';
+        } else {
+          recipe.style.display = 'none';
+        }
+      });
+    });
+    
+    // Update cart count
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const cartCount = document.getElementById('cart-count');
+      if (cartCount) {
+        cartCount.textContent = totalItems;
+      }
+    }
+    
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      updateCartCount();
+    });
+    
+   // Newsletter signup
+    document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  fetch(this.action, {
+    method: "POST",
+    body: new FormData(this),
+  }).then(() => {
+    alert("🎉 Thank you for subscribing!");
+    this.reset();
+  });
+});
+
+
+  </script>
+
+<script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="m0cng2qUDY8ttv35SNhjt";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>
+
+<script>
+  // User Dropdown Functionality
+const userDropdownToggle = document.getElementById('userDropdownToggle');
+const userDropdown = document.getElementById('userDropdown');
+
+function toggleUserDropdown() {
+  userDropdown.classList.toggle('active');
+}
+
+userDropdownToggle.addEventListener('click', function(e) {
+  e.stopPropagation();
+  toggleUserDropdown();
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+  if (!userDropdown.contains(e.target) && !userDropdownToggle.contains(e.target)) {
+    userDropdown.classList.remove('active');
+  }
+});
+
+
+// User Dropdown Functionality
+const userDropdownToggleMobile = document.getElementById('userDropdownToggleMobile');
+const userDropdownMobile = document.getElementById('userDropdownMobile');
+
+function toggleUserDropdownMobile() {
+  userDropdownMobile.classList.toggle('active');
+}
+
+userDropdownToggleMobile.addEventListener('click', function(e) {
+  e.stopPropagation();
+  toggleUserDropdownMobile();
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+  if (!userDropdownMobile.contains(e.target) && !userDropdownToggle.contains(e.target)) {
+    userDropdownMobile.classList.remove('active');
+  }
+});
+</script>
+
+</body>
+</html>

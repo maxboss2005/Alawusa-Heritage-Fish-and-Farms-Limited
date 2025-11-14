@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>REVIEWS | Alawusa Heritage Fish & Farms</title>
+    <link rel="shortcut icon" href="Alawusa heritage icon - Icon.png" type="img">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+        /* Modern E-commerce Variables */
+        :root {
+            --primary-color: #1a4d2e;
+            --secondary-color: #28a745;
+            --accent-color: #ffc107;
+            --light-bg: #f9f9f9;
+            --dark-text: #333;
+            --light-text: #fff;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            max-width: 100%;
+            overflow-x: hidden;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        /* Header Styles */
+        .main-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .top-bar {
+            background: #2e802e;
+            color: white;
+            padding: 8px 20px;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .contact-info span {
+            margin: 0 15px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+        
+        .logo img {
+            width: 100px;
+        }
+        
+        /* Navigation */
+        .desktop-nav ul {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+        
+        .desktop-nav ul li a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #333;
+            transition: color 0.3s;
+            font-size: 16px;
+            position: relative;
+        }
+        
+        .desktop-nav ul li a:hover,
+        .desktop-nav ul li a.active {
+            color: #15921b;
+        }
+
+       
+
+    .desktop-nav ul li a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -1px;
+      left: 0;
+      background-color: #15921b;
+      transition: width 0.3s ease;
+   
+    }
+
+    .desktop-nav ul li a:hover::after {
+        width: 100%;
+      }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .shopping-cart {
+            position: relative;
+        }
+        
+        .cart-count {
+            background: #ff4444;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            position: absolute;
+            top: -8px;
+            right: -8px;
+        }
+        
+        .menu-icon {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 60vh;
+            background: url("reviews.jpg") center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 0;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-content {
+            position: relative;
+            color: white;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            color: #f0f0f0;
+        }
+        
+        /* Testimonials Section */
+        .testimonial {
+            padding: 80px 0;
+        }
+        
+        .small-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-card::before {
+            content: "❝";
+            color: #4caf50;
+            font-size: 50px;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            opacity: 0.7;
+        }
+        
+        .testimonial-card p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 20px 0;
+            color: #555;
+            padding-top: 20px;
+        }
+        
+        .rating {
+            margin: 15px 0;
+        }
+        
+        .rating span {
+            color: #ffc107;
+            font-size: 18px;
+        }
+        
+        .testimonial-card h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .testimonial-card h4 {
+            font-size: 14px;
+            color: #777;
+            font-weight: 400;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #1a3e1a;
+            color: #fff;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-logo img {
+            width: 200px;
+            margin-bottom: 20px;
+            filter: brightness(0) invert(1);
+        }
+        
+        .footer-links h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: #4caf50;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links ul li a:hover {
+            color: #4caf50;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #4caf50;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background: #1a3e1a;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+            padding: 20px;
+            transition: right 0.3s ease;
+            z-index: 2000;
+            overflow-y: auto;
+        }
+        
+        .mobile-menu.open {
+            right: 0;
+        }
+        
+        .mobile-menu .close-btn {
+            background: none;
+            border: none;
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            display: block;
+            margin-left: auto;
+            margin-bottom: 20px;
+        }
+        
+        .mobile-menu ul {
+            list-style: none;
+        }
+        
+        .mobile-menu ul li {
+            margin-bottom: 15px;
+        }
+        
+        .mobile-menu ul li a {
+            text-decoration: none;
+            color: #f5f3f3;
+            font-weight: 600;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 6px;
+            transition: background 0.3s;
+            display: block;
+        }
+        
+        .mobile-menu ul li a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .testimonial-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .top-bar {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+            
+            .contact-info span {
+                margin: 0 8px;
+            }
+            
+            .desktop-nav {
+                display: none;
+            }
+            
+            .menu-icon {
+                display: block;
+            }
+            
+            .hero {
+                height: 50vh;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .testimonial {
+                padding: 50px 0;
+            }
+            
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .testimonial-card {
+                padding: 20px;
+            }
+            
+            .footer {
+                padding: 30px 0 15px;
+            }
+        }
+        
+        /* Animation Classes */
+        .zoom-text {
+            animation: zoom-in-out 3s ease-in-out infinite;
+        }
+        
+        @keyframes zoom-in-out {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: var(--light-text);
+            padding: 60px 0 20px;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .social-links img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        
+        
+        <div class="header">
+            <div class="logo">
+                <a href="index.html"><img src="Alawusa heritage logo.png" alt="Alawusa Heritage"></a>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="testimonial.html" class="active">Reviews</a></li>
+                    <li><a href="account.html">Account</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-right">
+                <a href="cart.html" class="shopping-cart">
+                    <img src="shopping-cart.png" width="30" height="30" alt="Cart">
+                    <span id="cart-count" class="cart-count">0</span>
+                </a>
+                <div class="menu-icon" onclick="openMenu()">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu">
+        <button class="close-btn" onclick="closeMenu()">×</button>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="aboutus.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="testimonial.html">Testimonial</a></li>
+            <li><a href="account.html">Account</a></li>
+        </ul>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content" data-aos="zoom-in">
+            <h1 class="zoom-text">Customer Reviews</h1>
+            <p>Below are several reviews/testimonials of our customers in various states.</p>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="testimonial">
+        <div class="small-container">
+            <div class="testimonial-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card fade-in" data-aos="fade-up">
+                    <p>I've been buying their smoked fish for months now, and it's simply the best! The flavor is incredible, and it makes my soups taste so authentic. Plus, the dried smoked option is a lifesaver for my pantry.</p>
+                    <div class="rating">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <h3>Mama Ngozi</h3>
+                    <h4>Surulere, Lagos</h4>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card fade-in" data-aos="fade-up" data-aos-delay="100">
+                    <p>The fresh eggs from Alawusa are a game-changer. You can genuinely taste the difference from farm-fresh produce. My family loves them, and I feel good knowing where they come from.</p>
+                    <div class="rating">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <h3>Tunde A.</h3>
+                    <h4>Ikeja, Lagos</h4>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card fade-in" data-aos="fade-up" data-aos-delay="200">
+                    <p>I ordered live catfish for a special occasion, and Alawusa delivered exactly what they promised – fresh, healthy fish. Their service was excellent, and the fish was perfect for my pepper soup.</p>
+                    <div class="rating">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <h3>Mrs. Adebayo</h3>
+                    <h4>Badagry</h4>
+                </div>
+                
+                <!-- Testimonial 4 -->
+                <div class="testimonial-card fade-in" data-aos="fade-up" data-aos-delay="300">
+                    <p>Their frozen seafood bags are so convenient! I always stock up on the mackerel and herring. It saves me trips to the market, and the quality is consistently top-notch for my home cooking.</p>
+                    <div class="rating">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <h3>Chidinma O.</h3>
+                    <h4>Lekki, Lagos</h4>
+                </div>
+                
+                <!-- Testimonial 5 -->
+                <div class="testimonial-card fade-in" data-aos="fade-up" data-aos-delay="400">
+                    <p>We bought a whole pig from Alawusa for our community event, and it was fantastic. The meat was tender and delicious, and the process was so smooth. Highly recommend their farm-fresh pork.</p>
+                    <div class="rating">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <h3>Pastor Joseph</h3>
+                    <h4>Agada Community</h4>
+                </div>
+                
+                <!-- Testimonial 6 -->
+                <div class="testimonial-card fade-in" data-aos="fade-up" data-aos-delay="500">
+                    <p>The poultry from Alawusa Heritage is always fresh and clean. It cooks beautifully, and you can tell the chickens are well-raised. It's my go-to for all my family's chicken dishes.</p>
+                    <div class="rating">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <h3>Funke</h3>
+                    <h4>Festac Town, Lagos</h4>
+                </div>
+                
+                <!-- Testimonial 7 -->
+                <div class="testimonial-card fade-in" data-aos="fade-up" data-aos-delay="600">
+                    <p>I appreciate that I can get both fresh farm produce and diverse seafood from one reliable source. Alawusa Heritage has made my weekly meal planning so much easier and healthier.</p>
+                    <div class="rating">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <h3>Adeduro M.</h3>
+                    <h4>Ajah, Lagos</h4>
+                </div>
+                
+                <!-- Testimonial 8 -->
+                <div class="testimonial-card fade-in" data-aos="fade-up" data-aos-delay="700">
+                    <p>My mum lives abroad, and sending her the dried smoked fish from Alawusa has become a tradition. She says it reminds her of home, and it travels perfectly. Thank you for such a wonderful product.</p>
+                    <div class="rating">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <h3>Adedoja A.</h3>
+                    <h4>Abuja</h4>
+                </div>
+                
+                <!-- Testimonial 9 -->
+                <div class="testimonial-card fade-in" data-aos="fade-up" data-aos-delay="800">
+                    <p>I run a small restaurant, and finding consistent, high-quality fish has been a challenge. Alawusa Heritage's fresh fish and smoked options have been a blessing. Their reliability is unmatched.</p>
+                    <div class="rating">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <h3>Alhaja Idiroko</h3>
+                    <h4>Ipokia, Ogun State</h4>
+                </div>
+                
+                <!-- Testimonial 10 -->
+                <div class="testimonial-card fade-in" data-aos="fade-up" data-aos-delay="900">
+                    <p>The convenience of having them fry the seafood for my party was amazing! It saved me so much time and effort, and my guests loved the taste. Great service, great products.</p>
+                    <div class="rating">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <h3>Ronke A.</h3>
+                    <h4>Abeokuta</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <a href="index.html"><img src="Alawusa heritage logo.png" alt="Alawusa Heritage" style="width: 200px; filter: brightness(2) invert(0);"></a>
+                    <p>Bringing the Best of Our Farm to Your Table</p>
+                    
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=61577588632364&mibextid=ZbWKwL"><img src="facebook.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/alawusaheritage?igsh=MXJnbHJ5dGtlOGs0eQ=="><img src="instagram.png" alt="Instagram"></a>
+                        <a href="https://wa.link/zp8ngg"><img src="whatsapp.png" alt="WhatsApp"></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="faq.html">FAQs</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li><a href="blogpost.html">Farm Tips/Blog Post</a></li>
+                        <li><a href="ourfarm.html">Our Farm/Sustainability</a></li>
+                        <li><a href="recipes.html">Recipes</a></li>
+                        <li><a href="aboutus.html">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +234-802-227-6254</li>
+                        <li><i class="fas fa-envelope" ></i> alawusaheritage@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt" ></i> Alawusa-House, Hungotho, Tube, Ipokia LG, Ogun State</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Alawusa Heritage Fish & Farms. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+        
+        // Mobile menu functions
+        function openMenu() {
+            document.getElementById('mobileMenu').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeMenu() {
+            document.getElementById('mobileMenu').classList.remove('open');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Update cart count
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const cartCount = document.getElementById('cart-count');
+            if (cartCount) {
+                cartCount.textContent = totalItems;
+            }
+        }
+        
+        // Call on page load
+        updateCartCount();
+        
+        // Fade in animation on scroll
+        const faders = document.querySelectorAll('.fade-in');
+        
+        const appearOnScroll = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+        });
+        
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+    </script>
+</body>
+</html>

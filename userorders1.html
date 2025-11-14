@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Orders | Alawusa Heritage</title>
+  <link rel="shortcut icon" href="Alawusa heritage icon - Icon.png" type="img">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script type="module" src="homepage.js"></script>
+  <style>
+    /* Modern E-commerce Variables */
+        :root {
+            --primary-color: #1a4d2e;
+            --secondary-color: #28a745;
+            --accent-color: #ffc107;
+            --light-bg: #f9f9f9;
+            --dark-text: #333;
+            --light-text: #fff;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+    
+    body { 
+      font-family: 'Poppins', sans-serif; 
+      background: #f8f9fa; 
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    a {
+      color: inherit; 
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* Header Styles */
+    header { 
+      position: sticky; 
+      top: 0; 
+      z-index: 1000; 
+      background: #fff; 
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 15px 0;
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo h1 { 
+      font-size: 24px; 
+      font-weight: 700;
+      color: #2e7d32;
+    }
+    
+    .logo span {
+      color: #ff9800;
+    }
+    
+    /* Navigation */
+    .navbar ul { 
+      display: flex; 
+      gap: 25px; 
+      list-style: none; 
+    }
+    
+    .navbar ul li {
+      font-weight: 500;
+      position: relative;
+    }
+    
+    .navbar ul li a:hover { 
+      color: #2e7d32;
+    }
+    
+    .navbar li.active a {
+      color: #2e7d32;
+      font-weight: 600;
+    }
+    
+    .navbar li.active::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #2e7d32;
+    }
+    
+    /* Search bar */
+    .search-bar { 
+      flex: 1; 
+      display: flex; 
+      align-items: center; 
+      max-width: 500px; 
+      margin: 0 20px;
+      background: #f5f5f5;
+      border-radius: 30px;
+      padding: 8px 15px;
+      border: 1px solid #e0e0e0;
+    }
+    
+    .search-bar input { 
+      flex: 1; 
+      border: none; 
+      outline: none; 
+      font-size: 14px; 
+      padding: 5px 10px;
+      background: transparent;
+    }
+    
+    .search-bar i { 
+      color: #757575; 
+      cursor: pointer; 
+      font-size: 16px; 
+    }
+    
+    /* Header Actions */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .cart { 
+      position: relative; 
+      cursor: pointer;
+      color: #555;
+    }
+    
+    .cart:hover {
+      color: #2e7d32;
+    }
+    
+    .cart-count { 
+      position: absolute; 
+      top: -8px; 
+      right: -10px; 
+      background: #f44336; 
+      color: #fff; 
+      font-size: 11px; 
+      font-weight: bold; 
+      padding: 2px 6px; 
+      border-radius: 50%; 
+    }
+    
+    .user-actions {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .user-actions a {
+      color: #555;
+      font-size: 14px;
+    }
+    
+    .user-actions a:hover {
+      color: #2e7d32;
+    }
+    
+    /* Main Content */
+    .main-content {
+      margin-top: 20px;
+    }
+    
+    /* Page Title */
+    .page-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .page-title h2 {
+      font-size: 24px;
+      font-weight: 600;
+      color: #333;
+    }
+    
+    /* Filters */
+    .filters { 
+      display: flex; 
+      gap: 10px; 
+      padding: 15px; 
+      background: #fff; 
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .filters button {
+      border: none; 
+      padding: 8px 15px; 
+      border-radius: 20px; 
+      cursor: pointer;
+      font-weight: 500; 
+      background: #e0e0e0;
+      transition: all 0.3s ease;
+    }
+    
+    .filters button:hover {
+      background: #d5d5d5;
+    }
+    
+    .filters button.active { 
+      background: #2e7d32; 
+      color: #fff; 
+    }
+    
+    /* Orders Container */
+    .orders-container { 
+      display: grid; 
+      gap: 20px; 
+    }
+    
+    .order-card { 
+      background: #fff; 
+      padding: 20px; 
+      border-radius: 10px; 
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08); 
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-left: 4px solid #2e7d32;
+    }
+    
+    .order-card:hover { 
+      transform: translateY(-3px); 
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .order-id {
+      font-weight: 600;
+      color: #555;
+    }
+    
+    .order-date {
+      color: #757575;
+      font-size: 14px;
+    }
+    
+    .order-items {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .order-item {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      padding: 10px;
+      border-radius: 8px;
+      background: #f9f9f9;
+    }
+    
+    .order-item img { 
+      width: 80px; 
+      height: 80px; 
+      object-fit: cover; 
+      border-radius: 8px; 
+    }
+    
+    .order-item-info { 
+      flex: 1; 
+    }
+    
+    .order-item-info h3 { 
+      margin: 0; 
+      font-size: 16px; 
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+    
+    .order-item-info p { 
+      margin: 0; 
+      font-size: 14px; 
+      color: #666;
+    }
+    
+    .order-item-price {
+      font-weight: 600;
+      color: #2e7d32;
+    }
+    
+    .order-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #eee;
+    }
+    
+    .order-total {
+      font-size: 18px;
+      font-weight: 700;
+      color: #333;
+    }
+    
+    .order-total span {
+      color: #2e7d32;
+    }
+    
+    .status { 
+      font-size: 14px; 
+      font-weight: 600; 
+      padding: 6px 12px; 
+      border-radius: 20px; 
+    }
+    
+    .status.awaiting { 
+      background: #fff3e0; 
+      color: #f57c00; 
+      border: 1px solid #ffb74d;
+    }
+    
+    .status.processing { 
+      background: #e3f2fd; 
+      color: #1976d2; 
+      border: 1px solid #64b5f6;
+    }
+    
+    .status.shipped { 
+      background: #e8f5e9; 
+      color: #388e3c; 
+      border: 1px solid #81c784;
+    }
+    
+    .status.delivered { 
+      background: #f1f8e9; 
+      color: #689f38; 
+      border: 1px solid #9ccc65;
+    }
+    
+    .status.cancelled { 
+      background: #ffebee; 
+      color: #d32f2f; 
+      border: 1px solid #ef5350;
+    }
+    
+    .order-actions {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .order-actions button {
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+    
+    .order-actions .track-btn {
+      background: #2e7d32;
+      color: #fff;
+    }
+    
+    .order-actions .track-btn:hover {
+      background: #1b5e20;
+    }
+    
+    .order-actions .cancel-btn {
+      background: #f5f5f5;
+      color: #666;
+      border: 1px solid #ddd;
+    }
+    
+    .order-actions .cancel-btn:hover {
+      background: #eeeeee;
+    }
+    
+    .order-actions .reorder-btn {
+      background: #ff9800;
+      color: #fff;
+    }
+    
+    .order-actions .reorder-btn:hover {
+      background: #f57c00;
+    }
+    
+    /* Empty State */
+    .empty-orders {
+      text-align: center;
+      padding: 60px 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    
+    .empty-orders i {
+      font-size: 64px;
+      color: #e0e0e0;
+      margin-bottom: 20px;
+    }
+    
+    .empty-orders h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #555;
+    }
+    
+    .empty-orders p {
+      color: #757575;
+      margin-bottom: 25px;
+    }
+    
+    .empty-orders .btn {
+      background: #2e7d32;
+      color: #fff;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    .empty-orders .btn:hover {
+      background: #1b5e20;
+    }
+    
+    /* Footer */
+    .footer {
+      margin-top: 60px;
+      background: #1a3c1a;
+      color: #fff;
+      padding: 40px 0 20px;
+    }
+    
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: space-between;
+    }
+    
+    .footer-column {
+      flex: 1;
+      min-width: 200px;
+    }
+    
+    .footer-column h5 {
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: #81c784;
+    }
+    
+    .footer-column ul li {
+      margin-bottom: 10px;
+      list-style: none;
+    }
+    
+    .footer-column ul li a {
+      color: #e0e0e0;
+    }
+    
+    .footer-column ul li a:hover {
+      color: #81c784;
+    }
+    
+    .social-links i {
+      margin-right: 8px;
+    }
+    
+    .footer-copy {
+      margin-top: 30px;
+      text-align: center;
+      border-top: 1px solid #2e4d2e;
+      padding-top: 15px;
+      font-size: 13px;
+      color: #bbb;
+    }
+    
+    /* Mobile Menu */
+    .menu-toggle {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #333;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .order-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      
+      .order-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+      
+      .order-actions {
+        width: 100%;
+        justify-content: flex-end;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .search-bar {
+        order: 3;
+        width: 100%;
+        max-width: 100%;
+        margin: 10px 0;
+      }
+      
+      .navbar ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        background: #f5f5f5;
+        border-radius: 8px;
+        padding: 10px 0;
+        margin-top: 15px;
+      }
+      
+      .navbar.active ul {
+        display: flex;
+      }
+      
+      .menu-toggle {
+        display: block;
+      }
+      
+      .header-actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      .order-item {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .order-item img {
+        width: 100%;
+        max-width: 200px;
+        height: auto;
+      }
+      
+      .footer-links {
+        flex-direction: column;
+        gap: 30px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .filters {
+        justify-content: center;
+      }
+      
+      .filters button {
+        flex: 1;
+        min-width: 100px;
+        text-align: center;
+      }
+      
+      .order-actions {
+        flex-direction: column;
+      }
+      
+      .order-actions button {
+        width: 100%;
+      }
+    }
+
+    /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: var(--light-text);
+            padding: 60px 0 20px;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .social-links img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .user-actions p i {
+  margin-right: 6px;
+  color: var(--secondary-color);
+  font-size: 16px;
+}
+
+#userName2{
+  color: #fff;
+}
+
+/* Jumia-style Header Improvements */
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 20px;
+}
+
+.logo {
+  flex-shrink: 0;
+}
+
+/* Improved Search Bar - Jumia Style */
+.search-bar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 20px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 8px 15px;
+  border: 2px solid #2e7d32;
+  box-shadow: 0 2px 5px rgba(46, 125, 50, 0.1);
+}
+
+.search-bar:focus-within {
+  border-color: #1b5e20;
+  box-shadow: 0 2px 8px rgba(46, 125, 50, 0.2);
+}
+
+.search-bar input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  padding: 5px 10px;
+  background: transparent;
+}
+
+.search-bar i {
+  color: #2e7d32;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px;
+}
+
+/* Header Actions - Jumia Style */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  flex-shrink: 0;
+}
+
+.user-actions {
+  position: relative;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: 100%;
+  right: -150px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+  min-width: 200px;
+  padding: 15px 0;
+  z-index: 1001;
+  display: none;
+  margin-top: 10px;
+}
+
+.user-dropdown.active {
+  display: block;
+  animation: dropdownFade 0.3s ease;
+}
+
+@keyframes dropdownFade {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.user-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid white;
+}
+
+.user-dropdown a {
+  display: block;
+  padding: 10px 20px;
+  color: #333;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.user-dropdown a:hover {
+  background: #f5f5f5;
+  color: #2e7d32;
+}
+
+.user-dropdown a i {
+  margin-right: 8px;
+  width: 16px;
+  text-align: center;
+}
+
+/* Jumia-style Mobile Menu Overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+  display: none;
+}
+
+.mobile-sidebar {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  width: 300px;
+  height: 100%;
+  background: white;
+  z-index: 1000;
+  transition: left 0.3s ease;
+  overflow-y: auto;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+}
+
+.mobile-sidebar.active {
+  left: 0;
+}
+
+.mobile-sidebar-header {
+  padding: 20px;
+  background: #fff;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mobile-sidebar-header .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mobile-sidebar-header .logo img {
+  width: 40px;
+  height: 40px;
+}
+
+.mobile-sidebar-header .close-menu {
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.mobile-nav {
+  padding: 20px 0;
+}
+
+.mobile-nav ul {
+  list-style: none;
+}
+
+.mobile-nav ul li {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.mobile-nav ul li a {
+  display: block;
+  padding: 15px 20px;
+  color: #333;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.mobile-nav ul li a:hover,
+.mobile-nav ul li.active a {
+  background: #f8f9fa;
+  color: #2e7d32;
+  border-right: 3px solid #2e7d32;
+}
+
+.mobile-nav ul li a i {
+  margin-right: 10px;
+  width: 20px;
+  text-align: center;
+}
+
+/* Cart Improvements */
+.cart {
+  position: relative;
+  cursor: pointer;
+  color: #555;
+  padding: 8px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.cart:hover {
+  background: #f5f5f5;
+  color: #2e7d32;
+}
+
+.cart-count {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #f44336;
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 50%;
+  min-width: 18px;
+  text-align: center;
+}
+
+/* User Actions Improvements */
+.user-actions p {
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  margin: 0;
+}
+
+.user-actions p:hover {
+  background: #f5f5f5;
+  color: #2e7d32;
+}
+
+/* Responsive Design Updates */
+@media (max-width: 992px) {
+  .header-content {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  .search-bar {
+    order: 3;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+  
+  .navbar {
+    display: none;
+  }
+  
+  .menu-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: #f5f5f5;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .menu-toggle:hover {
+    background: #e8f5e8;
+    color: #2e7d32;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    gap: 10px;
+  }
+  
+  .header-actions {
+    gap: 15px;
+  }
+  
+  .user-actions span {
+    display: none;
+  }
+  
+  .user-actions p i {
+    margin-right: 0;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mobile-sidebar {
+    width: 280px;
+  }
+  
+  .header-actions {
+    gap: 10px;
+  }
+  
+  .cart {
+    padding: 6px;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-content">
+      <div class="logo">
+        <a href="homepage.html"><img src="Alawusa heritage logo.png" style="width: 100px;" alt="Alawusa Heritage"></a>
+      </div>
+      
+      <!-- Mobile Menu Toggle - Jumia Style -->
+      <div class="menu-toggle" id="mobileMenu">
+        <i class="fa fa-bars"></i>
+        <span>Menu</span>
+      </div>
+      
+      <!-- Desktop Navigation -->
+      <nav class="navbar">
+        <ul>
+          <li><a href="homepage.html">Home</a></li>
+          <li><a href="userproducts.html">Products</a></li>
+          <li class="active"><a href="userorders.html">Orders</a></li>
+          <li><a href="wishlist.html">Wishlist</a></li>
+        </ul>
+      </nav>
+      
+      
+      
+      <!-- Header Actions -->
+      <div class="header-actions">
+        <!-- User Dropdown -->
+        <div class="user-actions">
+          <p id="userDropdownToggle">
+            <i class="fas fa-user-circle"></i>
+            <span id="userName">Customer</span>
+            <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 5px;"></i>
+          </p>
+          <div class="user-dropdown" id="userDropdown">
+            <a href="homepage.html"><i class="fas fa-user"></i> Home</a>
+            <a href="userorders.html"><i class="fas fa-shopping-bag"></i> My Orders</a>
+            <a href="wishlist.html"><i class="fas fa-heart"></i> Wishlist</a>
+            <a href="userfaq.html"><i class="fas fa-question-circle"></i> Help Center</a>
+            <a href="#" id="logoutButton"><i class="fas fa-sign-out-alt"></i> Logout</a>
+          </div>
+        </div>
+        
+        <!-- Cart -->
+        <div class="cart">
+          <a href="usercart.html"><i class="fa fa-shopping-cart"></i></a>
+          <span class="cart-count" id="cartCount">0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileOverlay"></div>
+  
+  <!-- Mobile Sidebar -->
+  <div class="mobile-sidebar" id="mobileSidebar">
+    <div class="mobile-sidebar-header">
+      <div class="logo">
+        <img src="Alawusa heritage icon - Icon.png" alt="Alawusa Heritage">
+        
+      </div>
+      <button class="close-menu" id="closeMenu" style="color:black;">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <nav class="mobile-nav">
+      <ul>
+        <li><a href="homepage.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="userproducts.html"><i class="fas fa-shopping-bag"></i> Products</a></li>
+        <li class="active"><a href="userorders.html"><i class="fas fa-clipboard-list"></i> Orders</a></li>
+        <li><a href="wishlist.html"><i class="fas fa-heart"></i> Wishlist</a></li>
+        
+        <li><a href="userfaq.html"><i class="fas fa-question-circle"></i> Help Center</a></li>
+        <li><a href="usercontact.html"><i class="fas fa-phone"></i> Contact Us</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <div class="main-content">
+    <div class="page-title">
+      <h2>My Orders</h2>
+      <div class="sort-options">
+        <label for="sortSelect">Sort by:</label>
+        <select id="sortSelect">
+          <option value="recent">Most Recent</option>
+          <option value="oldest">Oldest First</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="filters">
+      <button class="active" data-filter="all">All Orders</button>
+      <button data-filter="awaiting">Awaiting Payment</button>
+      
+    </div>
+    
+    <div class="orders-container" id="ordersList">
+      <!-- Orders will be populated here -->
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <a href="homepage.html"><img src="Alawusa heritage logo.png" alt="Alawusa Heritage" style="width: 200px; filter: brightness(2) invert(0);"></a>
+                    <p>Bringing the Best of Our Farm to Your Table</p>
+                    
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=61577588632364&mibextid=ZbWKwL"><img src="facebook.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/alawusaheritage?igsh=MXJnbHJ5dGtlOGs0eQ=="><img src="instagram.png" alt="Instagram"></a>
+                        <a href="https://wa.link/zp8ngg"><img src="whatsapp.png" alt="WhatsApp"></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="userfaq.html">FAQs</a></li>
+                        <li><a href="usercontact.html">Contact Us</a></li>
+                        
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li><a href="userblogpost.html">Farm Tips/Blog Post</a></li>
+                        <li><a href="userourfarm.html">Our Farm/Sustainability</a></li>
+                        <li><a href="userrecipes.html">Recipes</a></li>
+                        <li><a href="useraboutus.html">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +234-802-227-6254</li>
+                        <li><i class="fas fa-envelope" ></i> alawusaheritage@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt" ></i> Alawusa-House, Hungotho, Tube, Ipokia LG, Ogun State</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Alawusa Heritage Fish & Farms. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+  
+  const firebaseConfig = {
+    apiKey: "AIzaSyDuxTHLfwiETTMO6Dx7YMehngZqWLgUlH0",
+    authDomain: "alawusa-heritage-website.firebaseapp.com",
+    projectId: "alawusa-heritage-website",
+    storageBucket: "alawusa-heritage-website.firebasestorage.app",
+    messagingSenderId: "857988164081",
+    appId: "1:857988164081:web:ccac1200d344a8bd82bc50",
+    measurementId: "G-TJQJMVVMZG"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  
+  const ordersList = document.getElementById("ordersList");
+  let orders = [];
+
+  // Sample order data (in a real app, this would come from a database)
+  const sampleOrders = [
+    
+    
+  ];
+
+  // Render orders dynamically
+  function renderOrders(filter="all") {
+    ordersList.innerHTML = "";
+    let filtered = orders;
+    
+    if (filter !== "all") {
+      filtered = orders.filter(o => o.status === filter);
+    }
+    
+    if (filtered.length === 0) {
+      if (filter === "all") {
+        ordersList.innerHTML = `
+          <div class="empty-orders">
+            <i class="fas fa-shopping-bag"></i>
+            <h3>No Orders Yet</h3>
+            <p>You haven't placed any orders. Start shopping to see your orders here.</p>
+            <button class="btn" onclick="window.location.href='userproducts.html'">Start Shopping</button>
+          </div>
+        `;
+      } else {
+        ordersList.innerHTML = `
+          <div class="empty-orders">
+            <i class="fas fa-filter"></i>
+            <h3>No ${filter.charAt(0).toUpperCase() + filter.slice(1)} Orders</h3>
+            <p>You don't have any orders with this status.</p>
+            <button class="btn" onclick="document.querySelector('[data-filter=\"all\"]').click()">View All Orders</button>
+          </div>
+        `;
+      }
+      return;
+    }
+    
+    filtered.forEach(order => {
+      const card = document.createElement("div");
+      card.className = "order-card";
+      
+      // Format date
+      const orderDate = new Date(order.date);
+      const formattedDate = orderDate.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+      
+      // Generate order items HTML
+      const orderItemsHTML = order.items.map(item => `
+        <div class="order-item">
+          <img src="${item.img}" alt="${item.name}">
+          <div class="order-item-info">
+            <h3>${item.name}</h3>
+            <p>Quantity: ${item.quantity}</p>
+          </div>
+          <div class="order-item-price">₦${(item.price * item.quantity).toLocaleString()}</div>
+        </div>
+      `).join('');
+      
+      // Determine action buttons based on status
+      let actionButtons = '';
+      if (order.status === 'awaiting') {
+        
+      } else if (order.status === 'processing') {
+        
+      } else if (order.status === 'shipped') {
+       
+      } else if (order.status === 'delivered') {
+        
+      } else if (order.status === 'cancelled') {
+       
+      }
+      
+      card.innerHTML = `
+        <div class="order-header">
+          <div>
+            <div class="order-id">Order #${order.id}</div>
+            <div class="order-date">Placed on ${formattedDate}</div>
+          </div>
+          <span class="status ${order.status}">${order.status.charAt(0).toUpperCase() + order.status.slice(1)}</span>
+        </div>
+        <div class="order-items">
+          ${orderItemsHTML}
+        </div>
+        <div class="order-footer">
+          <div class="order-total">Total: <span>₦${order.total.toLocaleString()}</span></div>
+          <div class="order-actions">
+            ${actionButtons}
+          </div>
+        </div>
+      `;
+      ordersList.appendChild(card);
+    });
+  }
+
+  // Event listeners for filters
+  document.querySelectorAll(".filters button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".filters button").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      renderOrders(btn.dataset.filter);
+    });
+  });
+
+  // Sort functionality
+  const sortSelect = document.getElementById('sortSelect');
+  sortSelect.addEventListener('change', function() {
+    switch(this.value) {
+      case 'recent':
+        orders.sort((a, b) => new Date(b.date) - new Date(a.date));
+        break;
+      case 'oldest':
+        orders.sort((a, b) => new Date(a.date) - new Date(b.date));
+        break;
+      case 'price-low':
+        orders.sort((a, b) => a.total - b.total);
+        break;
+      case 'price-high':
+        orders.sort((a, b) => b.total - a.total);
+        break;
+    }
+    
+    const activeFilter = document.querySelector('.filters button.active').dataset.filter;
+    renderOrders(activeFilter);
+  });
+
+  // Load orders
+  function loadOrders() {
+    // In a real app, this would fetch from Firebase or your backend
+    // For now, we'll use sample data and combine with localStorage data
+    
+    orders = [...sampleOrders];
+    
+    // Add cart items as "awaiting" orders
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    if (cart.length > 0) {
+      const cartOrder = {
+        id: "CART-" + Date.now(),
+        date: new Date().toISOString().split('T')[0],
+        status: "awaiting",
+        items: cart.map(item => ({
+          name: item.name,
+          img: item.img,
+          price: item.price,
+          quantity: item.quantity
+        })),
+        total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+      };
+      orders.unshift(cartOrder);
+    }
+    
+    
+
+   const allOrders = JSON.parse(localStorage.getItem("awaiting")) || {};
+const successfulOrders = allOrders[user.uid] || [];
+
+successfulOrders.forEach(order => {
+  orders.unshift({
+    id: "ORD-" + Date.now() + Math.floor(Math.random() * 1000),
+    date: order.date || new Date().toISOString().split('T')[0],
+    status: "delivered",
+    items: order.items || [order],
+    total: order.total || (order.price * (order.quantity || 1))
+  });
+});
+
+    
+    // Sort by most recent first
+    orders.sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+    renderOrders("all");
+  }
+
+  /// Auth state
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // Update user name if available
+    const userNameElement = document.getElementById("userName");
+    if (userNameElement) {
+      userNameElement.textContent = user.displayName || "Customer";
+    }
+    
+    // Initialize cart count
+    updateCartCount();
+    loadOrders(user.uid);
+  } else {
+    ordersList.innerHTML = `
+      <div class="empty-orders">
+        <i class="fas fa-user-lock"></i>
+        <h3>Please Log In</h3>
+        <p>You need to be logged in to view your orders.</p>
+        <button class="btn" onclick="window.location.href='account.html'">Log In / Register</button>
+      </div>
+    `;
+    updateCartCount(); // Still update cart count even when logged out
+  }
+});
+
+  // Initialize
+  loadOrders();
+</script>
+
+<script>
+  function updateCartCount() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const totalItems = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+  const cartCountElement = document.getElementById("cartCount");
+  if (cartCountElement) {
+    cartCountElement.textContent = totalItems;
+    // Show/hide based on count
+    cartCountElement.style.display = totalItems > 0 ? 'block' : 'none';
+  }
+}
+  
+  // Mobile Menu Functionality
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileSidebar = document.getElementById('mobileSidebar');
+const mobileOverlay = document.getElementById('mobileOverlay');
+const closeMenu = document.getElementById('closeMenu');
+
+function openMobileMenu() {
+  mobileSidebar.classList.add('active');
+  mobileOverlay.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMobileMenu() {
+  mobileSidebar.classList.remove('active');
+  mobileOverlay.style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+mobileMenu.addEventListener('click', openMobileMenu);
+closeMenu.addEventListener('click', closeMobileMenu);
+mobileOverlay.addEventListener('click', closeMobileMenu);
+
+// User Dropdown Functionality
+const userDropdownToggle = document.getElementById('userDropdownToggle');
+const userDropdown = document.getElementById('userDropdown');
+
+function toggleUserDropdown() {
+  userDropdown.classList.toggle('active');
+}
+
+userDropdownToggle.addEventListener('click', function(e) {
+  e.stopPropagation();
+  toggleUserDropdown();
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+  if (!userDropdown.contains(e.target) && !userDropdownToggle.contains(e.target)) {
+    userDropdown.classList.remove('active');
+  }
+});
+
+// Search functionality
+const searchButton = document.getElementById('searchButton');
+searchButton.addEventListener('click', function() {
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput.value.trim()) {
+    // Trigger search
+    const event = new Event('input');
+    searchInput.dispatchEvent(event);
+  }
+});
+
+// Logout functionality
+const logoutBtn = document.getElementById('logoutBtn');
+if (logoutBtn) {
+  logoutBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    // Add your logout logic here
+    if (confirm('Are you sure you want to logout?')) {
+      localStorage.removeItem('user');
+      window.location.href = 'homepage.html';
+    }
+  });
+}
+
+// Close mobile menu when clicking on links
+const mobileLinks = document.querySelectorAll('.mobile-nav a');
+mobileLinks.forEach(link => {
+  link.addEventListener('click', closeMobileMenu);
+});
+
+// Initialize the page with these new functions
+document.addEventListener('DOMContentLoaded', function() {
+  // Your existing initialization code
+  renderProducts(products);
+  updateCartCount();
+
+  
+  
+  // Add any additional initialization for new features
+});
+  
+  // Initialize on page load
+  window.onload = function() {
+    updateCartCount();
+  };
+
+  
+</script>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment Successful - Alawusa Heritage</title>
+  <style>
+    .success-container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 40px;
+      text-align: center;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    }
+    .success-icon {
+      font-size: 80px;
+      color: #28a745;
+      margin-bottom: 20px;
+    }
+    .loading {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="success-container">
+    <div class="loading" id="loading">
+      <i class="fas fa-spinner fa-spin"></i>
+      <p>Processing your payment...</p>
+    </div>
+    
+    <div id="successMessage" style="display: none;">
+      <div class="success-icon">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <h2>Payment Successful!</h2>
+      <p>Thank you for your order. Your payment has been processed successfully.</p>
+      <p>Order ID: <strong id="orderId"></strong></p>
+      <div style="margin-top: 30px;">
+        <a href="userorders.html" class="checkout-btn">View Your Orders</a>
+        <a href="userproducts.html" style="margin-left: 15px;">Continue Shopping</a>
+      </div>
+    </div>
+
+    <div id="errorMessage" >
+      <div style="font-size: 80px; color: #dc3545; margin-bottom: 20px;">
+        <i class="fas fa-exclamation-circle"></i>
+      </div>
+      <h2>Payment Processing</h2>
+      <p>We're verifying your payment. Please check your orders page in a few minutes.</p>
+      <a href="userorders.html" class="checkout-btn">Check Orders</a>
+    </div>
+  </div>
+
+  <script>
+    // Get order ID from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderId = urlParams.get('order_id');
+
+    if (orderId) {
+      document.getElementById('orderId').textContent = orderId;
+      
+      // In a real scenario, you would verify payment status with your backend
+      // For now, we'll show success after a short delay
+      setTimeout(() => {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('successMessage').style.display = 'block';
+        
+        // Clear cart
+        localStorage.removeItem('cart');
+      }, 2000);
+    }
+  </script>
+</body>
+</html>

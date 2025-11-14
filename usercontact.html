@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us | Alawusa Heritage Fish & Farms</title>
+  <link rel="shortcut icon" href="Alawusa heritage icon - Icon.png" type="img">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="module" src="homepage.js"></script>
+  <style>
+
+    /* Modern E-commerce Variables */
+        :root {
+            --primary-color: #1a4d2e;
+            --secondary-color: #28a745;
+            --accent-color: #ffc107;
+            --light-bg: #f9f9f9;
+            --dark-text: #333;
+            --white: #ffffff;
+            --light-text: #fff;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+    :root {
+      --primary-color: #1a4d2e;
+      --primary-dark: #1f6d33;
+      --secondary-color: #2e802e;
+      --text-color: #333;
+      --light-bg: #f9f9f9;
+      --white: #ffffff;
+      --border-radius: 8px;
+      --box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      color: var(--text-color);
+      background-color: var(--white);
+      line-height: 1.6;
+      
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header Styles */
+    .main-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--white);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    
+
+    
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+    }
+
+    .logo img{ 
+            width: 100px; 
+            height: auto;
+        }
+
+    /* Navigation */
+    .desktop-nav ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+
+    .desktop-nav ul li a {
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+      font-size: 16px;
+      position: relative;
+    }
+
+    .desktop-nav ul li a:hover,
+      .desktop-nav ul li a.active {
+        color: #15921b;
+      }
+
+      .desktop-nav ul li a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background-color: #15921b;
+        transition: width 0.3s ease;
+      }
+
+      .desktop-nav ul li a:hover::after {
+        width: 100%;
+      }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .shopping-cart {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .cart-count {
+      background: red;
+      color: white;
+      border-radius: 50%;
+      font-size: 12px;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: -8px;
+      right: -8px;
+    }
+
+    .menu-icon {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero-3 {
+      position: relative;
+      height: 60vh;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('contact us.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+
+    .hero-content-3 h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      animation: zoom-in-out 2s ease-in-out infinite;
+    }
+
+    .hero-content-3 p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    @keyframes zoom-in-out {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    /* Contact Section */
+    .contact-section {
+      padding: 80px 0;
+      background-color: var(--light-bg);
+    }
+
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    .contact-info, .contact-form {
+      background: var(--white);
+      padding: 40px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+
+    .contact-info h2, .contact-form h2 {
+      font-size: 28px;
+      margin-bottom: 25px;
+      color: var(--secondary-color);
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .contact-info h2::after, .contact-form h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background-color: var(--primary-color);
+    }
+
+    .contact-info p {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+
+    .contact-info i {
+      color: var(--primary-color);
+      margin-right: 10px;
+      width: 20px;
+    }
+
+    .social-icons {
+      margin-top: 30px;
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: var(--primary-color);
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+
+    .social-icons a:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    .social-icons a img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .contact-form form input,
+    .contact-form form textarea {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      font-size: 16px;
+      transition: var(--transition);
+    }
+
+    .contact-form form input:focus,
+    .contact-form form textarea:focus {
+      border-color: var(--primary-color);
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.2);
+    }
+
+    .contact-form form button {
+      width: 100%;
+      padding: 15px;
+      background: var(--primary-color);
+      color: var(--white);
+      border: none;
+      border-radius: var(--border-radius);
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .contact-form form button:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Newsletter */
+    .newsletter {
+      background: var(--secondary-color);
+      color: var(--white);
+      padding: 60px 0;
+    }
+
+    .newsletter .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .newstext h4 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .newstext p span {
+      color: #ffcc00;
+      font-weight: 600;
+    }
+
+    .form {
+      display: flex;
+      width: 50%;
+      max-width: 500px;
+    }
+
+    .form input {
+      flex: 1;
+      padding: 15px;
+      border: none;
+      border-radius: var(--border-radius) 0 0 var(--border-radius);
+      font-size: 16px;
+    }
+
+    .form button {
+      padding: 0 30px;
+      background: var(--primary-color);
+      color: var(--white);
+      border: none;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .form button:hover {
+      background: var(--primary-dark);
+    }
+
+    
+    /* Mobile Menu */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 300px;
+      height: 100%;
+      background: rgb(4, 49, 12);
+      box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+      padding: 20px;
+      transition: right 0.3s ease;
+      z-index: 2000;
+      overflow-y: auto;
+    }
+
+    .mobile-menu.open {
+      right: 0;
+    }
+
+    
+     .mobile-menu .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            margin-left: 60%;
+            top: 15px;
+            right: 20px;
+            cursor: pointer;
+        }
+
+       @media (max-width: 576px) {
+         .mobile-menu .close-btn {
+          margin-left: 40%;
+         }
+       }  
+
+    .mobile-menu ul {
+      list-style: none;
+    }
+
+    .mobile-menu ul li {
+      margin-bottom: 15px;
+    }
+
+    .mobile-menu ul li a {
+      text-decoration: none;
+      color: #f5f3f3;
+      font-weight: 500;
+      font-size: 18px;
+      display: block;
+      padding: 10px;
+      border-radius: 6px;
+      transition: var(--transition);
+    }
+
+    .mobile-menu ul li a:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 992px) {
+      .contact-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      
+      .newsletter .container {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+      }
+      
+      .form {
+        width: 100%;
+        max-width: 400px;
+      }
+      
+      .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .top-bar .container {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .contact-info span {
+        margin-right: 10px;
+        font-size: 12px;
+      }
+      
+      .desktop-nav {
+        display: none;
+      }
+      
+      .menu-icon {
+        display: block;
+      }
+      
+      .hero-3 {
+        height: 40vh;
+      }
+      
+      .hero-content-3 h1 {
+        font-size: 2.2rem;
+      }
+      
+      .hero-content-3 p {
+        font-size: 1rem;
+      }
+      
+      .contact-info, .contact-form {
+        padding: 25px;
+      }
+      
+      
+    }
+
+    @media (max-width: 576px) {
+      .hero-3 {
+        height: 35vh;
+      }
+      
+      .contact-section {
+        padding: 50px 0;
+      }
+      
+      .form {
+        flex-direction: column;
+      }
+      
+      .form input {
+        border-radius: var(--border-radius);
+        margin-bottom: 10px;
+      }
+      
+      .form button {
+        border-radius: var(--border-radius);
+        padding: 15px;
+      }
+    }
+
+    /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: var(--light-text);
+            padding: 60px 0 20px;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .social-links img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: #aaa;
+        }
+        /* Newsletter Section */
+    .newsletter-section {
+  background: #041e42;
+  color: white;
+  padding: 50px 0;
+  margin-bottom: 40px;
+}
+
+.newsletter-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;  /* allows wrapping */
+  gap: 20px;
+  width: 100%;
+}
+
+.newsletter-text {
+  flex: 1 1 300px;  /* allows shrinking on smaller screens */
+}
+
+.newsletter-form {
+  display: flex;
+  flex: 1 1 300px;
+  max-width: 500px;
+  width: 100%;
+}
+
+    
+    .newsletter-form input {
+  flex: 1;
+  padding: 12px 10px;
+  border: none;
+  border-radius: 4px 0 0 4px;
+  font-size: 1rem;
+  min-width: 0; /* prevents stretching */
+}
+
+.newsletter-form button {
+  background: #15921b;
+  color: white;
+  border: none;
+  padding: 0 20px;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  white-space: nowrap; /* keeps text inside */
+}
+
+    
+    .newsletter-form button:hover {
+      background: #117a15;
+    }
+
+    ul li i {
+  margin-right: 6px;
+  color: var(--secondary-color);
+  font-size: 16px;
+}
+
+#userName2{
+  color: #fff;
+}
+
+
+
+.container {
+  max-width: 100%;
+  
+}
+
+.newsletter-content, .contact-container, .footer-container{
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+.user-actions {
+  position: relative;
+  cursor: pointer;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: 100%;
+  right: -150px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+  min-width: 200px;
+  padding: 15px 0;
+  z-index: 2001;
+  display: none;
+  margin-top: 10px;
+}
+
+.user-dropdown.active {
+  display: block;
+  animation: dropdownFade 0.3s ease;
+}
+
+@keyframes dropdownFade {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.user-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid white;
+}
+
+.user-dropdown a {
+  display: block;
+  padding: 10px 20px;
+  color: #333;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.user-dropdown a:hover {
+  background: #f5f5f5;
+  color: #2e7d32;
+}
+
+.user-dropdown a i {
+  margin-right: 8px;
+  width: 16px;
+  text-align: center;
+}
+
+ @media (max-width: 768px) {
+    .user-dropdown {
+      left: -10px;
+      right: -10px;
+      background-color: #444;
+    }
+
+    .user-dropdown a{
+      color: black;
+    }
+ }
+  </style>
+</head>
+
+<body>
+  <header class="main-header">
+        
+
+    <div class="container">
+      <div class="header">
+        <div class="logo">
+          <a href="dashboard.html"><img src="Alawusa heritage logo.png" alt="Alawusa Heritage"></a>
+        </div>
+
+        <nav class="navbar desktop-nav">
+          <ul>
+            <li>
+  <!-- User Dropdown -->
+        <div class="user-actions">
+          <p id="userDropdownToggle">
+            <i class="fas fa-user-circle"></i>
+            <span id="userName">Customer</span>
+            <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 5px;"></i>
+          </p>
+          <div class="user-dropdown" id="userDropdown">
+            <a href="dashboard.html"><i class="fas fa-home"></i> Home</a>
+            <a href="homepage.html"><i class="fas fa-user"></i> My Profile</a>
+            <a href="userorders.html"><i class="fas fa-shopping-bag"></i> My Orders</a>
+            <a href="wishlist.html"><i class="fas fa-heart"></i> Wishlist</a>
+            <a href="userfaq.html"><i class="fas fa-question-circle"></i> Help Center</a>
+            <a href="#" id="logoutButtonOne"><i class="fas fa-sign-out-alt"></i> Logout</a>
+          </div>
+        </div>
+</li>
+            <li><a href="dashboard.html">Home</a></li>
+            <li><a href="homepage.html">Profile</a></li>
+            <li><a href="userproducts.html">Products</a></li>
+            <li><a href="useraboutus.html">About Us</a></li>
+            <li><a href="usercontact.html" class="active">Contact</a></li>
+            <li><a href="usertestimonial.html">Reviews</a></li>
+            
+          </ul>
+        </nav>
+
+        <div class="header-actions">
+          <a href="usercart.html" class="shopping-cart">
+            <img src="shopping-cart.png" alt="Shopping Cart" width="30">
+            <span id="cart-count" class="cart-count">0</span>
+          </a>
+          <div class="menu-icon" onclick="openMenu()">
+            <i class="fas fa-bars" style="font-size: 22px;"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu">
+    <button class="close-btn" onclick="closeMenu()">×</button>
+    <ul>
+       <li>
+  <!-- User Dropdown -->
+        <div class="user-actions">
+          <p id="userDropdownToggleMobile">
+            <i class="fas fa-user-circle"></i>
+            <span id="userName2">Customer</span>
+            <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 5px;"></i>
+          </p>
+          <div class="user-dropdown" id="userDropdownMobile">
+            <a href="dashboard.html"><i class="fas fa-home"></i> Home</a>
+            <a href="homepage.html"><i class="fas fa-user"></i> My Profile</a>
+            <a href="userorders.html"><i class="fas fa-shopping-bag"></i> My Orders</a>
+            <a href="wishlist.html"><i class="fas fa-heart"></i> Wishlist</a>
+            <a href="userfaq.html"><i class="fas fa-question-circle"></i> Help Center</a>
+            <a href="#" id="logoutButton"><i class="fas fa-sign-out-alt"></i> Logout</a>
+          </div>
+        </div>
+</li>
+        <li><a href="dashboard.html">Home</a></li>
+        <li><a href="homepage.html">Profile</a></li>
+        <li><a href="userproducts.html">Products</a></li>
+        <li><a href="useraboutus.html">About Us</a></li>
+        <li><a href="usercontact.html">Contact</a></li>
+        <li><a href="usertestimonial.html">Reviews</a></li>
+        
+    </ul>
+  </div>
+
+  <section class="hero-3">
+    <div class="container">
+      <div class="hero-content-3" data-aos="zoom-in">
+        <h1 class="zoom-text">We're Here To Help</h1>
+        <p>Have questions, feedback, or need support? Reach out - we'd love to hear from you!</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section">
+    <div class="container">
+      <div class="contact-container">
+        <div class="contact-info" data-aos="fade-right">
+          <h2>Get in Touch</h2>
+          <p><i class="fas fa-map-marker-alt"></i> Alawusa-House, Hungotho, Tube, Ipokia LG, Ogun State</p>
+          <p><i class="fas fa-phone"></i> +234-802-227-6254</p>
+          <p><i class="fas fa-envelope"></i> alawusaheritage@gmail.com</p>
+          
+          <div class="social-icons">
+            <a href="https://www.facebook.com/profile.php?id=61577588632364&mibextid=ZbWKwL"><img src="facebook.png" alt="Facebook"></a>
+            <a href="https://www.instagram.com/alawusaheritage?igsh=MXJnbHJ5dGtlOGs0eQ=="><img src="instagram.png" alt="Instagram"></a>
+            <a href="https://wa.link/zp8ngg"><img src="whatsapp.png" alt="WhatsApp"></a>
+          </div>
+        </div>
+
+        <div class="contact-form" data-aos="fade-left">
+          <h2>Send Us a Message</h2>
+          <form id="whatsappForm">
+            <input type="text" id="name" name="Name" placeholder="Your Full Name" required>
+            <input type="email" id="email" name="Email" placeholder="Your Email Address" required>
+            <input type="text" id="subject" name="Subject" placeholder="Subject" required>
+            <textarea id="message" name="Message" rows="6" placeholder="Your Message..." required></textarea>
+            <button type="submit">Send Message <i class="fas fa-share"></i></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="newsletter-section">
+    <div class="container">
+      <div class="newsletter-content">
+        <div class="newsletter-text">
+          <h3>Sign Up For Our Newsletter</h3>
+          <p>Get email updates about our latest products and special offers</p>
+        </div>
+       <form  action="https://sheetdb.io/api/v1/7pjxxvpo241l5" method="POST" id="newsletterForm" class="newsletter-form">
+  <input type="email" name="data[email]" placeholder="Your email address" required>
+  <button type="submit">Subscribe</button>
+</form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <a href="dashboard.html"><img src="Alawusa heritage logo.png" alt="Alawusa Heritage" style="width: 200px; filter: brightness(2) invert(0);"></a>
+                    <p>Bringing the Best of Our Farm to Your Table</p>
+                    
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=61577588632364&mibextid=ZbWKwL"><img src="facebook.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/alawusaheritage?igsh=MXJnbHJ5dGtlOGs0eQ=="><img src="instagram.png" alt="Instagram"></a>
+                        <a href="https://wa.link/zp8ngg"><img src="whatsapp.png" alt="WhatsApp"></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="userfaq.html">FAQs</a></li>
+                        <li><a href="usercontact.html">Contact Us</a></li>
+                        
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li><a href="userblogpost.html">Farm Tips/Blog Post</a></li>
+                        <li><a href="userourfarm.html">Our Farm/Sustainability</a></li>
+                        <li><a href="userrecipes.html">Recipes</a></li>
+                        <li><a href="useraboutus.html">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +234-802-227-6254</li>
+                        <li><i class="fas fa-envelope" ></i> alawusaheritage@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt" ></i> Alawusa-House, Hungotho, Tube, Ipokia LG, Ogun State</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Alawusa Heritage Fish & Farms. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: false,
+    });
+
+    // Update cart count
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const cartCount = document.getElementById('cart-count');
+      if (cartCount) {
+        cartCount.textContent = totalItems;
+      }
+    }
+
+    updateCartCount();
+
+    // Mobile menu functions
+    function openMenu() {
+      document.getElementById('mobileMenu').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Newsletter signup
+    document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  fetch(this.action, {
+    method: "POST",
+    body: new FormData(this),
+  }).then(() => {
+    alert("🎉 Thank you for subscribing!");
+    this.reset();
+  });
+});
+
+    // Contact form submission
+    document.getElementById("whatsappForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const subject = document.getElementById("subject").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      const phoneNumber = "2348022276254";
+      const whatsappMessage = `Hello, my name is ${name} (${email}).%0A%0A*Subject:* ${subject}%0A%0A*Message:* ${message}`;
+
+      window.open(`https://wa.me/${phoneNumber}?text=${whatsappMessage}`, "_blank");
+    });
+
+
+    
+  </script>
+
+  <script>
+    // User Dropdown Functionality
+const userDropdownToggle = document.getElementById('userDropdownToggle');
+const userDropdown = document.getElementById('userDropdown');
+
+function toggleUserDropdown() {
+  userDropdown.classList.toggle('active');
+}
+
+userDropdownToggle.addEventListener('click', function(e) {
+  e.stopPropagation();
+  toggleUserDropdown();
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+  if (!userDropdown.contains(e.target) && !userDropdownToggle.contains(e.target)) {
+    userDropdown.classList.remove('active');
+  }
+});
+
+
+// User Dropdown Functionality
+const userDropdownToggleMobile = document.getElementById('userDropdownToggleMobile');
+const userDropdownMobile = document.getElementById('userDropdownMobile');
+
+function toggleUserDropdownMobile() {
+  userDropdownMobile.classList.toggle('active');
+}
+
+userDropdownToggleMobile.addEventListener('click', function(e) {
+  e.stopPropagation();
+  toggleUserDropdownMobile();
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+  if (!userDropdownMobile.contains(e.target) && !userDropdownToggle.contains(e.target)) {
+    userDropdownMobile.classList.remove('active');
+  }
+});
+  </script>
+</body>
+</html>

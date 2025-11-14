@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>
+           Home | Alawusa Heritage Fish & Farms
+        </title>
+        <link rel="shortcut icon" href="Alawusa heritage icon - Icon.png" type="img">
+        <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?
+        family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    </head>
+
+    <body>
+        <div class="header">
+            <div class="logo">
+                <a href="index.html"><img src="Alawusa heritage logo.png" width="150px"></a>
+            </div>
+             <div class="navbar">
+           
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="index.html" style="font-weight: bold;">Home</a></li>
+                    <li><a href="products.html" style="font-weight: bold;">Products</a></li>
+                    <li><a href="aboutus.html" style="font-weight: bold;">About Us</a></li>
+                    <li><a href="contact.html" style="font-weight: bold;">Contact</a></li>
+                    <li><a href="account.html" style="font-weight: bold;">Account</a></li>
+                    <li><a href="testimonial.html" style="font-weight: bold;">Testimonial</a></li>
+                    
+                </ul>
+            </nav>
+            
+            <a href="cart.html">
+            <img src="shopping-cart.png" width="30px" height="30px" style="margin-bottom: 40px;">
+            <span id="cart-count" style="background:red; color:white; padding:2px 6px; border-radius:50%; font-size:12px; 
+            position:relative; top:-60px; left:-10px;">0</span>
+            </a>
+            
+            <div class="menu-1">
+            <img src="menu bar.png" class="menu-icon" onclick="menutoggle()" style="margin-bottom: 40px;">
+            </div>
+             </div>
+        </div>
+       
+
+    
+
+    <!----Footer---->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3>
+                       Customer Service
+                    </h3>
+                    <ul>
+                        <li><a href="faq.html">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col-2">
+                    <img src="Alawusa heritage logo.png">
+                    
+                </div>
+                <div class="footer-col-3">
+                    <h3>
+                       Useful Links
+                    </h3>
+                    <ul>
+                       <li><a href="blogpost.html">Farm Tips/Blog Post</a></li><br>
+                        <li><a href="ourfarm.html">Our Farm/Sustainability</a></li><br>
+                        <li><a href="recipes.html">Recipes</a></li><br>
+                        <li><a href="aboutus.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <h3>
+                       Our Social Media Links
+                    </h3>
+                    <ul>
+                        <li><a href="https://www.facebook.com/profile.php?id=61577588632364&mibextid=ZbWKwL">Facebook</a></li>
+                        <li><a href="https://www.instagram.com/alawusaheritage?igsh=MXJnbHJ5dGtlOGs0eQ==">Instagram</a></li>
+                        <li><a href="https://wa.link/zp8ngg">Whatsapp</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr><p class="copyright">Copyright 2025 - Alawusa Heritage Fish & Farms</p>
+        </div>
+    </div>
+
+    <!-------js script for menu toggle------>
+    <script>
+        var MenuItems = document.getElementById("MenuItems");
+        MenuItems.style.maxHeight = "0px";
+        function menutoggle(){
+            if(MenuItems.style.maxHeight == "0px")
+                {
+                  MenuItems.style.maxHeight = "300px"  
+                }
+            else
+                {
+                    MenuItems.style.maxHeight = "0px"
+                }
+        }
+    </script>
+
+    <!---Update cart count badge in the navbar--->
+<script>
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const cartCount = document.getElementById('cart-count');
+    if (cartCount) {
+      cartCount.textContent = totalItems;
+    }
+  }
+
+  // call this on page load
+  updateCartCount();
+
+</script>
+
+<script>
+  function openMenu() {
+    document.getElementById('mobileMenu').classList.add('open');
+  }
+
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+</script>
+
+    </body>
+</html>

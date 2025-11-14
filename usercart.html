@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Cart | Alawusa Heritage</title>
+  <link rel="shortcut icon" href="Alawusa heritage icon - Icon.png" type="img">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script type="module" src="homepage.js"></script>
+  <script src="https://checkout.flutterwave.com/v3.js"></script>
+  <!-- Add Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-functions-compat.js"></script>
+
+
+
+  <style>
+    /* Modern E-commerce Variables */
+        :root {
+            --primary-color: #1a4d2e;
+            --secondary-color: #28a745;
+            --accent-color: #ffc107;
+            --light-bg: #f9f9f9;
+            --dark-text: #333;
+            --light-text: #fff;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+    
+    body { 
+      font-family: 'Poppins', sans-serif; 
+      background: #f8f9fa; 
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    a {
+      color: inherit; 
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* Header Styles */
+    header { 
+      position: sticky; 
+      top: 0; 
+      z-index: 1000; 
+      background: #fff; 
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 15px 0;
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo h1 { 
+      font-size: 24px; 
+      font-weight: 700;
+      color: #2e7d32;
+    }
+    
+    .logo span {
+      color: #ff9800;
+    }
+    
+    /* Navigation */
+    .navbar ul { 
+      display: flex; 
+      gap: 25px; 
+      list-style: none; 
+    }
+    
+    .navbar ul li {
+      font-weight: 500;
+      position: relative;
+    }
+    
+    .navbar ul li a:hover,
+      .navbar ul li a.active {
+        color: #15921b;
+      }
+
+      .navbar ul li a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background-color: #15921b;
+        transition: width 0.3s ease;
+      }
+
+      .navbar ul li a:hover::after {
+        width: 100%;
+      }
+    
+    /* Search bar */
+    .search-bar { 
+      flex: 1; 
+      display: flex; 
+      align-items: center; 
+      max-width: 500px; 
+      margin: 0 20px;
+      background: #f5f5f5;
+      border-radius: 30px;
+      padding: 8px 15px;
+      border: 1px solid #e0e0e0;
+    }
+    
+    .search-bar input { 
+      flex: 1; 
+      border: none; 
+      outline: none; 
+      font-size: 14px; 
+      padding: 5px 10px;
+      background: transparent;
+    }
+    
+    .search-bar i { 
+      color: #757575; 
+      cursor: pointer; 
+      font-size: 16px; 
+    }
+    
+    /* Header Actions */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .cart { 
+      position: relative; 
+      cursor: pointer;
+      color: #555;
+    }
+    
+    .cart:hover {
+      color: #2e7d32;
+    }
+    
+    .cart-count { 
+      position: absolute; 
+      top: -8px; 
+      right: -10px; 
+      background: #f44336; 
+      color: #fff; 
+      font-size: 11px; 
+      font-weight: bold; 
+      padding: 2px 6px; 
+      border-radius: 50%; 
+    }
+    
+    .user-actions {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .user-actions a {
+      color: #555;
+      font-size: 14px;
+    }
+    
+    .user-actions a:hover {
+      color: #2e7d32;
+    }
+    
+    /* Cart Container */
+    .cart-container {
+      max-width: 1200px;
+      margin: 30px auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+    
+    .cart-header {
+      background: #f8f9fa;
+      padding: 20px 30px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .cart-header h1 {
+      font-size: 24px;
+      font-weight: 600;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .cart-header h1 i {
+      color: #2e7d32;
+    }
+    
+    .cart-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      padding: 30px;
+    }
+    
+    .cart-items {
+      flex: 1;
+      min-width: 300px;
+    }
+    
+    .cart-item {
+      display: flex;
+      align-items: center;
+      padding: 20px;
+      border-bottom: 1px solid #eee;
+      gap: 15px;
+      transition: background 0.3s;
+    }
+    
+    .cart-item:hover {
+      background: #f9f9f9;
+    }
+    
+    .item-image {
+      width: 100px;
+      height: 100px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    
+    .item-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .item-details {
+      flex: 1;
+    }
+    
+    .item-details h3 {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 5px;
+      color: #222;
+    }
+    
+    .item-price {
+      font-size: 18px;
+      font-weight: 700;
+      color: #2e7d32;
+      margin-bottom: 10px;
+    }
+    
+    .item-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .quantity-btn {
+      background: #f5f5f5;
+      border: none;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    .quantity-btn:hover {
+      background: #e9e9e9;
+    }
+    
+    .quantity-input {
+      width: 50px;
+      height: 32px;
+      border: none;
+      text-align: center;
+      font-weight: 500;
+      outline: none;
+    }
+    
+    .remove-btn {
+      color: #f44336;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      transition: color 0.3s;
+      padding: 5px;
+    }
+    
+    .remove-btn:hover {
+      color: #d32f2f;
+    }
+
+    .edit-price-btn {
+  background: #ff9800;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.3s ease;
+}
+
+.edit-price-btn:hover {
+  background: #e68900;
+}
+
+    
+    .item-subtotal {
+      font-weight: 600;
+      font-size: 16px;
+      color: #333;
+      min-width: 100px;
+      text-align: right;
+    }
+    
+    .cart-summary {
+      width: 100%;
+      max-width: 350px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 25px;
+      align-self: flex-start;
+    }
+    
+    .summary-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #333;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      font-size: 15px;
+    }
+    
+    .summary-total {
+      font-weight: 700;
+      font-size: 18px;
+      color: #2e7d32;
+      border-top: 1px solid #ddd;
+      padding-top: 15px;
+      margin-top: 10px;
+    }
+    
+    .checkout-btn {
+      width: 100%;
+      background: #2e7d32;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .checkout-btn:hover {
+      background: #1b5e20;
+    }
+    
+    .continue-shopping {
+      display: inline-block;
+      margin-top: 15px;
+      color: #2e7d32;
+      font-weight: 500;
+      text-align: center;
+      width: 100%;
+    }
+    
+    .continue-shopping:hover {
+      text-decoration: underline;
+    }
+    
+    .empty-cart {
+      text-align: center;
+      padding: 60px 20px;
+      color: #666;
+    }
+    
+    .empty-cart i {
+      font-size: 70px;
+      color: #ddd;
+      margin-bottom: 20px;
+    }
+    
+    .empty-cart h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #555;
+    }
+    
+    .empty-cart p {
+      margin-bottom: 25px;
+      font-size: 15px;
+    }
+    
+    .shop-btn {
+      background: #2e7d32;
+      color: #fff;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .shop-btn:hover {
+      background: #1b5e20;
+    }
+    
+    /* Footer */
+    .footer {
+      margin-top: 60px;
+      background: #1a3c1a;
+      color: #fff;
+      padding: 40px 0 20px;
+    }
+    
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: space-between;
+    }
+    
+    .footer-column {
+      flex: 1;
+      min-width: 200px;
+    }
+    
+    .footer-column h5 {
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: #81c784;
+    }
+    
+    .footer-column ul li {
+      margin-bottom: 10px;
+      list-style: none;
+    }
+    
+    .footer-column ul li a {
+      color: #e0e0e0;
+    }
+    
+    .footer-column ul li a:hover {
+      color: #81c784;
+    }
+    
+    .social-links i {
+      margin-right: 8px;
+    }
+    
+    .footer-copy {
+      margin-top: 30px;
+      text-align: center;
+      border-top: 1px solid #2e4d2e;
+      padding-top: 15px;
+      font-size: 13px;
+      color: #bbb;
+    }
+    
+    /* Mobile Menu */
+    .menu-toggle {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #333;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .cart-content {
+        flex-direction: column;
+      }
+      
+      .cart-summary {
+        max-width: 100%;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .search-bar {
+        order: 3;
+        width: 100%;
+        max-width: 100%;
+        margin: 10px 0;
+      }
+      
+      .navbar ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        background: #f5f5f5;
+        border-radius: 8px;
+        padding: 10px 0;
+        margin-top: 15px;
+      }
+      
+      .navbar.active ul {
+        display: flex;
+      }
+      
+      .menu-toggle {
+        display: block;
+      }
+      
+      .header-actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+      }
+      
+      .item-image {
+        align-self: center;
+      }
+      
+      .item-actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      .item-subtotal {
+        text-align: left;
+        margin-top: 10px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .cart-content {
+        padding: 20px 15px;
+      }
+      
+      .cart-header {
+        padding: 15px 20px;
+      }
+      
+      .item-image {
+        width: 80px;
+        height: 80px;
+      }
+    }
+    
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #2e7d32;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 4px;
+      z-index: 9999;
+      font-family: 'Poppins';
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: var(--light-text);
+            padding: 60px 0 20px;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .social-links img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: #aaa;
+        }
+        .user-actions p i {
+  margin-right: 6px;
+  color: var(--secondary-color);
+  font-size: 16px;
+}
+
+#userName2{
+  color: #fff;
+}
+
+
+
+
+/* Header Improvements */
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 20px;
+}
+
+.logo {
+  flex-shrink: 0;
+}
+
+/* Improved Search Bar */
+.search-bar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 20px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 8px 15px;
+  border: 2px solid #2e7d32;
+  box-shadow: 0 2px 5px rgba(46, 125, 50, 0.1);
+}
+
+.search-bar:focus-within {
+  border-color: #1b5e20;
+  box-shadow: 0 2px 8px rgba(46, 125, 50, 0.2);
+}
+
+.search-bar input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  padding: 5px 10px;
+  background: transparent;
+}
+
+.search-bar i {
+  color: #2e7d32;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px;
+}
+
+/* Header Actions */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  flex-shrink: 0;
+}
+
+.user-actions {
+  position: relative;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: 100%;
+  right: -150px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+  min-width: 200px;
+  padding: 15px 0;
+  z-index: 1001;
+  display: none;
+  margin-top: 10px;
+}
+
+.user-dropdown.active {
+  display: block;
+  animation: dropdownFade 0.3s ease;
+}
+
+@keyframes dropdownFade {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.user-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid white;
+}
+
+.user-dropdown a {
+  display: block;
+  padding: 10px 20px;
+  color: #333;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.user-dropdown a:hover {
+  background: #f5f5f5;
+  color: #2e7d32;
+}
+
+.user-dropdown a i {
+  margin-right: 8px;
+  width: 16px;
+  text-align: center;
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+  display: none;
+}
+
+.mobile-sidebar {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  width: 300px;
+  height: 100%;
+  background: white;
+  z-index: 1000;
+  transition: left 0.3s ease;
+  overflow-y: auto;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+}
+
+.mobile-sidebar.active {
+  left: 0;
+}
+
+.mobile-sidebar-header {
+  padding: 20px;
+  background: #fff;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mobile-sidebar-header .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mobile-sidebar-header .logo img {
+  width: 40px;
+  height: 40px;
+}
+
+.mobile-sidebar-header .close-menu {
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.mobile-nav {
+  padding: 20px 0;
+}
+
+.mobile-nav ul {
+  list-style: none;
+}
+
+.mobile-nav ul li {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.mobile-nav ul li a {
+  display: block;
+  padding: 15px 20px;
+  color: #333;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.mobile-nav ul li a:hover,
+.mobile-nav ul li.active a {
+  background: #f8f9fa;
+  color: #2e7d32;
+  border-right: 3px solid #2e7d32;
+}
+
+.mobile-nav ul li a i {
+  margin-right: 10px;
+  width: 20px;
+  text-align: center;
+}
+
+/* Cart Improvements */
+.cart {
+  position: relative;
+  cursor: pointer;
+  color: #555;
+  padding: 8px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.cart:hover {
+  background: #f5f5f5;
+  color: #2e7d32;
+}
+
+.cart-count {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #f44336;
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 50%;
+  min-width: 18px;
+  text-align: center;
+}
+
+/* User Actions Improvements */
+.user-actions p {
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  margin: 0;
+}
+
+.user-actions p:hover {
+  background: #f5f5f5;
+  color: #2e7d32;
+}
+
+/* Responsive Design Updates */
+@media (max-width: 992px) {
+  .header-content {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  .search-bar {
+    order: 3;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+  
+  .navbar {
+    display: none;
+  }
+  
+  .menu-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: #f5f5f5;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .menu-toggle:hover {
+    background: #e8f5e8;
+    color: #2e7d32;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    gap: 10px;
+  }
+  
+  .header-actions {
+    gap: 15px;
+  }
+  
+  .user-actions span {
+    display: none;
+  }
+  
+  .user-actions p i {
+    margin-right: 0;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mobile-sidebar {
+    width: 280px;
+  }
+  
+  .header-actions {
+    gap: 10px;
+  }
+  
+  .cart {
+    padding: 6px;
+  }
+}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-content">
+      <div class="logo">
+        <a href="dashboard.html"><img src="Alawusa heritage logo.png" style="width: 100px;" alt="Alawusa Heritage"></a>
+      </div>
+      
+      <!-- Mobile Menu Toggle - Jumia Style -->
+      <div class="menu-toggle" id="mobileMenu">
+        <i class="fa fa-bars"></i>
+        <span>Menu</span>
+      </div>
+      
+      <!-- Desktop Navigation -->
+      <nav class="navbar">
+        <ul>
+          <li><a href="dashboard.html">Home</a></li>
+          <li><a href="homepage.html">Profile</a></li>
+          <li><a href="userproducts.html">Products</a></li>
+          <li><a href="userorders.html">Orders</a></li>
+          <li><a href="wishlist.html">Wishlist</a></li>
+          <li class="active"><a href="usercart.html">Cart</a></li>
+        </ul>
+      </nav>
+      
+      <!-- Search Bar -->
+      <div class="search-bar" style="display: none;">
+        <input type="text" id="searchInput" placeholder="Search for products...">
+        <i class="fa fa-search" id="searchButton"></i>
+      </div>
+      
+      <!-- Header Actions -->
+      <div class="header-actions">
+        <!-- User Dropdown -->
+        <div class="user-actions">
+          <p id="userDropdownToggle">
+            <i class="fas fa-user-circle"></i>
+            <span id="userName">Customer</span>
+            <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 5px;"></i>
+          </p>
+          <div class="user-dropdown" id="userDropdown">
+            <a href="dashboard.html"><i class="fas fa-home"></i> Home</a>
+            <a href="homepage.html"><i class="fas fa-user"></i> My Profile</a>
+            <a href="userorders.html"><i class="fas fa-shopping-bag"></i> My Orders</a>
+            <a href="wishlist.html"><i class="fas fa-heart"></i> Wishlist</a>
+            <a href="userfaq.html"><i class="fas fa-question-circle"></i> Help Center</a>
+            <a href="usertestimonial.html"><i class="fas fa-star"></i> Reviews</a>
+            <a href="#" id="logoutButton"><i class="fas fa-sign-out-alt"></i> Logout</a>
+          </div>
+        </div>
+        
+        <!-- Cart -->
+        <div class="cart">
+          <a href="usercart.html"><i class="fa fa-shopping-cart"></i></a>
+          <span class="cart-count" id="cartCount">0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileOverlay"></div>
+  
+  <!-- Mobile Sidebar -->
+  <div class="mobile-sidebar" id="mobileSidebar">
+    <div class="mobile-sidebar-header">
+      <div class="logo">
+        <img src="Alawusa heritage icon - Icon.png" alt="Alawusa Heritage">
+        
+      </div>
+      <button class="close-menu" id="closeMenu" style="color: black;">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <nav class="mobile-nav">
+      <ul>
+        <li><a href="dashboard.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="homepage.html"><i class="fas fa-user"></i> Profile</a></li>
+        <li><a href="userproducts.html"><i class="fas fa-shopping-bag"></i> Products</a></li>
+        <li><a href="userorders.html"><i class="fas fa-clipboard-list"></i> Orders</a></li>
+        <li><a href="wishlist.html"><i class="fas fa-heart"></i> Wishlist</a></li>
+        <li><a href="userfaq.html"><i class="fas fa-question-circle"></i> Help Center</a></li>
+        <li><a href="usercontact.html"><i class="fas fa-phone"></i> Contact Us</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="cart-container">
+  <div class="cart-header">
+    <h1><i class="fas fa-shopping-cart"></i> My Shopping Cart</h1>
+  </div>
+  
+  
+  <div class="cart-content" id="cartContent">
+    <!-- Cart items will be populated here -->
+  </div>
+</div>
+
+<!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <a href="dashboard.html"><img src="Alawusa heritage logo.png" alt="Alawusa Heritage" style="width: 200px; filter: brightness(2) invert(0);"></a>
+                    <p>Bringing the Best of Our Farm to Your Table</p>
+                    
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=61577588632364&mibextid=ZbWKwL"><img src="facebook.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/alawusaheritage?igsh=MXJnbHJ5dGtlOGs0eQ=="><img src="instagram.png" alt="Instagram"></a>
+                        <a href="https://wa.link/zp8ngg"><img src="whatsapp.png" alt="WhatsApp"></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="userfaq.html">FAQs</a></li>
+                        <li><a href="usercontact.html">Contact Us</a></li>
+                        
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li><a href="userblogpost.html">Farm Tips/Blog Post</a></li>
+                        <li><a href="userourfarm.html">Our Farm/Sustainability</a></li>
+                        <li><a href="userrecipes.html">Recipes</a></li>
+                        <li><a href="useraboutus.html">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +234-802-227-6254</li>
+                        <li><i class="fas fa-envelope" ></i> alawusaheritage@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt" ></i> Alawusa-House, Hungotho, Tube, Ipokia LG, Ogun State</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Alawusa Heritage Fish & Farms. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+<script src="usercart.js"></script>
+
+</body>
+
+</html>

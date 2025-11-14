@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout | Alawusa Heritage Fish & Farms</title>
+  <link rel="shortcut icon" href="Alawusa heritage icon - Icon.png" type="img">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script type="module" src="homepage.js"></script>
+  <style>
+    /* Modern E-commerce Variables */
+    :root {
+      --primary-color: #1a4d2e;
+      --secondary-color: #28a745;
+      --accent-color: #ffc107;
+      --light-bg: #f9f9f9;
+      --dark-text: #333;
+      --light-text: #fff;
+      --border-radius: 8px;
+      --box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      --transition: all 0.3s ease;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    a {
+      text-decoration: none;
+    }
+    .container-1 {
+      max-width: 550px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    h1 {
+      text-align: center;
+      color: #222;
+    }
+    p {
+      font-size: 14px;
+      text-align: center;
+      color: #555;
+    }
+    .bank-details {
+      margin-top: 20px;
+      padding: 15px;
+      background: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    .account-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f9f9f9;
+      padding: 8px 12px;
+      margin-top: 6px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      font-size: 14px;
+    }
+    .copy-btn {
+      padding: 5px 10px;
+      border: 1px solid #444;
+      border-radius: 6px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .copy-btn:hover { background: #ddd; }
+    .amount {
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 15px;
+      color: #111;
+    }
+    .currency-btn {
+      padding: 6px 14px;
+      margin: 5px 4px;
+      border: 1px solid #444;
+      border-radius: 6px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .currency-btn.active {
+      background: #25d366;
+      color: #fff;
+      font-weight: bold;
+    }
+    .form-group {
+      margin-top: 12px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+    .whatsapp-btn, .back-btn, .shop-btn {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      padding: 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .whatsapp-btn { background: #25d366; color: #fff; }
+    .whatsapp-btn:hover { background: #1ebc57; }
+    .back-btn { background: #555; color: #fff; }
+    .back-btn:hover { background: #333; }
+    .shop-btn { background: #666; color: #fff; }
+    .shop-btn:hover { background: #444; }
+
+    /* Footer styles remain the same */
+    .footer {
+      background: var(--primary-color);
+      color: var(--light-text);
+      padding: 60px 0 20px;
+    }
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    .footer-col {
+      flex: 1;
+      min-width: 200px;
+    }
+    .footer-col h3 {
+      font-size: 20px;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    .footer-col h3::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 50px;
+      height: 2px;
+      background: var(--secondary-color);
+    }
+    .footer-col ul {
+      list-style: none;
+    }
+    .footer-col ul li {
+      margin-bottom: 10px;
+    }
+    .footer-col ul li a {
+      color: #ddd;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .footer-col ul li a:hover {
+      color: var(--secondary-color);
+      padding-left: 5px;
+    }
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .social-links a {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+    .social-links a:hover {
+      background: var(--secondary-color);
+      transform: translateY(-3px);
+    }
+    .social-links img {
+      width: 20px;
+      height: 20px;
+    }
+    .copyright {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 14px;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container-1">
+  <h1>Complete Your Payment</h1>
+  <p>Transfer the total amount to the account below:</p>
+
+  <div class="bank-details">
+    <strong>Account Name:</strong> ALAWUSA HERITAGE FISH And FARMS <br><br>
+    <strong>Bank Name:</strong> Guaranty Trust Bank (GTB) <br><br>
+    
+    <!-- Domestic Transfer (Nigeria) -->
+    <div style="margin-bottom: 20px; padding: 15px; background: #f0f8ff; border-radius: 8px; border-left: 4px solid #1a4d2e;">
+      <strong style="color: #1a4d2e;">🇳🇬 For Domestic Transfers (Within Nigeria):</strong><br>
+      <div class="account-box">
+        <span>NGN (Naira): <strong id="nairaAcc">3002053057</strong></span>
+        <button class="copy-btn" onclick="copyAcc('nairaAcc')">Copy</button>
+      </div>
+    </div>
+
+    <!-- International Transfer -->
+    <div style="margin-bottom: 20px; padding: 15px; background: #fff8f0; border-radius: 8px; border-left: 4px solid #ff6b00;">
+      <strong style="color: #ff6b00;">For International Transfers:</strong><br><br>
+      
+      <strong>Bank Codes Required:</strong><br>
+      <div class="account-box">
+        <span>SWIFT/BIC Code: <strong id="swiftCode">GTBINGLA</strong></span>
+        <button class="copy-btn" onclick="copyAcc('swiftCode')">Copy</button>
+      </div>
+      <div class="account-box">
+        <span>Sort Code: <strong id="sortCode">058-152146</strong></span>
+        <button class="copy-btn" onclick="copyAcc('sortCode')">Copy</button>
+      </div>
+      <br>
+      
+      <strong>Foreign Currency Accounts:</strong><br>
+      <div class="account-box">
+        <span>🇺🇸 USD (Dollar): <strong id="usdAcc">3002053215</strong></span>
+        <button class="copy-btn" onclick="copyAcc('usdAcc')">Copy</button>
+      </div>
+      <div class="account-box">
+        <span>🇬🇧 GBP (Pounds): <strong id="gbpAcc">3002053071</strong></span>
+        <button class="copy-btn" onclick="copyAcc('gbpAcc')">Copy</button>
+      </div>
+      <div class="account-box">
+        <span>🇪🇺 EUR (Euro): <strong id="eurAcc">3002053095</strong></span>
+        <button class="copy-btn" onclick="copyAcc('eurAcc')">Copy</button>
+      </div>
+    </div>
+
+    <div class="amount">Amount: <span id="totalAmount">₦0</span></div>
+  </div>
+
+  <!-- Instructions Section -->
+  <div style="margin-top: 20px; padding: 15px; background: #f9f9f9; border-radius: 8px; font-size: 14px;">
+    <strong>Important Transfer Instructions:</strong>
+    <ul style="margin: 10px 0; padding-left: 20px;">
+      <li>For <strong>Nigerian transfers</strong>, use only the Naira account number</li>
+      <li>For <strong>international transfers</strong>, you MUST provide:
+        <ul>
+          <li>SWIFT/BIC Code: <strong>GTBINGLA</strong></li>
+          <li>Sort Code: <strong>058-152146</strong></li>
+          <li>The correct currency account (USD, GBP, or EUR)</li>
+        </ul>
+      </li>
+      <li>Ensure the account name matches exactly: <strong>ALAWUSA HERITAGE FISH And FARMS</strong></li>
+      <li>Transfer the exact amount shown above</li>
+    </ul>
+  </div>
+
+  <div style="margin-top:15px;">
+    <strong>Select Currency:</strong><br>
+    <button class="currency-btn" onclick="setCurrency(event,'NGN')">₦ NGN</button>
+    <button class="currency-btn" onclick="setCurrency(event,'USD')">$ USD</button>
+    <button class="currency-btn" onclick="setCurrency(event,'GBP')">£ GBP</button>
+    <button class="currency-btn" onclick="setCurrency(event,'EUR')">€ EUR</button>
+  </div>
+
+  <div class="form-group">
+    <label>Upload Payment Proof (receipt)</label>
+    <input type="file" id="paymentProof" accept="image/*,application/pdf">
+  </div>
+  <div class="form-group">
+    <label>Full Name</label>
+    <input type="text" id="customerName">
+  </div>
+  <div class="form-group">
+    <label>Email (optional)</label>
+    <input type="text" id="customerEmail">
+  </div>
+  <div class="form-group">
+    <label>Phone Number</label>
+    <input type="text" id="customerPhone">
+  </div>
+  <div class="form-group">
+    <label>Delivery Address</label>
+    <textarea id="customerAddress"></textarea>
+  </div>
+
+  <a id="whatsappLink" class="whatsapp-btn" onclick="sendWhatsApp()">Send Payment Proof via WhatsApp</a>
+  <a href="dashboard.html" class="back-btn">← Back to Home</a>
+  <a href="userproducts.html" class="shop-btn">Continue Shopping</a>
+</div>
+
+<!-- Footer (unchanged) -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-container">
+      <div class="footer-col">
+        <a href="dashboard.html"><img src="Alawusa heritage logo.png" alt="Alawusa Heritage" style="width: 200px; filter: brightness(2) invert(0);"></a>
+        <p style="color: #fff;">Bringing the Best of Our Farm to Your Table</p>
+        <div class="social-links">
+          <a href="https://www.facebook.com/profile.php?id=61577588632364&mibextid=ZbWKwL"><img src="facebook.png" alt="Facebook"></a>
+          <a href="https://www.instagram.com/alawusaheritage?igsh=MXJnbHJ5dGtlOGs0eQ=="><img src="instagram.png" alt="Instagram"></a>
+          <a href="https://wa.link/zp8ngg"><img src="whatsapp.png" alt="WhatsApp"></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Customer Service</h3>
+        <ul>
+          <li><a href="userfaq.html">FAQs</a></li>
+          <li><a href="usercontact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Useful Links</h3>
+        <ul>
+          <li><a href="userblogpost.html">Farm Tips/Blog Post</a></li>
+          <li><a href="userourfarm.html">Our Farm/Sustainability</a></li>
+          <li><a href="userrecipes.html">Recipes</a></li>
+          <li><a href="useraboutus.html">About Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Contact Info</h3>
+        <ul>
+          <li><i class="fas fa-phone"></i> +234-802-227-6254</li>
+          <li><i class="fas fa-envelope"></i> alawusaheritage@gmail.com</li>
+          <li><i class="fas fa-map-marker-alt"></i> Alawusa-House, Hungotho, Tube, Ipokia LG, Ogun State</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <p style="color: #fff;">&copy; 2025 Alawusa Heritage Fish & Farms. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // --- CART TOTAL ---
+  const total = parseFloat(localStorage.getItem('checkoutTotal') || 0);
+  document.getElementById('totalAmount').innerText = `₦${total.toLocaleString()}`;
+
+  // --- COPY FUNCTION (updated for new IDs) ---
+  function copyAcc(id) {
+    const acc = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(acc);
+    alert(`Copied!`);
+  }
+
+  // --- CURRENCY SWITCH ---
+  let currentCurrency = "NGN";
+  const exchangeRates = { NGN: 1, USD: 0.00069, 
+  GBP: 0.00053, 
+  EUR: 0.00060 };
+
+  function setCurrency(event, currency) {
+    currentCurrency = currency;
+    document.querySelectorAll(".currency-btn").forEach(btn => btn.classList.remove("active"));
+    event.target.classList.add("active");
+
+    const total = parseFloat(localStorage.getItem('checkoutTotal') || 0);
+    let converted = total * exchangeRates[currency];
+    let symbol = {NGN:"₦", USD:"$", GBP:"£", EUR:"€"}[currency];
+    document.getElementById("totalAmount").innerText = `${symbol}${converted.toLocaleString()}`;
+  }
+
+  // --- WHATSAPP SUBMIT (unchanged) ---
+  async function sendWhatsApp() {
+    let name = document.getElementById("customerName").value.trim();
+    let phone = document.getElementById("customerPhone").value.trim();
+    let email = document.getElementById("customerEmail").value.trim();
+    let address = document.getElementById("customerAddress").value.trim();
+    let proofFile = document.getElementById("paymentProof").files[0];
+
+    if (!name || !phone || !address || !proofFile) {
+      alert("Fill in all details and upload proof before sending.");
+      return;
+    }
+
+    const proofBase64 = await fileToBase64(proofFile);
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let total = parseFloat(localStorage.getItem('checkoutTotal') || 0);
+    let converted = total * exchangeRates[currentCurrency];
+    let symbol = {NGN:"₦", USD:"$", GBP:"£", EUR:"€"}[currentCurrency];
+
+    let cartDetails = cart.map((item, i) =>
+      `${i+1}. ${item.name} (x${item.quantity}) - ₦${item.price.toLocaleString()}`
+    ).join("\n");
+
+    let timestamp = new Date().toLocaleString();
+
+    // Save to Google Sheets
+    let rows = cart.map((item, i) => ({
+      Timestamp: i === 0 ? timestamp : "",
+      Name: i === 0 ? name : "",
+      Email: i === 0 ? email : "",
+      Phone: i === 0 ? phone : "",
+      Address: i === 0 ? address : "",
+      Currency: currentCurrency,
+      Product: item.name,
+      Quantity: item.quantity,
+      Price: item.price,
+      ItemTotal: item.quantity * item.price,
+      OrderTotal: i === 0 ? converted : "",
+      Proof: i === 0 ? proofBase64 : ""
+    }));
+
+    fetch("https://sheetdb.io/api/v1/supulk4c3weec", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({ data: rows })
+    })
+    .then(() => {
+      // Clear cart
+      localStorage.removeItem("cart");
+      localStorage.removeItem("checkoutTotal");
+
+      // WhatsApp message
+      const whatsappNumber = "2348022276254";
+      const message = `Hello, I made a payment of ${symbol}${converted.toLocaleString()}.\n
+Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nAddress: ${address}\n
+Order:\n${cartDetails}\n\nPayment proof attached.`;
+
+      // Open WhatsApp
+      window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank");
+
+      // ✅ ALSO send email copy if user provided email
+      if (email) {
+        sendOrderEmail(name, email, phone, address, cartDetails, `${symbol}${converted.toLocaleString()}`);
+      }
+    })
+    .catch(err => {
+      alert("Error saving order. Try again.");
+      console.error(err);
+    });
+  }
+
+  // File → Base64
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+</script>
+
+
+<script type="module">
+  // --- FIREBASE IMPORTS ---
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  // --- FIREBASE CONFIG ---
+  const firebaseConfig = {
+    apiKey: "AIzaSyDuxTHLfwiETTMO6Dx7YMehngZqWLgUlH0",
+    authDomain: "alawusa-heritage-website.firebaseapp.com",
+    projectId: "alawusa-heritage-website",
+    storageBucket: "alawusa-heritage-website.firebasestorage.app",
+    messagingSenderId: "857988164081",
+    appId: "1:857988164081:web:ccac1200d344a8bd82bc50",
+    measurementId: "G-TJQJMVVMZG"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // --- ELEMENTS ---
+  const nameField = document.getElementById("customerName");
+  const phoneField = document.getElementById("customerPhone");
+  const emailField = document.getElementById("customerEmail");
+  const addressField = document.getElementById("customerAddress");
+
+  // --- LOAD USER INFO ---
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      const userRef = doc(db, "users", user.uid);
+      const snap = await getDoc(userRef);
+
+      if (snap.exists()) {
+        const data = snap.data();
+        if (data.name) nameField.value = data.name;
+        if (data.phone) phoneField.value = data.phone;
+        if (data.email) emailField.value = data.email;
+        if (data.address) addressField.value = data.address;
+      }
+
+      // --- AUTO-SAVE WHEN CHANGED ---
+      phoneField.addEventListener("blur", async () => {
+        await setDoc(userRef, { phone: phoneField.value.trim() }, { merge: true });
+      });
+
+      addressField.addEventListener("blur", async () => {
+        await setDoc(userRef, { address: addressField.value.trim() }, { merge: true });
+      });
+
+      nameField.addEventListener("blur", async () => {
+        await setDoc(userRef, { name: nameField.value.trim() }, { merge: true });
+      });
+    }
+  });
+</script>
+
+
+<script>
+function updateCartCount() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  document.getElementById("cartCount").textContent = cart.length;
+}
+window.onload = updateCartCount;
+</script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+  (function(){
+    emailjs.init("5y1IrOU5yKY4zKpua");
+  })();
+
+  function sendOrderEmail(name, email, phone, address, cartDetails, totalAmount) {
+    let templateParams = {
+      customer_name: name,
+      customer_email: email,
+      customer_phone: phone,
+      customer_address: address,
+      order_details: cartDetails,
+      total_amount: totalAmount
+    };
+
+    emailjs.send("service_sebez5r", "template_x8sz89f", templateParams)
+      .then(() => {
+        alert("✅ A copy of your order has been sent to your email!");
+      })
+      .catch((err) => {
+        console.error("EmailJS Error:", err);
+        alert("❌ Failed to send email.");
+      });
+  }
+</script>
+
+</body>
+</html>
+
+

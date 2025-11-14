@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Details - Alawusa Heritage Fish & Farms</title>
+    <link rel="shortcut icon" href="Alawusa heritage icon - Icon.png" type="img">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B2NQHJMLJ6"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-B2NQHJMLJ6');
+    </script>
+
+    <style>
+      /* Modern E-commerce Variables */
+        :root {
+            --primary-color: #1a4d2e;
+            --secondary-color: #28a745;
+            --accent-color: #ffc107;
+            --light-bg: #f9f9f9;
+            --dark-text: #333;
+            --light-text: #fff;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            max-width: 100%;
+            overflow-x: hidden;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        .main-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .top-bar {
+            background: #2e802e;
+            color: white;
+            padding: 8px 20px;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .contact-info span {
+            margin: 0 10px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+        
+        .logo img {
+            width: 100px;
+            height: auto;
+        }
+        
+        /* Navigation */
+        .navbar ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        .navbar ul li a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #555;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        
+        .navbar ul li a:hover {
+            color: #15921b;
+        }
+        
+        .shopping-cart {
+            position: relative;
+            margin-left: 15px;
+        }
+        
+        .cart-count {
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+            position: absolute;
+            top: -25px;
+            right: -8px;
+        }
+        
+        .menu-icon {
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
+        }
+        
+        /* Product Details Section */
+        .product-details {
+            padding: 40px 0;
+            background: #f9f9f9;
+        }
+        
+        .small-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .product-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .product-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .product-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .product-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .back-link {
+            margin-bottom: 15px;
+        }
+        
+        .back-link a {
+            color: #15921b;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .breadcrumb {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .product-title {
+            font-size: 28px;
+            color: #2e802e;
+            margin-bottom: 5px;
+        }
+        
+        .price-section {
+            margin: 20px 0;
+        }
+        
+        .price-select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        
+        .selected-price {
+            font-size: 24px;
+            font-weight: 600;
+            color: #15921b;
+            margin: 10px 0;
+        }
+        
+        .rating {
+            margin: 20px 0;
+        }
+        
+        .rating span {
+            color: #ffc107;
+            font-size: 18px;
+        }
+        
+        .quantity-section {
+            margin: 25px 0;
+        }
+        
+        .quantity-section p {
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .quantity-wrapper {
+            display: inline-flex;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .qty-btn {
+            background: #f5f5f5;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        
+        .qty-btn:hover {
+            background: #e0e0e0;
+        }
+        
+        .qty-input {
+            width: 50px;
+            text-align: center;
+            border: none;
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            font-size: 16px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #15921b;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn:hover {
+            background: #117a16;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #15921b;
+            color: #15921b;
+        }
+        
+        .btn-outline:hover {
+            background: #15921b;
+            color: white;
+        }
+        
+        .product-description h3 {
+            margin-bottom: 15px;
+            font-size: 20px;
+            color: #333;
+        }
+        
+        .product-description p {
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        /* Related Products Section */
+        .related-products {
+            padding: 60px 0;
+            background: #f5f5f5;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 28px;
+            color: #15921b;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: #15921b;
+            margin: 10px auto 0;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .product-card a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .product-card-content {
+            padding: 20px;
+        }
+        
+        .product-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .product-card p {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 10px;
+        }
+        
+        .product-card .price {
+            font-size: 18px;
+            font-weight: 600;
+            color: #15921b;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #1a3a1a;
+            color: #fff;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-logo img {
+            width: 200px;
+            margin-bottom: 15px;
+            filter: brightness(0) invert(1);
+        }
+        
+        .footer h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        .footer ul {
+            list-style: none;
+        }
+        
+        .footer ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer ul li a:hover {
+            color: #fff;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a img {
+            width: 35px;
+            height: 35px;
+            transition: transform 0.3s;
+        }
+        
+        .social-links a:hover img {
+            transform: scale(1.1);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background: #1a3a1a;
+            z-index: 2000;
+            transition: right 0.3s ease;
+            padding: 60px 20px 20px;
+            overflow-y: auto;
+        }
+        
+        .mobile-menu.open {
+            right: 0;
+        }
+        
+        .mobile-menu .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .mobile-menu ul {
+            list-style: none;
+        }
+        
+        .mobile-menu ul li {
+            margin-bottom: 15px;
+        }
+        
+        .mobile-menu ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        .mobile-menu ul li a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .accordion-toggle {
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            padding: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding-left: 20px;
+        }
+        
+        .accordion-content.open {
+            max-height: 200px;
+        }
+        
+        .accordion-toggle .arrow {
+            transition: transform 0.3s;
+        }
+        
+        .accordion-toggle.active .arrow {
+            transform: rotate(180deg);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .navbar ul {
+                gap: 15px;
+            }
+            
+            .navbar ul li a {
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                display: none;
+            }
+            
+            .menu-icon {
+                display: block;
+            }
+            
+            .top-bar {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+            
+            .contact-info span {
+                display: block;
+                margin: 5px 0;
+            }
+            
+            .product-row {
+                flex-direction: column;
+                padding: 20px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                text-align: center;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header {
+                padding: 10px;
+            }
+            
+            .logo img {
+                width: 100px;
+            }
+            
+            .small-container {
+                padding: 0 15px;
+            }
+            
+            .product-title {
+                font-size: 24px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: var(--light-text);
+            padding: 60px 0 20px;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .social-links img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="main-header">
+        
+        
+        <div class="header">
+            <div class="logo">
+                <a href="index.html"><img src="Alawusa heritage logo.png" alt="Alawusa Heritage Logo"></a>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="navbar desktop-nav">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="testimonial.html">Reviews</a></li>
+                    <li><a href="account.html">Account</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-right">
+                <a href="cart.html" class="shopping-cart">
+                    <img src="shopping-cart.png" width="30" height="30" alt="Shopping Cart">
+                    <span id="cart-count" class="cart-count">0</span>
+                </a>
+                <div class="menu-icon" onclick="openMenu()">☰</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu">
+        <button class="close-btn" onclick="closeMenu()">×</button>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="aboutus.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="testimonial.html">Reviews</a></li>
+            <li><a href="account.html">Account</a></li>
+        </ul>
+    </div>
+
+    <!-- Product Details Section -->
+    <section class="product-details">
+        <div class="small-container">
+            <div class="product-row">
+                <div class="product-image">
+                    <img src="sourced seafood sticker.png" alt="Alawusa Diverse Sourced Sea Food">
+                </div>
+                <div class="product-info">
+                    <div class="back-link">
+                        <a href="products.html">⟸ Back to Products</a>
+                    </div>
+                    <p class="breadcrumb">Home / Sea Food</p>
+                    <h1 class="product-title">Alawusa Diverse Sourced Sea Food (Frozen, Bagged)</h1>
+                    
+                    <div class="price-section">
+                        <select class="price-select" id="priceSelect">
+                            <option value="40000">Medium - ₦40,000</option>
+                            <option value="110000">Large - ₦110,000</option>
+                        </select>
+                        <p class="selected-price">Price: ₦<span id="priceValue">40,000</span></p>
+                    </div>
+                    
+                    <div class="rating">
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                    </div>
+                    
+                    <div class="quantity-section">
+                        <p><b>Quantity:</b></p>
+                        <div class="quantity-wrapper">
+                            <button class="qty-btn minus">−</button>
+                            <input type="text" class="qty-input" value="1" min="1">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button onclick="addToCart(this)" class="btn">Add to Cart</button>
+                        <a href="cart.html" class="btn btn-outline">View Cart</a>
+                    </div>
+                    
+                    <div class="product-description">
+                        <h3>Product Details</h3>
+                        <p>Beyond our farm, we bring you a curated selection of popular seafood, including varieties like croaker, catfish, mackerel (kite), herring (shawa), and hake (panla). These are frozen and conveniently sold in bags, catering to both bulk buyers for home consumption and other retailers for resale. Additionally, for customers purchasing these items, we offer a service to fry or smoke them for their parties or events upon request.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="head" class="product" data-id="7" data-name="Alawusa Diverse Sourced Sea Food (Frozen, Bagged)" data-image="sourced seafood sticker.png" data-shipping="2000"></div>
+
+    <!-- Related Products Section -->
+    <section class="related-products">
+        <div class="small-container">
+            <h2 class="section-title">Related Products</h2>
+            <div class="products-grid">
+                <div class="product-card" data-aos="fade-up">
+                    <a href="productdetailsforfish.html">
+                        <img src="fish-product.jpg" alt="Fresh Fish">
+                        <div class="product-card-content">
+                            <h3>Fresh Fish</h3>
+                            <p>Category: Sea Food</p>
+                            <div class="rating">
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                            </div>
+                            <p class="price">₦5,000 - ₦15,000</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="product-card" data-aos="fade-up">
+                    <a href="productdetailsforprawns.html">
+                        <img src="prawns-product.jpg" alt="Fresh Prawns">
+                        <div class="product-card-content">
+                            <h3>Fresh Prawns</h3>
+                            <p>Category: Sea Food</p>
+                            <div class="rating">
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                            </div>
+                            <p class="price">₦8,000 - ₦25,000</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="product-card" data-aos="fade-up">
+                    <a href="productdetailsforcrab.html">
+                        <img src="crab-product.jpg" alt="Fresh Crab">
+                        <div class="product-card-content">
+                            <h3>Fresh Crab</h3>
+                            <p>Category: Sea Food</p>
+                            <div class="rating">
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                            </div>
+                            <p class="price">₦6,000 - ₦20,000</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="product-card" data-aos="fade-up">
+                    <a href="productdetailsforoysters.html">
+                        <img src="oysters-product.jpg" alt="Fresh Oysters">
+                        <div class="product-card-content">
+                            <h3>Fresh Oysters</h3>
+                            <p>Category: Sea Food</p>
+                            <div class="rating">
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                            </div>
+                            <p class="price">₦4,000 - ₦12,000</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <a href="index.html"><img src="Alawusa heritage logo.png" alt="Alawusa Heritage" style="width: 200px; filter: brightness(2) invert(0);"></a>
+                    <p>Bringing the Best of Our Farm to Your Table</p>
+                    
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=61577588632364&mibextid=ZbWKwL"><img src="facebook.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/alawusaheritage?igsh=MXJnbHJ5dGtlOGs0eQ=="><img src="instagram.png" alt="Instagram"></a>
+                        <a href="https://wa.link/zp8ngg"><img src="whatsapp.png" alt="WhatsApp"></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="faq.html">FAQs</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li><a href="blogpost.html">Farm Tips/Blog Post</a></li>
+                        <li><a href="ourfarm.html">Our Farm/Sustainability</a></li>
+                        <li><a href="recipes.html">Recipes</a></li>
+                        <li><a href="aboutus.html">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +234-802-227-6254</li>
+                        <li><i class="fas fa-envelope" ></i> alawusaheritage@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt" ></i> Alawusa-House, Hungotho, Tube, Ipokia LG, Ogun State</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Alawusa Heritage Fish & Farms. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        function openMenu() {
+            document.getElementById('mobileMenu').classList.add('open');
+        }
+
+        function closeMenu() {
+            document.getElementById('mobileMenu').classList.remove('open');
+        }
+
+        // Price Select
+        const priceSelect = document.getElementById('priceSelect');
+        const priceValue = document.getElementById('priceValue');
+        
+        priceSelect.addEventListener('change', function() {
+            priceValue.textContent = new Intl.NumberFormat().format(this.value);
+        });
+
+        // Initialize price display
+        priceValue.textContent = new Intl.NumberFormat().format(priceSelect.value);
+
+        // Quantity Controls
+        document.addEventListener('DOMContentLoaded', function() {
+            const plusBtn = document.querySelector('.qty-btn.plus');
+            const minusBtn = document.querySelector('.qty-btn.minus');
+            const input = document.querySelector('.qty-input');
+
+            if (plusBtn && minusBtn && input) {
+                plusBtn.addEventListener('click', () => {
+                    let val = parseInt(input.value);
+                    input.value = val + 1;
+                });
+
+                minusBtn.addEventListener('click', () => {
+                    let val = parseInt(input.value);
+                    if (val > 1) {
+                        input.value = val - 1;
+                    }
+                });
+            }
+
+            // Update cart count
+            updateCartCount();
+        });
+
+        // Cart functionality
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const cartCount = document.getElementById('cart-count');
+            if (cartCount) {
+                cartCount.textContent = totalItems;
+            }
+        }
+
+        function addToCart(button) {
+            // Get product details
+            const productInfo = {
+                id: 'seafood',
+                name: 'Alawusa Diverse Sourced Sea Food (Frozen, Bagged)',
+                price: parseInt(document.getElementById('priceSelect').value),
+                image: 'sourced seafood sticker.png',
+                quantity: parseInt(document.querySelector('.qty-input').value),
+                shipping: 1600
+            };
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Check if product already in cart
+            const existingIndex = cart.findIndex(item => item.id === productInfo.id && item.price === productInfo.price);
+            
+            if (existingIndex > -1) {
+                cart[existingIndex].quantity += productInfo.quantity;
+            } else {
+                cart.push(productInfo);
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            
+            // Show confirmation
+            showToast('Product added to cart!');
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.textContent = message;
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: #15921b;
+                color: white;
+                padding: 12px 20px;
+                border-radius: 5px;
+                z-index: 1000;
+                font-family: 'Poppins', sans-serif;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            `;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+    </script>
+
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    </script>
+</body>
+</html>
