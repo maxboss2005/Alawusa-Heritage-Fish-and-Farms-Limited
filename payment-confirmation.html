@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment Confirmation | Alawusa Heritage</title>
+  <link rel="shortcut icon" href="Alawusa heritage icon - Icon.png" type="img">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Add Firebase SDK at the top of your body -->
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+
+  
+  <style>
+    :root {
+      --primary-color: #1a4d2e;
+      --secondary-color: #28a745;
+      --accent-color: #ffc107;
+      --light-bg: #f9f9f9;
+      --dark-text: #333;
+      --light-text: #fff;
+      --border-radius: 8px;
+      --box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      --transition: all 0.3s ease;
+    }
+    
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+    
+    body { 
+      font-family: 'Poppins', sans-serif; 
+      background: #f8f9fa; 
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    
+    .success-header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 20px;
+      background: linear-gradient(135deg, #1a4d2e, #28a745);
+      color: white;
+      border-radius: 10px;
+    }
+    
+    .success-icon {
+      font-size: 60px;
+      margin-bottom: 15px;
+      color: #ffc107;
+    }
+    
+    .confirmation-title {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    
+    .confirmation-subtitle {
+      font-size: 16px;
+      opacity: 0.9;
+    }
+    
+    .form-section {
+      margin-bottom: 25px;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+    
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: #1a4d2e;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: #555;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: var(--transition);
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #1a4d2e;
+      box-shadow: 0 0 0 2px rgba(26, 77, 46, 0.1);
+    }
+    
+    .whatsapp-btn {
+      display: block;
+      width: 100%;
+      background: #25d366;
+      color: white;
+      padding: 15px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    .whatsapp-btn:hover {
+      background: #1ebc57;
+      transform: translateY(-2px);
+    }
+    
+    .action-buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 25px;
+    }
+    
+    .back-btn {
+      flex: 1;
+      background: #6c757d;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      text-align: center;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    
+    .back-btn:hover {
+      background: #5a6268;
+    }
+    
+    .shop-btn {
+      flex: 1;
+      background: #1a4d2e;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      text-align: center;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    
+    .shop-btn:hover {
+      background: #143d25;
+    }
+    
+    .file-input-wrapper {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      width: 100%;
+    }
+    
+    .file-input-wrapper input[type=file] {
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+    
+    .file-input-label {
+      display: block;
+      padding: 12px;
+      background: #e9ecef;
+      border: 2px dashed #dee2e6;
+      border-radius: 6px;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .file-input-label:hover {
+      background: #dee2e6;
+      border-color: #1a4d2e;
+    }
+    
+    .file-name {
+      margin-top: 5px;
+      font-size: 12px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="success-header">
+      <div class="success-icon">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <h1 class="confirmation-title">Payment Successful!</h1>
+      <p class="confirmation-subtitle">Please confirm your delivery information and upload payment proof</p>
+    </div>
+    
+
+    <!-- Add this after the success-header and before the form-section -->
+<div class="form-section">
+  <h3 class="section-title">
+    <i class="fas fa-shopping-bag"></i>
+    Order Summary
+  </h3>
+  <div id="orderSummary">
+    <!-- Order details will be populated here -->
+  </div>
+</div>
+
+
+    <div class="form-section">
+      <h3 class="section-title">
+        <i class="fas fa-user"></i>
+        Personal Information
+      </h3>
+      
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" placeholder="Enter your full name">
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="Enter your email">
+      </div>
+      
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" placeholder="Enter your phone number">
+      </div>
+    </div>
+    
+    <div class="form-section">
+      <h3 class="section-title">
+        <i class="fas fa-map-marker-alt"></i>
+        Delivery Address
+      </h3>
+      
+      <div class="form-group">
+        <label for="deliveryAddress">Complete Delivery Address</label>
+        <textarea id="deliveryAddress" rows="4" placeholder="Enter your complete delivery address including city, state, and landmarks"></textarea>
+      </div>
+    </div>
+    
+    <div class="form-section">
+      <h3 class="section-title">
+        <i class="fas fa-receipt"></i>
+        Payment Proof
+      </h3>
+      
+      <div class="form-group">
+        <label>Upload Payment Receipt/Screenshot</label>
+        <div class="file-input-wrapper">
+          <input type="file" id="paymentProof" accept="image/*,.pdf">
+          <div class="file-input-label">
+            <i class="fas fa-cloud-upload-alt"></i> Click to upload payment proof
+          </div>
+        </div>
+        <div class="file-name" id="fileName">No file chosen</div>
+      </div>
+    </div>
+    
+    <button class="whatsapp-btn" onclick="sendToWhatsApp()">
+      <i class="fab fa-whatsapp"></i> Send Information via WhatsApp
+    </button>
+    
+    <div class="action-buttons">
+      <a href="dashboard.html" class="back-btn">
+        <i class="fas fa-home"></i> Back to Home
+      </a>
+      <a href="userproducts.html" class="shop-btn">
+        <i class="fas fa-shopping-bag"></i> Continue Shopping
+      </a>
+    </div>
+  </div>
+
+  <script>
+    
+  // Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDuxTHLfwiETTMO6Dx7YMehngZqWLgUlH0",
+    authDomain: "alawusa-heritage-website.firebaseapp.com",
+    projectId: "alawusa-heritage-website",
+    storageBucket: "alawusa-heritage-website.firebasestorage.app",
+    messagingSenderId: "857988164081",
+    appId: "1:857988164081:web:ccac1200d344a8bd82bc50",
+    measurementId: "G-TJQJMVVMZG"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+
+  // Display order summary function
+  function displayOrderSummary() {
+    const lastOrder = JSON.parse(localStorage.getItem('lastOrder') || '{}');
+    const orderSummary = document.getElementById('orderSummary');
+    
+    if (lastOrder.items && lastOrder.items.length > 0) {
+      let summaryHTML = `
+        <div style="margin-bottom: 10px;">
+          <strong>Order Total: ₦${parseFloat(lastOrder.amount).toLocaleString()}</strong>
+        </div>
+        <div style="font-size: 14px; color: #666;">
+      `;
+      
+      lastOrder.items.forEach(item => {
+        const quantity = item.quantity || 1;
+        const itemTotal = item.price * quantity;
+        summaryHTML += `
+          <div>• ${item.name} (x${quantity}) - ₦${itemTotal.toLocaleString()}</div>
+        `;
+      });
+      
+      summaryHTML += `</div>`;
+      orderSummary.innerHTML = summaryHTML;
+    }
+  }
+
+  // Enhanced file upload handler
+  function setupFileUpload() {
+    const fileInput = document.getElementById('paymentProof');
+    const fileNameDisplay = document.getElementById('fileName');
+    
+    fileInput.addEventListener('change', function(e) {
+      if (this.files && this.files[0]) {
+        const file = this.files[0];
+        fileNameDisplay.textContent = file.name;
+        fileNameDisplay.style.color = '#1a4d2e';
+        fileNameDisplay.style.fontWeight = '500';
+        
+        // Optional: Add file size validation
+        const fileSize = file.size / 1024 / 1024; // in MB
+        if (fileSize > 5) {
+          alert('File size should be less than 5MB');
+          this.value = '';
+          fileNameDisplay.textContent = 'No file chosen';
+          fileNameDisplay.style.color = '#666';
+          fileNameDisplay.style.fontWeight = 'normal';
+        }
+      } else {
+        fileNameDisplay.textContent = 'No file chosen';
+        fileNameDisplay.style.color = '#666';
+        fileNameDisplay.style.fontWeight = 'normal';
+      }
+    });
+  }
+
+  // Auto-save user data when fields change
+  function setupAutoSave(fieldId, fieldName) {
+    const field = document.getElementById(fieldId);
+    field.addEventListener('blur', function() {
+      const user = auth.currentUser;
+      if (user) {
+        const updateData = {};
+        updateData[fieldName] = field.value.trim();
+        db.collection("users").doc(user.uid).set(updateData, { merge: true })
+          .then(() => console.log(`${fieldName} saved successfully`))
+          .catch(error => console.error('Error saving data:', error));
+      }
+    });
+  }
+
+  // Send to WhatsApp function
+  async function sendToWhatsApp() {
+    const fullName = document.getElementById('fullName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const deliveryAddress = document.getElementById('deliveryAddress').value.trim();
+    const paymentProof = document.getElementById('paymentProof').files[0];
+
+    if (!fullName || !phone || !deliveryAddress) {
+      alert('Please fill in all required fields: Full Name, Phone Number, and Delivery Address.');
+      return;
+    }
+
+    if (!paymentProof) {
+      alert('Please upload your payment proof (screenshot or receipt).');
+      return;
+    }
+
+    // Get order details from localStorage
+    const orderDetails = JSON.parse(localStorage.getItem('lastOrder') || '{}');
+    const totalAmount = orderDetails.amount || 'N/A';
+
+    // Prepare WhatsApp message
+    const message = ` *PAYMENT CONFIRMATION - ALAWUSA HERITAGE* 
+
+ *Customer Information:*
+• Name: ${fullName}
+• Email: ${email || 'Not provided'}
+• Phone: ${phone}
+
+ *Delivery Address:*
+${deliveryAddress}
+
+ *Payment Details:*
+• Amount: ₦${parseFloat(totalAmount).toLocaleString()}
+• Currency: NGN
+• Status:  Payment Successful
+
+ *Order Summary:*
+${orderDetails.items ? orderDetails.items.map(item => 
+  `• ${item.name} (x${item.quantity}) - ₦${(item.price * item.quantity).toLocaleString()}`
+).join('\n') : 'Order details not available'}
+
+📎 Payment proof attached
+
+Please confirm receipt of this information and provide estimated delivery timeline.`;
+
+    const whatsappNumber = "2348022276254";
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Open WhatsApp
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+
+    // Save order confirmation to Firebase
+    if (auth.currentUser) {
+      try {
+        await db.collection("orderConfirmations").add({
+          userId: auth.currentUser.uid,
+          customerName: fullName,
+          customerEmail: email,
+          customerPhone: phone,
+          deliveryAddress: deliveryAddress,
+          amount: totalAmount,
+          timestamp: new Date().toISOString(),
+          status: 'confirmed',
+          hasPaymentProof: !!paymentProof
+        });
+        console.log('Order confirmation saved to Firebase');
+      } catch (error) {
+        console.error('Error saving order confirmation:', error);
+      }
+    }
+
+    alert('Information sent via WhatsApp! We will contact you soon regarding your delivery.');
+  }
+
+  // Main initialization when DOM is loaded
+  document.addEventListener('DOMContentLoaded', function() {
+    // Check if there's a recent order
+    const lastOrder = JSON.parse(localStorage.getItem('lastOrder') || '{}');
+    
+    if (!lastOrder.id || !lastOrder.amount) {
+      alert('No recent payment found. Please complete a payment first.');
+      window.location.href = 'usercart.html';
+      return;
+    }
+
+    console.log('Loading confirmation for order:', lastOrder.id);
+
+    // Display order summary
+    displayOrderSummary();
+
+    // Setup file upload
+    setupFileUpload();
+
+    // Load user data if logged in
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        console.log('User is signed in:', user.email);
+        
+        // Load user data from Firestore
+        db.collection("users").doc(user.uid).get().then((doc) => {
+          if (doc.exists) {
+            const userData = doc.data();
+            document.getElementById('fullName').value = userData.name || '';
+            document.getElementById('email').value = userData.email || user.email || '';
+            document.getElementById('phone').value = userData.phone || '';
+            document.getElementById('deliveryAddress').value = userData.address || '';
+            
+            console.log('User data loaded successfully');
+          }
+        }).catch(error => {
+          console.error('Error loading user data:', error);
+        });
+
+        // Setup auto-save for all fields
+        setupAutoSave('fullName', 'name');
+        setupAutoSave('phone', 'phone');
+        setupAutoSave('deliveryAddress', 'address');
+        
+      } else {
+        console.log('User is not signed in');
+        // User can still fill the form manually
+      }
+    });
+  });
+
+  </script>
+</body>
+</html>
