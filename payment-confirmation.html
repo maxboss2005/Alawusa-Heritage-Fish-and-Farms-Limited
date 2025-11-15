@@ -476,11 +476,7 @@ Please confirm receipt of this information and provide estimated delivery timeli
     // Check if there's a recent order
     const lastOrder = JSON.parse(localStorage.getItem('lastOrder') || '{}');
     
-    if (!lastOrder.id || !lastOrder.amount) {
-      alert('No recent payment found. Please complete a payment first.');
-      window.location.href = 'usercart.html';
-      return;
-    }
+    
 
     console.log('Loading confirmation for order:', lastOrder.id);
 
@@ -524,4 +520,5 @@ Please confirm receipt of this information and provide estimated delivery timeli
 
   </script>
 </body>
+
 </html>
