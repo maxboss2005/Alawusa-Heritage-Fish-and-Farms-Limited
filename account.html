@@ -392,21 +392,37 @@
       const loginEmail = document.getElementById("loginEmail");
       const loginPassword = document.getElementById("loginPassword");
 
-      // Check if user credentials are saved
-      document.addEventListener('DOMContentLoaded', function() {
-        const savedEmail = localStorage.getItem('savedEmail');
-        const savedPassword = localStorage.getItem('savedPassword');
-        
-        if (savedEmail && savedPassword) {
-          loginEmail.value = savedEmail;
-          loginPassword.value = savedPassword;
-          rememberMeCheckbox.checked = true;
-          
-          // Show a message that credentials were auto-filled
-          showMessage('Your login information has been auto-filled from saved data.', 'info');
+      
+// Check if user is already logged in OR has remembered email
+document.addEventListener('DOMContentLoaded', function() {
+  // First, check for remembered email
+  const rememberedEmail = localStorage.getItem('rememberedEmail');
+  if (rememberedEmail) {
+    document.getElementById('loginEmail').value = rememberedEmail;
+  
+    document.getElementById('rememberMe').checked = true;
+  }
+
+  // Then check if user is already authenticated
+  import('./firebaseauth.js')
+    .then(module => {
+      const { getAuth, onAuthStateChanged } = module;
+      const auth = getAuth();
+      
+      onAuthStateChanged(auth, (user) => {
+        if (user && user.emailVerified) {
+          // User is signed in and verified, redirect immediately
+          showMessage(`Welcome back, ${user.email}!`, 'success');
+          setTimeout(() => {
+            window.location.href = 'userproducts.html';
+          }, 1000);
         }
       });
-
+    })
+    .catch(error => {
+      console.error('Error loading auth module:', error);
+    });
+});
       // Tab switching
       loginTab.addEventListener("click", () => {
         loginForm.classList.add("active");
@@ -440,35 +456,7 @@
       });
 
       // Login form submission
-      loginForm.addEventListener("submit", function(e) {
-        e.preventDefault();
-        
-        const email = loginEmail.value;
-        const password = loginPassword.value;
-        const rememberMe = rememberMeCheckbox.checked;
-        
-        // Simulate login process (replace with actual authentication)
-        if (email && password) {
-          // If "Remember Me" is checked, save credentials
-          if (rememberMe) {
-            localStorage.setItem('savedEmail', email);
-            localStorage.setItem('savedPassword', password);
-            showMessage('Your login information has been saved for future use.', 'success');
-          } else {
-            // If not checked, remove any previously saved credentials
-            localStorage.removeItem('savedEmail');
-            localStorage.removeItem('savedPassword');
-          }
-          
-          // Simulate successful login
-          showMessage('Login successful!', 'success');
-          
-          // In a real application, you would redirect to the dashboard here
-          // window.location.href = 'dashboard.html';
-        } else {
-          showMessage('Please enter both email and password.', 'error');
-        }
-      });
+      
 
       // Register form submission
       registerForm.addEventListener("submit", function(e) {
