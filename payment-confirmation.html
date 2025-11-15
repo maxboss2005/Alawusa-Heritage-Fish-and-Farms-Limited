@@ -418,7 +418,7 @@
     const totalAmount = orderDetails.amount || 'N/A';
 
     // Prepare WhatsApp message
-    const message = ` *PAYMENT CONFIRMATION - ALAWUSA HERITAGE* 
+    const message = ` *PAYMENT CONFIRMATION - ALAWUSA HERITAGE FISH AND FARMS* 
 
  *Customer Information:*
 • Name: ${fullName}
@@ -476,7 +476,11 @@ Please confirm receipt of this information and provide estimated delivery timeli
     // Check if there's a recent order
     const lastOrder = JSON.parse(localStorage.getItem('lastOrder') || '{}');
     
-    
+    if (!lastOrder.id || !lastOrder.amount) {
+      alert('No recent payment found. Please complete a payment first.');
+      window.location.href = 'usercart.html';
+      return;
+    }
 
     console.log('Loading confirmation for order:', lastOrder.id);
 
@@ -522,3 +526,4 @@ Please confirm receipt of this information and provide estimated delivery timeli
 </body>
 
 </html>
+
