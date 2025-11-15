@@ -305,7 +305,8 @@
       </h3>
       
       <div class="form-group">
-        <label>Upload Payment Receipt/Screenshot *</label>
+        <label>Upload Payment Receipt/Screenshot * <br>
+        (Check your email for the receipt and screenshot)</label>
         <div class="file-input-wrapper">
           <input type="file" id="paymentProof" accept="image/*,.pdf" required>
           <div class="file-input-label">
@@ -465,7 +466,11 @@ Please confirm receipt of this information and provide estimated delivery timeli
       // Check if there's a recent order
       const lastOrder = JSON.parse(localStorage.getItem('lastOrder') || '{}');
       
-      
+      if (!lastOrder.id || !lastOrder.amount) {
+      alert('No recent payment found. Please complete a payment first.');
+      window.location.href = 'usercart.html';
+      return;
+    }
 
       console.log('Loading guest confirmation for order:', lastOrder.id);
 
@@ -517,5 +522,4 @@ Please confirm receipt of this information and provide estimated delivery timeli
     });
   </script>
 </body>
-
 </html>
