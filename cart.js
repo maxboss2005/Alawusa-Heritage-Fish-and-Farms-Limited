@@ -108,7 +108,7 @@ function removeItem(index) {
   }
 
   // Checkout function
-  // Enhanced checkout function with Flutterwave for Naira payments
+  // Enhanced checkout function for guest users
 async function checkout() {
   const checkoutBtn = document.querySelector('.checkout-btn');
   const originalText = checkoutBtn.innerHTML;
@@ -142,6 +142,16 @@ async function checkout() {
       // Generate unique transaction reference for guest user
       const txRef = "ALW_GUEST_" + Date.now() + "_" + Math.random().toString(36).substr(2, 9);
       
+      // Save order details for confirmation page BEFORE payment
+      const lastOrder = {
+        id: txRef,
+        amount: totalAmount,
+        items: [...cart], // Create a copy of the cart
+        timestamp: new Date().toISOString(),
+        customer_type: "guest"
+      };
+      localStorage.setItem('lastOrder', JSON.stringify(lastOrder));
+
       // For guest users, we'll use localStorage to track the transaction
       const transactionData = {
         tx_ref: txRef,
@@ -149,9 +159,9 @@ async function checkout() {
         currency: "NGN",
         status: "initiated",
         customer: {
-          email: "guest@alawusa.com", // Default email for guests
+          email: "guest@alawusa.com",
           name: "Guest Customer",
-          phone: "08000000000" // Default phone
+          phone: "08000000000"
         },
         cart: cart,
         created_at: new Date().toISOString(),
@@ -173,12 +183,9 @@ async function checkout() {
       let customerEmail = "guest@alawusa.com";
       let customerName = "Guest Customer";
       let customerPhone = "08000000000";
-      
-      // You can add a form to collect guest user info or use these defaults
-      // For now using defaults, but you can modify this to collect info
 
       FlutterwaveCheckout({
-        public_key: "FLWPUBK-12f39e50a0c4450e5c4cfb2a3151a57a-X", // Use your Flutterwave public key
+        public_key: "FLWPUBK-12f39e50a0c4450e5c4cfb2a3151a57a-X",
         tx_ref: txRef,
         amount: totalAmount,
         currency: "NGN",
@@ -220,13 +227,14 @@ async function checkout() {
               user_type: "guest"
             });
             
-            // Clear cart
+            // ✅ CLEAR THE CART AFTER SUCCESSFUL PAYMENT
             localStorage.removeItem("cart");
             cart = [];
+            updateCartCount();
             
+            // ✅ REDIRECT TO GUEST CONFIRMATION PAGE
             setTimeout(() => {
-              // Redirect to order confirmation page for guests
-              window.location.href = "order-confirmation.html?tx_ref=" + txRef;
+              window.location.href = "guest-payment-confirmation.html";
             }, 2000);
           } else {
             // Update transaction status to failed
@@ -250,6 +258,16 @@ async function checkout() {
       localStorage.setItem("checkoutTotal", totalAmount);
       localStorage.setItem("paymentMethod", "international");
       localStorage.setItem("currency", "USD");
+      
+      // Save order details for foreign payment confirmation
+      const lastOrder = {
+        id: "FOREIGN_" + Date.now(),
+        amount: totalAmount,
+        items: [...cart],
+        timestamp: new Date().toISOString(),
+        customer_type: "guest"
+      };
+      localStorage.setItem('lastOrder', JSON.stringify(lastOrder));
       
       setTimeout(() => {
         window.location.href = "checkout.html";
