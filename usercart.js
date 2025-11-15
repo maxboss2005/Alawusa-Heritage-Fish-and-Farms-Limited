@@ -1,4 +1,5 @@
-// Firebase configuration
+
+  // Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDuxTHLfwiETTMO6Dx7YMehngZqWLgUlH0",
     authDomain: "alawusa-heritage-website.firebaseapp.com",
@@ -140,6 +141,7 @@ const auth = firebase.auth();
   }
   
   // Enhanced checkout function with Firebase integration
+// Enhanced checkout function with redirect to confirmation page
 async function checkout() {
   const checkoutBtn = document.querySelector('.checkout-btn');
   const originalText = checkoutBtn.innerHTML;
@@ -203,7 +205,7 @@ async function checkout() {
       }
 
       FlutterwaveCheckout({
-        public_key: "FLWPUBK-12f39e50a0c4450e5c4cfb2a3151a57a-X", // Replace with your public key
+        public_key: "FLWPUBK-12f39e50a0c4450e5c4cfb2a3151a57a-X",
         tx_ref: txRef,
         amount: totalAmount,
         currency: "NGN",
@@ -228,7 +230,7 @@ async function checkout() {
             showToast("Payment successful! Transaction ID: " + data.transaction_id);
             
             // Save order to Firebase
-            await saveOrderToFirebase({
+            const orderId = await saveOrderToFirebase({
               transaction_id: data.transaction_id,
               tx_ref: txRef,
               amount: totalAmount,
@@ -244,13 +246,26 @@ async function checkout() {
               created_at: new Date().toISOString()
             });
             
-            // Clear cart
+            // Save order details for confirmation page
+            const lastOrder = {
+              id: orderId,
+              amount: totalAmount,
+              items: cart,
+              transactionId: data.transaction_id,
+              timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('lastOrder', JSON.stringify(lastOrder));
+            
+            // ✅ CLEAR THE CART AFTER SUCCESSFUL PAYMENT
             localStorage.removeItem("cart");
             cart = [];
+            updateCartCount();
             
+            // ✅ REDIRECT TO CONFIRMATION PAGE
             setTimeout(() => {
-              window.location.href = "userorders.html";
+              window.location.href = "payment-confirmation.html";
             }, 2000);
+            
           } else {
             // Update transaction status to failed
             await updateTransactionStatus(txRef, "failed", data);
@@ -269,7 +284,7 @@ async function checkout() {
       });
 
     } else {
-      // Redirect for foreign currency payment
+      // Redirect for foreign currency payment (existing flow)
       window.location.href = "usercheckout.html?amount=" + totalAmount;
     }
   } catch (error) {
@@ -279,7 +294,6 @@ async function checkout() {
     checkoutBtn.disabled = false;
   }
 }
-
 // Firebase helper functions
 async function saveTransactionToFirebase(transactionData) {
   try {
@@ -532,4 +546,5 @@ updateCartFunctions();
     renderCart();
     updateCartCount();
   });
+
 
