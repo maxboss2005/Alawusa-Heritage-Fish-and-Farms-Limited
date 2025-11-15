@@ -10,6 +10,9 @@ import {
   signOut,
   GoogleAuthProvider,
   signInWithPopup,
+  setPersistence,
+  browserLocalPersistence,
+  browserSessionPersistence,
   fetchSignInMethodsForEmail // ✅ important for duplicate checks
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 import { 
@@ -45,6 +48,20 @@ function showMessage(message, divId) {
   setTimeout(() => {
     messageDiv.style.opacity = 0;
   }, 5000);
+}
+
+
+export async function signInWithEmail(email, password, rememberMe) {
+  try {
+    // Set persistence based on "Remember me" selection
+    const persistence = rememberMe ? browserLocalPersistence : browserSessionPersistence;
+    await setPersistence(auth, persistence);
+    
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    return userCredential;
+  } catch (error) {
+    throw error;
+  }
 }
 
 // ---------------- REGISTER ----------------
@@ -97,33 +114,53 @@ signUp.addEventListener("click", async (event) => {
 
 // ---------------- LOGIN ----------------
 const signIn = document.getElementById("submitSignIn");
-signIn.addEventListener("click", (event) => {
+signIn.addEventListener("click", async (event) => {
   event.preventDefault();
   const email = document.getElementById("loginEmail").value;
   const password = document.getElementById("loginPassword").value;
+  const rememberMe = document.getElementById("rememberMe").checked;
 
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
+  try {
+    // Save email to localStorage for convenience (like Jumia does)
+    if (rememberMe) {
+      localStorage.setItem('rememberedEmail', email);
+    } else {
+      localStorage.removeItem('rememberedEmail');
+    }
 
-      if (!user.emailVerified) {
-        showMessage("Please verify your email before logging in.", "signInMessage");
-        signOut(auth);
-        return;
-      }
+    // Set persistence based on "Remember me" selection
+    const persistence = rememberMe ? browserLocalPersistence : browserSessionPersistence;
+    await setPersistence(auth, persistence);
+    
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
 
-      showMessage("Login successful!", "signInMessage");
-      localStorage.setItem("loggedInUserId", user.uid);
+    if (!user.emailVerified) {
+      showMessage("Please verify your email before logging in.", "signInMessage");
+      await signOut(auth);
+      return;
+    }
+
+    showMessage("Login successful!", "signInMessage");
+    localStorage.setItem("loggedInUserId", user.uid);
+    
+    // Redirect after a brief delay
+    setTimeout(() => {
       window.location.href = "userproducts.html";
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      if (errorCode === "auth/invalid-credential") {
-        showMessage("Incorrect Email or Password. Please try again.", "signInMessage");
-      } else {
-        showMessage("Account does not exist. Please register.", "signInMessage");
-      }
-    });
+    }, 1000);
+    
+  } catch (error) {
+    const errorCode = error.code;
+    if (errorCode === "auth/invalid-credential") {
+      showMessage("Incorrect Email or Password. Please try again.", "signInMessage");
+    } else if (errorCode === "auth/too-many-requests") {
+      showMessage("Too many failed attempts. Please try again later.", "signInMessage");
+    } else if (errorCode === "auth/invalid-email") {
+      showMessage("Invalid email address.", "signInMessage");
+    } else {
+      showMessage("Login failed. Please try again.", "signInMessage");
+    }
+  }
 });
 
 // ---------------- FORGOT PASSWORD ----------------
@@ -160,8 +197,14 @@ forgotPasswordLink.addEventListener("click", (event) => {
 const provider = new GoogleAuthProvider();
 
 // --- Google Login (Restricted to Registered Emails) ---
+// --- Google Login (Restricted to Registered Emails) ---
 document.getElementById("googleLoginBtn").addEventListener("click", async () => {
   try {
+    // Check "Remember me" for Google login too
+    const rememberMe = document.getElementById("rememberMe").checked;
+    const persistence = rememberMe ? browserLocalPersistence : browserSessionPersistence;
+    await setPersistence(auth, persistence);
+    
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
 
@@ -179,10 +222,18 @@ document.getElementById("googleLoginBtn").addEventListener("click", async () => 
       return;
     }
 
+    // Save email for convenience
+    if (rememberMe) {
+      localStorage.setItem('rememberedEmail', user.email);
+    }
+
     // ✅ Login success
     showMessage(`Welcome back, ${user.displayName}!`, "signInMessage");
     localStorage.setItem("loggedInUserId", user.uid);
-    window.location.href = "userproducts.html";
+    
+    setTimeout(() => {
+      window.location.href = "userproducts.html";
+    }, 1000);
 
   } catch (error) {
     const errorCode = error.code;
@@ -253,3 +304,17 @@ document.getElementById("googleRegisterBtn").addEventListener("click", async () 
     }
   }
 });
+
+
+// ---------------- LOGOUT ----------------
+// Add this function to test the remember me functionality
+export async function logout() {
+  try {
+    await signOut(auth);
+    localStorage.removeItem('loggedInUserId');
+    // Don't remove rememberedEmail - that's the point of "Remember me"
+    showMessage("Logged out successfully.", "signInMessage");
+  } catch (error) {
+    console.error('Logout error:', error);
+  }
+}
